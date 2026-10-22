@@ -137,7 +137,8 @@ img{display:block;max-width:100%}
 .moments-btn:hover{background:var(--surface-alt)}
 .moments-btn svg{width:14px;height:14px;color:#8C7F71}
 .more-btn,
-.mail-btn{
+.mail-btn,
+.call-btn{
   width:32px;
   height:32px;
   display:grid;
@@ -146,9 +147,11 @@ img{display:block;max-width:100%}
   color:#7F7468;
 }
 .more-btn:hover,
-.mail-btn:hover{background:var(--surface-alt)}
+.mail-btn:hover,
+.call-btn:hover{background:var(--surface-alt)}
 .more-btn svg,
-.mail-btn svg{width:17px;height:17px}
+.mail-btn svg,
+.call-btn svg{width:17px;height:17px}
 .mail-btn{position:relative}
 .mail-badge{
   position:absolute;
@@ -692,6 +695,26 @@ img{display:block;max-width:100%}
 }
 .moment-comment + .moment-comment{margin-top:3px}
 .moment-comment b{margin-right:5px;color:#443B33;font-weight:600}
+.moment-comment-card{display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.moment-comment-card b{margin-right:1px}
+.moment-reply-label{color:#A29587;font-size:8.5px}
+.moment-comment-cards{display:inline-flex;align-items:center;flex-wrap:wrap;gap:4px;min-width:0;max-width:100%}
+.moment-card-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+  min-width:0;
+  max-width:100%;
+  padding:2px 7px;
+  border:1px solid #EAD7C8;
+  border-radius:6px;
+  background:#FFFBF6;
+  color:#594B3F;
+  font-size:9.5px;
+  line-height:1.5;
+}
+.moment-card-emoji{flex:none;font-size:11px;line-height:1}
+.moment-card-label{min-width:0;overflow-wrap:anywhere}
 .comment-form{display:flex;align-items:center;gap:6px;margin-top:7px}
 .moment-comments .comment-form:first-child{margin-top:0}
 .comment-input{
@@ -799,6 +822,143 @@ img{display:block;max-width:100%}
   line-height:1.7;
 }
 .mail-empty strong{display:block;margin-bottom:5px;color:#61564B;font-size:13px;font-weight:600}
+
+/* ——— Music ——— */
+.music-top-count{margin-left:auto;color:var(--muted);font-size:9px;padding-right:2px}
+.music-scroll{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:12px 16px calc(24px + env(safe-area-inset-bottom,0px));
+  background:var(--bg);
+  scrollbar-width:none;
+}
+.music-scroll::-webkit-scrollbar{display:none}
+.music-tabs{display:flex;gap:3px;padding:3px;border-radius:9px;background:var(--surface-alt);margin:0 0 12px}
+.music-tab{flex:1;height:30px;border-radius:7px;color:#8A7C6F;font-size:10.5px}
+.music-tab.active{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 4px rgba(76,58,40,.07)}
+.music-panel{min-height:0}
+.music-list{display:flex;flex-direction:column;gap:13px}
+.music-favorite-item{width:240px;max-width:100%}
+.music-favorite-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 2px 5px;color:var(--faint);font-size:8.5px}
+.music-favorite-del{width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:transparent;color:#A99C8F;font-size:15px;line-height:1}
+.music-favorite-del:hover{background:var(--surface-alt);color:#6F6358}
+.music-card{
+  width:240px;
+  max-width:100%;
+  padding:10px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#2c2f36 0%,#1a1c23 100%);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(24,20,16,.16);
+}
+.music-card-head{display:flex;align-items:center;gap:8px;min-width:0}
+.music-cover{
+  width:48px;
+  height:48px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border-radius:7px;
+  overflow:hidden;
+  background:rgba(255,255,255,.12);
+  font-size:20px;
+}
+.music-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.music-info{flex:1;min-width:0}
+.music-name{
+  margin:0;
+  color:#fff;
+  font-size:11.5px;
+  line-height:1.35;
+  font-weight:600;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.music-artist{
+  margin:2px 0 0;
+  color:rgba(255,255,255,.55);
+  font-size:8.5px;
+  line-height:1.35;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.music-play{
+  width:32px;
+  height:32px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:rgba(255,255,255,.14);
+  color:#fff;
+}
+.music-play:hover{background:rgba(255,255,255,.22)}
+.music-play.playing{background:var(--accent)}
+.music-play svg{width:12px;height:12px}
+.music-controls{display:flex;align-items:center;gap:6px;margin-top:9px}
+.music-time{flex:none;color:rgba(255,255,255,.5);font-size:8px;line-height:1;font-variant-numeric:tabular-nums}
+.music-range{flex:1;min-width:0;height:16px;margin:0;accent-color:#E8926E;cursor:pointer;touch-action:none}
+.music-lyrics-btn{
+  display:block;
+  width:max-content;
+  margin:5px 0 0 auto;
+  padding:0;
+  color:rgba(255,255,255,.55);
+  font-size:8.5px;
+  line-height:1.4;
+  text-decoration:underline;
+  text-underline-offset:2px;
+}
+.music-lyrics-btn:hover{color:#fff}
+.music-lyrics-btn[hidden]{display:none}
+.music-empty{
+  margin:28px 8px;
+  padding:24px 16px;
+  border:1px dashed var(--line);
+  border-radius:12px;
+  background:var(--surface);
+  text-align:center;
+  color:var(--muted);
+  font-size:10.5px;
+  line-height:1.6;
+}
+.music-empty strong{display:block;margin-bottom:4px;color:#65584C;font-size:12.5px;font-weight:600}
+.music-pager{display:flex;align-items:center;justify-content:center;gap:12px;padding:18px 0 4px}
+.music-page-btn{height:28px;padding:0 10px;border-radius:7px;background:var(--surface-alt);color:#7D7063;font-size:9.5px}
+.music-page-btn:disabled{opacity:.35;pointer-events:none}
+.music-page-text{color:var(--muted);font-size:9px}
+.music-settings{padding:2px 0 4px}
+.music-probability{flex:none;width:80px}
+.music-share-now{display:block;width:100%;margin-top:16px;height:40px}
+.music-share-status{margin:10px 0 0;color:var(--muted);font-size:9px;line-height:1.5;text-align:center}
+#musicSettingsPanel .decision-compose-hint{text-align:center}
+.music-empty button{
+  display:block;
+  margin:10px auto 0;
+  height:30px;
+  padding:0 12px;
+  border-radius:8px;
+  background:var(--accent-soft);
+  color:var(--accent-dark);
+  font-size:10px;
+  font-weight:600;
+}
+.music-cover > span{line-height:1}
+.lyrics-artist{margin:0 0 12px;color:var(--muted);font-size:10px;text-align:center}
+.lyrics-text{
+  margin:0;
+  padding:2px 4px 16px;
+  color:#5D5146;
+  font-family:inherit;
+  font-size:12px;
+  line-height:1.9;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
 
 /* ——— Overlays and sheets ——— */
 .overlay{
@@ -1113,7 +1273,12 @@ img{display:block;max-width:100%}
   border:1px solid var(--line);
   border-radius:10px;
   background:var(--surface);
+  cursor:pointer;
+  transition:border-color .16s,background .16s,transform .12s;
 }
+.library-sticker:hover{border-color:#D7B7A5;background:#FFFDF9}
+.library-sticker:active{transform:scale(.98)}
+.library-sticker:focus-visible{outline:2px solid #D9A78E;outline-offset:1px}
 .library-sticker img{width:100%;height:100%;object-fit:contain;border-radius:6px;pointer-events:none;-webkit-user-drag:none}
 .sticker-add{
   aspect-ratio:1;
@@ -1430,6 +1595,322 @@ img{display:block;max-width:100%}
   line-height:1;
 }
 
+/* ——— Calls ——— */
+.call-layer{
+  position:absolute;
+  inset:0;
+  z-index:150;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  color:#fff;
+  background:#151820;
+}
+.call-layer[hidden]{display:none}
+.call-wallpaper{
+  position:absolute;
+  inset:-24px;
+  width:calc(100% + 48px);
+  height:calc(100% + 48px);
+  object-fit:cover;
+  filter:blur(28px) brightness(.38) saturate(.85);
+  transform:scale(1.08);
+  opacity:.7;
+}
+.call-scrim{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 30%,rgba(255,198,156,.12),transparent 46%),
+    linear-gradient(180deg,rgba(12,14,18,.55) 0%,rgba(12,14,18,.42) 42%,rgba(12,14,18,.88) 100%);
+}
+.call-stage{
+  position:relative;
+  z-index:1;
+  flex:1;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:calc(26px + env(safe-area-inset-top,0px)) 22px 10px;
+}
+.call-topline{
+  position:absolute;
+  top:calc(24px + env(safe-area-inset-top,0px));
+  left:24px;
+  right:24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.call-kind{
+  padding:5px 10px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:20px;
+  background:rgba(255,255,255,.08);
+  color:rgba(255,255,255,.72);
+  font-size:9px;
+  letter-spacing:.4px;
+  backdrop-filter:blur(8px);
+}
+.call-timer{
+  color:rgba(255,255,255,.72);
+  font-size:10.5px;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.5px;
+  text-shadow:0 1px 4px rgba(0,0,0,.3);
+}
+.call-timer[hidden]{display:none}
+.call-portrait{
+  position:relative;
+  width:158px;
+  height:158px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  margin-bottom:22px;
+}
+.call-avatar-glow{
+  position:absolute;
+  width:176px;
+  height:176px;
+  border-radius:50%;
+  background:rgba(255,191,148,.22);
+  filter:blur(28px);
+  animation:callGlow 3.2s ease-in-out infinite;
+}
+.call-avatar{
+  position:relative;
+  z-index:1;
+  width:142px;
+  height:142px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid rgba(255,255,255,.22);
+  box-shadow:0 18px 42px rgba(0,0,0,.3);
+}
+.call-local{
+  position:absolute;
+  z-index:3;
+  right:-7px;
+  bottom:-7px;
+  width:72px;
+  height:94px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:12px;
+  background:linear-gradient(160deg,#3B3F48,#20232B);
+  box-shadow:0 8px 18px rgba(0,0,0,.3);
+}
+.call-local[hidden]{display:none}
+.call-local-initial{
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:rgba(255,255,255,.13);
+  color:rgba(255,255,255,.82);
+  font-size:12px;
+}
+.call-local-label{color:rgba(255,255,255,.5);font-size:8px}
+.call-layer.video .call-portrait{
+  width:min(286px,76vw);
+  height:min(366px,50vh);
+  margin-bottom:18px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:22px;
+  overflow:hidden;
+  background:#20242C;
+  box-shadow:0 22px 55px rgba(0,0,0,.35);
+}
+.call-layer.video .call-avatar{
+  width:100%;
+  height:100%;
+  border:0;
+  border-radius:0;
+  object-fit:cover;
+  filter:saturate(.92) contrast(1.02);
+}
+.call-layer.video .call-avatar-glow{display:none}
+.call-layer.video .call-local{right:10px;bottom:10px}
+.call-name{
+  position:relative;
+  z-index:1;
+  margin:0;
+  font-size:19px;
+  line-height:1.3;
+  font-weight:600;
+  letter-spacing:.2px;
+  text-shadow:0 2px 10px rgba(0,0,0,.3);
+}
+.call-status{
+  position:relative;
+  z-index:1;
+  margin:7px 0 0;
+  color:rgba(255,255,255,.56);
+  font-size:10.5px;
+  line-height:1.5;
+  text-align:center;
+}
+.call-wave{
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  height:18px;
+  margin-top:13px;
+}
+.call-wave[hidden]{display:none}
+.call-wave span{
+  width:3px;
+  height:7px;
+  border-radius:3px;
+  background:rgba(255,255,255,.65);
+  animation:callWave 1.1s ease-in-out infinite;
+}
+.call-wave span:nth-child(2){animation-delay:.15s}
+.call-wave span:nth-child(3){animation-delay:.3s}
+.call-wave span:nth-child(4){animation-delay:.45s}
+.call-wave span:nth-child(5){animation-delay:.6s}
+.call-actions{
+  position:relative;
+  z-index:2;
+  flex:none;
+  display:flex;
+  justify-content:center;
+  padding:8px 24px calc(34px + env(safe-area-inset-bottom,0px));
+}
+.call-action-group{display:flex;align-items:flex-start;justify-content:center;gap:54px;width:100%}
+.call-action-group[hidden]{display:none}
+.call-connected-actions{gap:17px;align-items:flex-start}
+.call-round{
+  position:relative;
+  width:60px;
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  color:#fff;
+  box-shadow:0 10px 24px rgba(0,0,0,.26);
+}
+.call-round svg{width:23px;height:23px}
+.call-round span{
+  position:absolute;
+  top:calc(100% + 7px);
+  left:50%;
+  transform:translateX(-50%);
+  color:rgba(255,255,255,.62);
+  font-size:8.5px;
+  line-height:1;
+  white-space:nowrap;
+}
+.call-round.accept{background:#3E9E74}
+.call-round.accept:hover{background:#47AE81}
+.call-round.decline,.call-round.hangup{background:#C85F5B}
+.call-round.decline:hover,.call-round.hangup:hover{background:#D76B66}
+.call-round.small{width:50px;height:50px}
+.call-round.small svg{width:20px;height:20px}
+.call-mini{
+  position:relative;
+  width:47px;
+  height:47px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:rgba(255,255,255,.1);
+  color:rgba(255,255,255,.82);
+  border:1px solid rgba(255,255,255,.1);
+}
+.call-mini:hover{background:rgba(255,255,255,.17)}
+.call-mini[aria-pressed="true"]{background:rgba(255,255,255,.92);color:#20232B}
+.call-mini[hidden]{display:none}
+.call-mini svg{width:19px;height:19px}
+.call-mini span{
+  position:absolute;
+  top:calc(100% + 6px);
+  left:50%;
+  transform:translateX(-50%);
+  color:rgba(255,255,255,.55);
+  font-size:8px;
+  line-height:1;
+  white-space:nowrap;
+}
+.call-layer.ending .call-actions{opacity:.35;pointer-events:none}
+.call-layer.ending .call-status{color:rgba(255,255,255,.8)}
+.call-log{
+  display:flex;
+  justify-content:center;
+  padding:2px 0;
+}
+.call-log-inner{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  max-width:88%;
+  padding:5px 10px;
+  border-radius:8px;
+  background:rgba(220,207,190,.42);
+  color:#8E8173;
+  font-size:9px;
+  line-height:1.5;
+}
+.call-log-inner svg{width:12px;height:12px;flex:none;color:#A08C79}
+.call-log-text{min-width:0;overflow-wrap:anywhere}
+.call-sheet-intro{margin:0 0 12px;color:var(--muted);font-size:10px;line-height:1.6}
+.call-start-options{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:15px}
+.call-start-btn{
+  min-height:82px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  background:var(--surface-alt);
+  color:#5C5045;
+  font-size:10.5px;
+  font-weight:600;
+}
+.call-start-btn:hover{background:#FBF5EC;border-color:#DCC9B9}
+.call-start-btn svg{width:23px;height:23px;color:var(--accent)}
+.call-incoming-test{
+  display:block;
+  width:100%;
+  height:34px;
+  margin-top:4px;
+  border:1px dashed #D6C3B2;
+  border-radius:8px;
+  background:transparent;
+  color:#8D7D6E;
+  font-size:9.5px;
+}
+.call-incoming-test:hover{background:#FCF8F1}
+@keyframes callGlow{
+  0%,100%{transform:scale(.94);opacity:.55}
+  50%{transform:scale(1.08);opacity:.95}
+}
+@keyframes callWave{
+  0%,100%{transform:scaleY(.55);opacity:.45}
+  50%{transform:scaleY(1.8);opacity:1}
+}
+@media (max-height:700px){
+  .call-portrait{width:128px;height:128px;margin-bottom:14px}
+  .call-avatar{width:114px;height:114px}
+  .call-avatar-glow{width:145px;height:145px}
+  .call-layer.video .call-portrait{height:38vh}
+  .call-actions{padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+}
+
 /* Toast */
 .toast{
   position:absolute;
@@ -1500,6 +1981,11 @@ img{display:block;max-width:100%}
           </svg>
           朋友圈
         </button>
+        <button class="call-btn" id="callBtn" type="button" aria-label="通话" title="通话">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6.6 4.5 9 3.8l2.2 5-2 1.6a14.6 14.6 0 0 0 4.4 4.4l1.6-2 5 2.2-.7 2.4c-.4 1.4-1.7 2.2-3.1 1.9C10.6 17.7 6.3 13.4 4.7 7.6c-.3-1.4.5-2.7 1.9-3.1Z"/>
+          </svg>
+        </button>
         <button class="mail-btn" id="mailBtn" type="button" aria-label="信箱" title="信箱">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="3" y="5.5" width="18" height="13" rx="2.5"/>
@@ -1518,6 +2004,7 @@ img{display:block;max-width:100%}
         <button type="button" data-menu="anniversary">我们的日子</button>
         <button type="button" data-menu="promises">小约定</button>
         <button type="button" data-menu="dailyLove">今日情话</button>
+        <button type="button" data-menu="music">音乐分享</button>
         <button type="button" data-menu="reply">回复设置</button>
         <button type="button" data-menu="info">使用说明</button>
         <span class="menu-separator" aria-hidden="true"></span>
@@ -1619,6 +2106,56 @@ img{display:block;max-width:100%}
     </div>
   </section>
 
+  <section class="view music-view" id="musicView" hidden>
+    <header class="moments-topbar">
+      <button class="back-btn" id="musicBack" type="button" aria-label="返回聊天">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 5l-7 7 7 7"/>
+        </svg>
+      </button>
+      <h1 class="moments-title">音乐</h1>
+      <span class="music-top-count" id="musicCount">0 首</span>
+    </header>
+    <div class="music-scroll" id="musicScroll">
+      <div class="music-tabs" role="tablist" aria-label="音乐">
+        <button class="music-tab active" id="musicSongsTab" type="button" role="tab" aria-selected="true">分享的歌曲</button>
+        <button class="music-tab" id="musicSettingsTab" type="button" role="tab" aria-selected="false">设置</button>
+      </div>
+      <div class="music-panel" id="musicSongsPanel">
+        <div class="music-list" id="musicList"></div>
+        <div class="music-pager" id="musicPager"></div>
+      </div>
+      <div class="music-panel" id="musicSettingsPanel" hidden>
+        <div class="setting-block">
+          <div class="setting-head">
+            <div>
+              <p class="setting-title">主动分享音乐</p>
+              <p class="setting-hint">开启后，对方会按概率不时分享一首歌。</p>
+            </div>
+            <button class="setting-switch" id="musicEnabledSwitch" type="button" role="switch" aria-checked="true" aria-label="主动分享音乐"><span></span></button>
+          </div>
+        </div>
+        <div class="setting-block">
+          <div class="setting-head">
+            <div>
+              <p class="setting-title">分享概率</p>
+              <p class="setting-hint">每小时检查一次，命中后分享一首。</p>
+            </div>
+            <select class="range-select music-probability" id="musicProbability" aria-label="音乐分享概率">
+              <option value="5">5%</option>
+              <option value="10">10%</option>
+              <option value="20">20%</option>
+              <option value="30">30%</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn primary music-share-now" id="shareMusicNow" type="button">立即分享一首</button>
+        <p class="music-share-status" id="musicShareStatus">还没有手动分享过</p>
+        <p class="decision-compose-hint">手动分享会绕过概率，直接触发一次搜索。</p>
+      </div>
+    </div>
+  </section>
+
   <div class="overlay" id="collectionLayer" hidden>
     <div class="scrim" data-close-collection></div>
     <section class="sheet collection-sheet" id="collectionSheet" role="dialog" aria-modal="true" aria-labelledby="collectionTitle" tabindex="-1">
@@ -1688,6 +2225,66 @@ img{display:block;max-width:100%}
     </section>
   </div>
 
+  <div class="call-layer" id="callLayer" hidden role="dialog" aria-modal="true" aria-labelledby="callName">
+    <img class="call-wallpaper" id="callWallpaper" alt="" aria-hidden="true">
+    <div class="call-scrim" aria-hidden="true"></div>
+    <div class="call-stage">
+      <div class="call-topline">
+        <span class="call-kind" id="callKind">语音通话</span>
+        <span class="call-timer" id="callTimer" hidden>00:00</span>
+      </div>
+      <div class="call-portrait" id="callPortrait">
+        <div class="call-avatar-glow" aria-hidden="true"></div>
+        <img class="call-avatar" id="callAvatar" alt="">
+        <div class="call-local" id="callLocal" hidden>
+          <span class="call-local-initial">我</span>
+          <span class="call-local-label">我</span>
+        </div>
+      </div>
+      <h2 class="call-name" id="callName">小满</h2>
+      <p class="call-status" id="callStatus">邀请你语音通话…</p>
+      <div class="call-wave" id="callWave" hidden aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <div class="call-actions">
+      <div class="call-action-group" id="callIncomingActions">
+        <button class="call-round decline" id="callDeclineBtn" type="button" aria-label="拒绝通话">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14.5c4-4.5 12-4.5 16 0l-1.8 2.4a2 2 0 0 1-2.3.6l-1.7-.8a2 2 0 0 1-1.1-1.9v-1a12.7 12.7 0 0 0-4.2 0v1a2 2 0 0 1-1.1 1.9l-1.7.8a2 2 0 0 1-2.3-.6Z"/><path d="M3 21 21 3"/></svg>
+          <span>拒绝</span>
+        </button>
+        <button class="call-round accept" id="callAcceptBtn" type="button" aria-label="接听通话">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 4.5 9 3.8l2.2 5-2 1.6a14.6 14.6 0 0 0 4.4 4.4l1.6-2 5 2.2-.7 2.4c-.4 1.4-1.7 2.2-3.1 1.9C10.6 17.7 6.3 13.4 4.7 7.6c-.3-1.4.5-2.7 1.9-3.1Z"/></svg>
+          <span>接听</span>
+        </button>
+      </div>
+      <div class="call-action-group" id="callOutgoingActions" hidden>
+        <button class="call-round hangup" id="callCancelBtn" type="button" aria-label="取消通话">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14.5c4-4.5 12-4.5 16 0l-1.8 2.4a2 2 0 0 1-2.3.6l-1.7-.8a2 2 0 0 1-1.1-1.9v-1a12.7 12.7 0 0 0-4.2 0v1a2 2 0 0 1-1.1 1.9l-1.7.8a2 2 0 0 1-2.3-.6Z"/></svg>
+          <span>取消</span>
+        </button>
+      </div>
+      <div class="call-action-group call-connected-actions" id="callConnectedActions" hidden>
+        <button class="call-mini" id="callMuteBtn" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.8 11.5a6.2 6.2 0 0 0 12.4 0M12 18v3"/></svg>
+          <span>静音</span>
+        </button>
+        <button class="call-mini" id="callSpeakerBtn" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h4l5-4v13l-5-4H4z"/><path d="M16 8.5a5 5 0 0 1 0 7M18.6 6a8.5 8.5 0 0 1 0 12"/></svg>
+          <span>免提</span>
+        </button>
+        <button class="call-mini" id="callCameraBtn" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6.5" width="12" height="11" rx="2.5"/><path d="M15 10l5-2.5v9L15 14Z"/></svg>
+          <span>摄像头</span>
+        </button>
+        <button class="call-round hangup small" id="callHangupBtn" type="button" aria-label="挂断通话">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14.5c4-4.5 12-4.5 16 0l-1.8 2.4a2 2 0 0 1-2.3.6l-1.7-.8a2 2 0 0 1-1.1-1.9v-1a12.7 12.7 0 0 0-4.2 0v1a2 2 0 0 1-1.1 1.9l-1.7.8a2 2 0 0 1-2.3-.6Z"/></svg>
+          <span>挂断</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </div>
 
@@ -1713,6 +2310,11 @@ img{display:block;max-width:100%}
     anniversary: 'zika.v3.anniversary',
     promises: 'zika.v3.promises',
     dailyLove: 'zika.v3.dailyLove',
+    musicSettings: 'zika.v3.music.settings',
+    musicFavorites: 'zika.v3.music.favorites',
+    musicRecent: 'zika.v3.music.recent',
+    musicLastCheck: 'zika.v3.music.lastCheck',
+    callChance: 'zika.v3.callChance',
     moments: 'zika.v4.moments',
     momentSignature: 'zika.v4.moments.signature',
     letters: 'zika.v5.mail.letters',
@@ -1726,6 +2328,23 @@ img{display:block;max-width:100%}
   const MAX_MOMENTS = 50;
   const MAX_LETTERS = 80;
   const MAX_PROMISES = 30;
+  const MUSIC_CHECK_INTERVAL = 60 * 60 * 1000;
+  const CALL_CHECK_INTERVAL = 4 * 60 * 1000;
+  const MUSIC_RETRY_DELAY = 60 * 1000;
+  const MUSIC_PAGE_SIZE = 10;
+  const MAX_MUSIC_FAVORITES = 100;
+  const HOT_ARTISTS = ['周杰伦', '林俊杰', '陈奕迅', '五月天', '孙燕姿', '邓紫棋', '毛不易', 'Taylor Swift', 'Ed Sheeran', 'Adele'];
+  const MUSIC_FALLBACK_ARTISTS = ['周深', 'Katy Perry'];
+  const MUSIC_EMOTIONS = [
+    { words: ['累', '疲惫', '困'], term: '治愈 放松' },
+    { words: ['难过', '伤心', '哭'], term: '治愈 温柔' },
+    { words: ['开心', '高兴', '快乐'], term: '快乐 happy' },
+    { words: ['想你', '想念', '思念'], term: '思念 情歌' },
+    { words: ['失眠', '睡不着'], term: '助眠 安静' },
+    { words: ['生气', '烦'], term: '平静 放松' },
+    { words: ['焦虑', '紧张'], term: '治愈 安静' },
+    { words: ['孤独', '寂寞'], term: '陪伴 温暖' }
+  ];
   const MAIL_MIN_DELAY = 60 * 60 * 1000;
   const MAIL_MAX_DELAY = 24 * 60 * 60 * 1000;
   const MAX_FILE_BYTES = 12 * 1024 * 1024;
@@ -1968,6 +2587,13 @@ img{display:block;max-width:100%}
     anniversary: '',
     promises: [],
     dailyLove: { date: '', index: 0 },
+    musicFavorites: [],
+    musicSettings: { enabled: true, probability: 5 },
+    musicRecent: [],
+    musicPage: 0,
+    musicTab: 'songs',
+    musicSharing: false,
+    callChance: 10,
     moments: [],
     momentSignature: '',
     commentingMomentId: null,
@@ -1994,6 +2620,13 @@ img{display:block;max-width:100%}
   let mailTimer = null;
   let lastFocusSheet = null;
   let lastFocusCollection = null;
+  let musicAudio = null;
+  let activeMusicController = null;
+  let activeCall = null;
+  let callTickTimer = null;
+  const momentReplyTimers = new Map();
+  const MUSIC_PLAY_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>';
+  const MUSIC_PAUSE_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg>';
 
   const $ = selector => document.querySelector(selector);
   const els = {
@@ -2001,7 +2634,40 @@ img{display:block;max-width:100%}
     chatView: $('#chatView'),
     momentsView: $('#momentsView'),
     mailView: $('#mailView'),
-    app: $('#app'),
+    musicView: $('#musicView'),
+    musicBack: $('#musicBack'),
+    musicScroll: $('#musicScroll'),
+    musicCount: $('#musicCount'),
+    musicSongsTab: $('#musicSongsTab'),
+    musicSettingsTab: $('#musicSettingsTab'),
+    musicSongsPanel: $('#musicSongsPanel'),
+    musicSettingsPanel: $('#musicSettingsPanel'),
+    musicList: $('#musicList'),
+    musicPager: $('#musicPager'),
+    musicEnabledSwitch: $('#musicEnabledSwitch'),
+    musicProbability: $('#musicProbability'),
+    shareMusicNow: $('#shareMusicNow'),
+    musicShareStatus: $('#musicShareStatus'),
+    callBtn: $('#callBtn'),
+    callLayer: $('#callLayer'),
+    callWallpaper: $('#callWallpaper'),
+    callKind: $('#callKind'),
+    callTimer: $('#callTimer'),
+    callAvatar: $('#callAvatar'),
+    callName: $('#callName'),
+    callStatus: $('#callStatus'),
+    callWave: $('#callWave'),
+    callLocal: $('#callLocal'),
+    callIncomingActions: $('#callIncomingActions'),
+    callOutgoingActions: $('#callOutgoingActions'),
+    callConnectedActions: $('#callConnectedActions'),
+    callDeclineBtn: $('#callDeclineBtn'),
+    callAcceptBtn: $('#callAcceptBtn'),
+    callCancelBtn: $('#callCancelBtn'),
+    callMuteBtn: $('#callMuteBtn'),
+    callSpeakerBtn: $('#callSpeakerBtn'),
+    callCameraBtn: $('#callCameraBtn'),
+    callHangupBtn: $('#callHangupBtn'),
     headerAvatar: $('#headerAvatar'),
     headerName: $('#headerName'),
     contactSub: $('#contactSub'),
@@ -2392,6 +3058,98 @@ img{display:block;max-width:100%}
     }
   }
 
+  function normalizeMusicData(raw) {
+    if (!raw || typeof raw !== 'object') return null;
+    const name = typeof raw.name === 'string' ? raw.name.trim().slice(0, 120) : '';
+    const artist = typeof raw.artist === 'string' ? raw.artist.trim().slice(0, 100) : '';
+    const previewUrl = typeof raw.previewUrl === 'string' && /^https?:\/\//i.test(raw.previewUrl)
+      ? raw.previewUrl
+      : '';
+    if (!name || !artist || !previewUrl) return null;
+    const coverUrl = typeof raw.coverUrl === 'string' && /^https?:\/\//i.test(raw.coverUrl)
+      ? raw.coverUrl
+      : '';
+    const duration = Number(raw.duration);
+    return {
+      name,
+      artist,
+      coverUrl,
+      previewUrl,
+      duration: Number.isFinite(duration) ? Math.min(120, Math.max(1, duration)) : 30,
+      lyrics: typeof raw.lyrics === 'string' ? raw.lyrics.slice(0, 8000) : '',
+      lyricsPlain: typeof raw.lyricsPlain === 'string' ? raw.lyricsPlain.slice(0, 8000) : ''
+    };
+  }
+
+  function loadMusicSettings() {
+    const raw = safeGet(KEYS.musicSettings);
+    if (raw === null) return;
+    try {
+      const parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object') return;
+      if (typeof parsed.enabled === 'boolean') state.musicSettings.enabled = parsed.enabled;
+      const probability = Number(parsed.probability);
+      if ([5, 10, 20, 30].includes(probability)) state.musicSettings.probability = probability;
+    } catch (_) {}
+  }
+
+  function persistMusicSettings() {
+    return safeSet(KEYS.musicSettings, JSON.stringify(state.musicSettings));
+  }
+
+  function loadMusicFavorites() {
+    const raw = safeGet(KEYS.musicFavorites);
+    if (raw === null) return;
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) throw new Error('bad music favorites');
+      state.musicFavorites = parsed
+        .map(item => {
+          const music = normalizeMusicData(item);
+          if (!music) return null;
+          return {
+            ...music,
+            id: typeof item.id === 'string' ? item.id : 'music-fav-' + uid(),
+            messageId: typeof item.messageId === 'string' ? item.messageId : '',
+            at: Number.isFinite(item.at) ? item.at : Date.now()
+          };
+        })
+        .filter(Boolean)
+        .slice(0, MAX_MUSIC_FAVORITES);
+    } catch (_) {
+      state.musicFavorites = [];
+    }
+  }
+
+  function persistMusicFavorites() {
+    return safeSet(KEYS.musicFavorites, JSON.stringify(state.musicFavorites.slice(0, MAX_MUSIC_FAVORITES)));
+  }
+
+  function loadMusicRecent() {
+    const raw = safeGet(KEYS.musicRecent);
+    if (raw === null) return;
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return;
+      state.musicRecent = parsed.filter(item => typeof item === 'string').slice(0, 10);
+    } catch (_) {}
+  }
+
+  function persistMusicRecent() {
+    return safeSet(KEYS.musicRecent, JSON.stringify(state.musicRecent.slice(0, 10)));
+  }
+
+  function loadCallChance() {
+    const raw = safeGet(KEYS.callChance);
+    if (raw === null) return;
+    const value = Number(raw);
+    if ([0, 5, 10, 20, 30].includes(value)) state.callChance = value;
+  }
+
+  function persistCallChance() {
+    return safeSet(KEYS.callChance, String(state.callChance));
+  }
+
   function loadCustomGroups() {
     const raw = safeGet(KEYS.cardGroups);
     if (raw === null) return;
@@ -2623,7 +3381,54 @@ img{display:block;max-width:100%}
         at: message.at
       };
     }
+    if (message.type === 'sticker') {
+      if (message.from !== 'me' && message.from !== 'them') return null;
+      if (typeof message.src !== 'string' || !message.src.startsWith('data:image/')) return null;
+      return {
+        id: typeof message.id === 'string' ? message.id : uid(),
+        from: message.from,
+        type: 'sticker',
+        stickerId: typeof message.stickerId === 'string' ? message.stickerId : '',
+        stickerName: typeof message.stickerName === 'string' ? message.stickerName : '表情',
+        src: message.src,
+        at: message.at
+      };
+    }
     if (message.from !== 'them') return null;
+    if (message.type === 'call') {
+      const direction = message.direction === 'outgoing' ? 'outgoing' : 'incoming';
+      const media = message.media === 'video' ? 'video' : 'voice';
+      const status = ['answered', 'missed', 'declined', 'cancelled'].includes(message.status)
+        ? message.status
+        : 'missed';
+      const duration = Number(message.duration);
+      return {
+        id: typeof message.id === 'string' ? message.id : uid(),
+        from: 'them',
+        type: 'call',
+        direction,
+        media,
+        status,
+        duration: Number.isFinite(duration) ? Math.max(0, Math.min(7200, Math.round(duration))) : 0,
+        at: message.at
+      };
+    }
+    if (message.type === 'music') {
+      let raw = message.content;
+      if (typeof raw === 'string') {
+        try { raw = JSON.parse(raw); } catch (_) { raw = null; }
+      }
+      const music = normalizeMusicData(raw);
+      if (!music) return null;
+      return {
+        id: typeof message.id === 'string' ? message.id : uid(),
+        from: 'them',
+        type: 'music',
+        content: JSON.stringify(music),
+        music,
+        at: message.at
+      };
+    }
     if (message.type === 'decisionAnswer') {
       const rawAnswers = Array.isArray(message.answerTexts)
         ? message.answerTexts
@@ -2678,18 +3483,6 @@ img{display:block;max-width:100%}
         at: message.at
       };
     }
-    if (message.type === 'sticker') {
-      if (typeof message.src !== 'string' || !message.src.startsWith('data:image/')) return null;
-      return {
-        id: typeof message.id === 'string' ? message.id : uid(),
-        from: 'them',
-        type: 'sticker',
-        stickerId: typeof message.stickerId === 'string' ? message.stickerId : '',
-        stickerName: typeof message.stickerName === 'string' ? message.stickerName : '表情',
-        src: message.src,
-        at: message.at
-      };
-    }
     return null;
   }
 
@@ -2721,18 +3514,47 @@ img{display:block;max-width:100%}
     const hasImage = typeof moment.image === 'string' && moment.image.startsWith('data:image/');
     if (!text && !hasImage) return null;
     const comments = Array.isArray(moment.comments)
-      ? moment.comments.filter(comment =>
-          comment &&
-          typeof comment.text === 'string' &&
-          comment.text.trim() &&
-          Number.isFinite(comment.at) &&
-          (comment.author === 'me' || comment.author === 'contact')
-        ).slice(-30).map(comment => ({
-          id: typeof comment.id === 'string' ? comment.id : uid(),
-          author: comment.author,
-          text: comment.text.trim().slice(0, 160),
-          at: comment.at
-        }))
+      ? moment.comments
+        .filter(comment =>
+          comment
+          && Number.isFinite(comment.at)
+          && (comment.author === 'me' || comment.author === 'contact')
+        )
+        .slice(-30)
+        .map(comment => {
+          if (comment.type === 'cards' && comment.author === 'contact') {
+            const cards = Array.isArray(comment.cards)
+              ? comment.cards
+                .filter(card => card && typeof card.label === 'string' && card.label.trim())
+                .slice(0, 3)
+                .map(card => ({
+                  cardId: typeof card.cardId === 'string' ? card.cardId : '',
+                  label: card.label.trim().slice(0, 80),
+                  emoji: typeof card.emoji === 'string' ? card.emoji.slice(0, 8) : '',
+                  noEmoji: Boolean(card.noEmoji) || !card.emoji,
+                  intent: typeof card.intent === 'string' ? card.intent.trim().slice(0, 80) : ''
+                }))
+              : [];
+            if (!cards.length) return null;
+            return {
+              id: typeof comment.id === 'string' ? comment.id : uid(),
+              author: 'contact',
+              type: 'cards',
+              cards,
+              replyTo: typeof comment.replyTo === 'string' ? comment.replyTo : '',
+              at: comment.at
+            };
+          }
+          if (typeof comment.text !== 'string' || !comment.text.trim()) return null;
+          return {
+            id: typeof comment.id === 'string' ? comment.id : uid(),
+            author: comment.author,
+            type: 'text',
+            text: comment.text.trim().slice(0, 160),
+            at: comment.at
+          };
+        })
+        .filter(Boolean)
       : [];
     return {
       id: typeof moment.id === 'string' ? moment.id : uid(),
@@ -3136,6 +3958,7 @@ img{display:block;max-width:100%}
     state.view = 'mail';
     els.chatView.hidden = true;
     els.momentsView.hidden = true;
+    els.musicView.hidden = true;
     els.mailView.hidden = false;
     checkMailDelivery();
     markMailRead();
@@ -3353,11 +4176,984 @@ img{display:block;max-width:100%}
   }
 
   /* ————————————————————————————————
+     Music
+  ———————————————————————————————— */
+  function formatMusicTime(value) {
+    const seconds = Math.max(0, Math.floor(Number(value) || 0));
+    return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
+  }
+
+  function ensureMusicAudio() {
+    if (!musicAudio) {
+      musicAudio = new Audio();
+      musicAudio.preload = 'none';
+      musicAudio.addEventListener('timeupdate', updateActiveMusicUI);
+      musicAudio.addEventListener('play', updateActiveMusicButton);
+      musicAudio.addEventListener('pause', updateActiveMusicButton);
+      musicAudio.addEventListener('ended', () => {
+        if (!activeMusicController) return;
+        try { musicAudio.currentTime = 0; } catch (_) {}
+        resetMusicControllersForUrl(activeMusicController.music.previewUrl);
+        resetMusicCard(activeMusicController);
+        updateActiveMusicButton();
+      });
+      musicAudio.addEventListener('error', () => {
+        if (!activeMusicController) return;
+        showToast('试听加载失败，换一首试试');
+        stopActiveMusic();
+      });
+    }
+    return musicAudio;
+  }
+
+  function resetMusicCard(controller) {
+    if (!controller) return;
+    controller.dragging = false;
+    controller.wasPlaying = false;
+    controller.slider.value = '0';
+    controller.currentEl.textContent = '0:00';
+    controller.totalEl.textContent = formatMusicTime(controller.music.duration || 30);
+    controller.playBtn.classList.remove('playing');
+    controller.playBtn.innerHTML = MUSIC_PLAY_ICON;
+    controller.playBtn.setAttribute('aria-label', '播放');
+  }
+
+  function musicControllersForUrl(url) {
+    return Array.from(document.querySelectorAll('.music-card'))
+      .map(card => card._musicController)
+      .filter(controller => controller && controller.music.previewUrl === url);
+  }
+
+  function resetMusicControllersForUrl(url) {
+    musicControllersForUrl(url).forEach(controller => resetMusicCard(controller));
+  }
+
+  function syncMusicCardUI(controller) {
+    if (!activeMusicController || !musicAudio) return;
+    if (activeMusicController.music.previewUrl !== controller.music.previewUrl) return;
+    const duration = Number.isFinite(musicAudio.duration) && musicAudio.duration > 0
+      ? Math.min(controller.music.duration || 30, musicAudio.duration)
+      : controller.music.duration || 30;
+    controller.slider.max = String(duration);
+    controller.totalEl.textContent = formatMusicTime(duration);
+    if (!controller.dragging) {
+      const current = Math.min(musicAudio.currentTime || 0, duration);
+      controller.slider.value = String(current);
+      controller.currentEl.textContent = formatMusicTime(current);
+    }
+  }
+
+  function updateActiveMusicButton() {
+    if (!activeMusicController || !musicAudio) return;
+    const playing = !musicAudio.paused;
+    musicControllersForUrl(activeMusicController.music.previewUrl).forEach(controller => {
+      controller.playBtn.classList.toggle('playing', playing);
+      controller.playBtn.innerHTML = playing ? MUSIC_PAUSE_ICON : MUSIC_PLAY_ICON;
+      controller.playBtn.setAttribute('aria-label', playing ? '暂停' : '播放');
+    });
+  }
+
+  function updateActiveMusicUI() {
+    if (!activeMusicController || !musicAudio) return;
+    musicControllersForUrl(activeMusicController.music.previewUrl).forEach(syncMusicCardUI);
+  }
+
+  function stopActiveMusic() {
+    if (musicAudio) {
+      musicAudio.pause();
+      try { musicAudio.currentTime = 0; } catch (_) {}
+    }
+    if (activeMusicController) {
+      resetMusicControllersForUrl(activeMusicController.music.previewUrl);
+      resetMusicCard(activeMusicController);
+      activeMusicController = null;
+    }
+  }
+
+  function activateMusic(controller, autoplay) {
+    const audio = ensureMusicAudio();
+    if (activeMusicController && activeMusicController.music.previewUrl !== controller.music.previewUrl) {
+      resetMusicControllersForUrl(activeMusicController.music.previewUrl);
+    }
+    activeMusicController = controller;
+    audio.pause();
+    audio.src = controller.music.previewUrl;
+    try { audio.currentTime = 0; } catch (_) {}
+    controller.slider.value = '0';
+    controller.currentEl.textContent = '0:00';
+    controller.totalEl.textContent = formatMusicTime(controller.music.duration || 30);
+    updateActiveMusicButton();
+    if (autoplay) {
+      const promise = audio.play();
+      if (promise && typeof promise.catch === 'function') {
+        promise.catch(() => {
+          if (activeMusicController === controller) {
+            showToast('试听加载失败，换一首试试');
+            stopActiveMusic();
+          }
+        });
+      }
+    }
+  }
+
+  function toggleMusic(controller) {
+    const audio = ensureMusicAudio();
+    if (activeMusicController && activeMusicController.music.previewUrl === controller.music.previewUrl) {
+      if (audio.paused) {
+        const promise = audio.play();
+        if (promise && typeof promise.catch === 'function') {
+          promise.catch(() => showToast('试听加载失败，换一首试试'));
+        }
+      } else {
+        audio.pause();
+      }
+      updateActiveMusicButton();
+      return;
+    }
+    activateMusic(controller, true);
+  }
+
+  function buildMusicCard(music, options = {}) {
+    const card = document.createElement('div');
+    card.className = 'music-card';
+    const head = document.createElement('div');
+    head.className = 'music-card-head';
+
+    const cover = document.createElement('div');
+    cover.className = 'music-cover';
+    const fallback = document.createElement('span');
+    fallback.textContent = '🎵';
+    fallback.setAttribute('aria-hidden', 'true');
+    if (music.coverUrl) {
+      const image = new Image();
+      image.src = music.coverUrl;
+      image.alt = '';
+      image.loading = 'lazy';
+      image.addEventListener('error', () => {
+        image.remove();
+        fallback.hidden = false;
+      });
+      fallback.hidden = true;
+      cover.append(image, fallback);
+    } else {
+      cover.appendChild(fallback);
+    }
+
+    const info = document.createElement('div');
+    info.className = 'music-info';
+    const name = document.createElement('p');
+    name.className = 'music-name';
+    name.textContent = music.name;
+    const artist = document.createElement('p');
+    artist.className = 'music-artist';
+    artist.textContent = music.artist;
+    info.append(name, artist);
+
+    const playBtn = document.createElement('button');
+    playBtn.type = 'button';
+    playBtn.className = 'music-play';
+    playBtn.setAttribute('aria-label', '播放');
+    playBtn.innerHTML = MUSIC_PLAY_ICON;
+
+    head.append(cover, info, playBtn);
+
+    const controls = document.createElement('div');
+    controls.className = 'music-controls';
+    const currentEl = document.createElement('span');
+    currentEl.className = 'music-time';
+    currentEl.textContent = '0:00';
+    const slider = document.createElement('input');
+    slider.className = 'music-range';
+    slider.type = 'range';
+    slider.min = '0';
+    slider.max = String(music.duration || 30);
+    slider.step = '0.1';
+    slider.value = '0';
+    slider.setAttribute('aria-label', `《${music.name}》播放进度`);
+    const totalEl = document.createElement('span');
+    totalEl.className = 'music-time';
+    totalEl.textContent = formatMusicTime(music.duration || 30);
+    controls.append(currentEl, slider, totalEl);
+
+    card.append(head, controls);
+
+    const hasLyrics = Boolean(music.lyricsPlain || music.lyrics);
+    const lyricsBtn = document.createElement('button');
+    lyricsBtn.type = 'button';
+    lyricsBtn.className = 'music-lyrics-btn';
+    lyricsBtn.textContent = '查看歌词';
+    lyricsBtn.hidden = !hasLyrics;
+    card.appendChild(lyricsBtn);
+
+    const controller = {
+      music,
+      card,
+      slider,
+      currentEl,
+      totalEl,
+      playBtn,
+      lyricsBtn,
+      dragging: false,
+      wasPlaying: false
+    };
+    lyricsBtn.addEventListener('click', () => openLyricsSheet(controller.music));
+
+    card._musicController = controller;
+    playBtn.addEventListener('click', () => toggleMusic(controller));
+    slider.addEventListener('pointerdown', event => {
+      controller.dragging = true;
+      try { slider.setPointerCapture(event.pointerId); } catch (_) {}
+      if (!activeMusicController || activeMusicController.music.previewUrl !== controller.music.previewUrl) {
+        activateMusic(controller, false);
+      }
+      const audio = ensureMusicAudio();
+      controller.wasPlaying = !audio.paused;
+      if (controller.wasPlaying) audio.pause();
+    });
+    slider.addEventListener('input', () => {
+      if (controller.dragging) currentEl.textContent = formatMusicTime(slider.value);
+    });
+    const finishDrag = () => {
+      if (!controller.dragging) return;
+      controller.dragging = false;
+      if (!activeMusicController || activeMusicController.music.previewUrl !== controller.music.previewUrl) {
+        activateMusic(controller, false);
+      }
+      const audio = ensureMusicAudio();
+      const duration = Number(slider.max) || music.duration || 30;
+      const value = Math.min(duration, Math.max(0, Number(slider.value) || 0));
+      try { audio.currentTime = value; } catch (_) {}
+      currentEl.textContent = formatMusicTime(value);
+      if (controller.wasPlaying) {
+        const promise = audio.play();
+        if (promise && typeof promise.catch === 'function') {
+          promise.catch(() => showToast('试听加载失败，换一首试试'));
+        }
+      }
+      controller.wasPlaying = false;
+    };
+    slider.addEventListener('pointerup', finishDrag);
+    slider.addEventListener('pointercancel', finishDrag);
+    slider.addEventListener('change', () => {
+      if (controller.dragging) return;
+      if (!activeMusicController || activeMusicController.music.previewUrl !== controller.music.previewUrl) {
+        activateMusic(controller, false);
+      }
+      const audio = ensureMusicAudio();
+      const duration = Number(slider.max) || music.duration || 30;
+      const value = Math.min(duration, Math.max(0, Number(slider.value) || 0));
+      try { audio.currentTime = value; } catch (_) {}
+      currentEl.textContent = formatMusicTime(value);
+    });
+
+    if (activeMusicController && activeMusicController.music.previewUrl === music.previewUrl) {
+      syncMusicCardUI(controller);
+      const playing = Boolean(musicAudio && !musicAudio.paused);
+      controller.playBtn.classList.toggle('playing', playing);
+      controller.playBtn.innerHTML = playing ? MUSIC_PAUSE_ICON : MUSIC_PLAY_ICON;
+      controller.playBtn.setAttribute('aria-label', playing ? '暂停' : '播放');
+    }
+
+    return card;
+  }
+
+  function openLyricsSheet(music) {
+    let text = music.lyricsPlain || '';
+    if (!text && music.lyrics) {
+      text = music.lyrics
+        .split('\n')
+        .map(line => line.replace(/\[[^\]]+\]/g, '').trim())
+        .filter(Boolean)
+        .join('\n');
+    }
+    if (!text) return;
+    els.sheetTitle.textContent = music.name;
+    els.sheetBody.innerHTML = `
+      <p class="lyrics-artist" id="lyricsArtist"></p>
+      <pre class="lyrics-text" id="lyricsText"></pre>
+    `;
+    const artist = $('#lyricsArtist');
+    const lyrics = $('#lyricsText');
+    if (artist) artist.textContent = music.artist;
+    if (lyrics) lyrics.textContent = text;
+    els.sheetActions.innerHTML = '<button class="btn primary" type="button" data-sheet-action="close">关闭</button>';
+    showSheet();
+  }
+
+  function musicDateLabel(at) {
+    return dayLabel(at);
+  }
+
+  function renderMusicSongs() {
+    if (!els.musicList) return;
+    els.musicList.innerHTML = '';
+    if (els.musicPager) els.musicPager.innerHTML = '';
+    const favorites = state.musicFavorites;
+    if (els.musicCount) els.musicCount.textContent = `${favorites.length} 首`;
+    if (!favorites.length) {
+      const empty = document.createElement('div');
+      empty.className = 'music-empty';
+      const strong = document.createElement('strong');
+      strong.textContent = '还没有分享的歌曲';
+      const copy = document.createElement('span');
+      copy.textContent = 'TA 分享的歌会收在这里。';
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = '让TA分享一首';
+      button.addEventListener('click', () => triggerMusicShare());
+      empty.append(strong, copy, button);
+      els.musicList.appendChild(empty);
+      return;
+    }
+    const pageCount = Math.max(1, Math.ceil(favorites.length / MUSIC_PAGE_SIZE));
+    if (state.musicPage >= pageCount) state.musicPage = pageCount - 1;
+    if (state.musicPage < 0) state.musicPage = 0;
+    const start = state.musicPage * MUSIC_PAGE_SIZE;
+    const pageItems = favorites.slice(start, start + MUSIC_PAGE_SIZE);
+    pageItems.forEach(favorite => {
+      const item = document.createElement('div');
+      item.className = 'music-favorite-item';
+      const head = document.createElement('div');
+      head.className = 'music-favorite-head';
+      const date = document.createElement('span');
+      date.textContent = musicDateLabel(favorite.at);
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'music-favorite-del';
+      remove.dataset.deleteMusicFavorite = favorite.id;
+      remove.setAttribute('aria-label', `删除《${favorite.name}》`);
+      remove.textContent = '×';
+      head.append(date, remove);
+      const card = buildMusicCard(favorite, { context: 'favorite' });
+      item.append(head, card);
+      els.musicList.appendChild(item);
+    });
+    if (pageCount > 1 && els.musicPager) {
+      const prev = document.createElement('button');
+      prev.type = 'button';
+      prev.className = 'music-page-btn';
+      prev.textContent = '上一页';
+      prev.disabled = state.musicPage === 0;
+      prev.addEventListener('click', () => {
+        state.musicPage = Math.max(0, state.musicPage - 1);
+        renderMusicSongs();
+      });
+      const text = document.createElement('span');
+      text.className = 'music-page-text';
+      text.textContent = `${state.musicPage + 1} / ${pageCount}`;
+      const next = document.createElement('button');
+      next.type = 'button';
+      next.className = 'music-page-btn';
+      next.textContent = '下一页';
+      next.disabled = state.musicPage >= pageCount - 1;
+      next.addEventListener('click', () => {
+        state.musicPage = Math.min(pageCount - 1, state.musicPage + 1);
+        renderMusicSongs();
+      });
+      els.musicPager.append(prev, text, next);
+    }
+  }
+
+  function renderMusicSettings() {
+    if (!els.musicEnabledSwitch) return;
+    const settings = state.musicSettings;
+    els.musicEnabledSwitch.classList.toggle('on', settings.enabled);
+    els.musicEnabledSwitch.setAttribute('aria-checked', String(settings.enabled));
+    if (els.musicProbability) els.musicProbability.value = String(settings.probability);
+    if (els.musicShareStatus && !state.musicShareStatus) {
+      els.musicShareStatus.textContent = state.musicFavorites.length
+        ? `最近分享《${state.musicFavorites[0].name}》`
+        : '还没有手动分享过';
+    }
+    updateMusicShareButton();
+  }
+
+  function renderMusicView() {
+    if (!els.musicView) return;
+    const songsTab = state.musicTab === 'songs';
+    if (els.musicSongsTab) {
+      els.musicSongsTab.classList.toggle('active', songsTab);
+      els.musicSongsTab.setAttribute('aria-selected', String(songsTab));
+    }
+    if (els.musicSettingsTab) {
+      els.musicSettingsTab.classList.toggle('active', !songsTab);
+      els.musicSettingsTab.setAttribute('aria-selected', String(!songsTab));
+    }
+    if (els.musicSongsPanel) els.musicSongsPanel.hidden = !songsTab;
+    if (els.musicSettingsPanel) els.musicSettingsPanel.hidden = songsTab;
+    if (songsTab) renderMusicSongs();
+    else renderMusicSettings();
+  }
+
+  function setMusicTab(tab) {
+    state.musicTab = tab === 'settings' ? 'settings' : 'songs';
+    renderMusicView();
+  }
+
+  function openMusicView() {
+    closeMenu();
+    state.view = 'music';
+    els.chatView.hidden = true;
+    els.momentsView.hidden = true;
+    els.mailView.hidden = true;
+    els.musicView.hidden = false;
+    renderMusicView();
+    if (els.musicScroll) els.musicScroll.scrollTop = 0;
+    updateDocumentTitle();
+  }
+
+  function cleanSongTitle(title) {
+    return String(title || '')
+      .replace(/\([^)]*\)|\[[^\]]*\]|（[^）]*）|【[^】]*】/g, ' ')
+      .replace(/\s*[-–—]\s*(?:remaster(?:ed)?|live|version|edit|radio edit).*$/i, ' ')
+      .replace(/\s+(?:feat\.?|ft\.?|with)\s+.*$/i, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function buildMusicSearchTerms() {
+    const recentText = state.messages
+      .filter(message => message.from === 'me' && message.type === 'text')
+      .slice(-5)
+      .map(message => message.text)
+      .join(' ');
+    const emotion = MUSIC_EMOTIONS.find(item => item.words.some(word => recentText.includes(word)));
+    const terms = [];
+    if (emotion) {
+      terms.push(emotion.term);
+    } else if (Math.random() < 0.6) {
+      const first = randomOf(HOT_ARTISTS);
+      const others = HOT_ARTISTS.filter(artist => artist !== first);
+      terms.push(first, randomOf(others));
+    } else {
+      const card = state.cards.length ? randomOf(state.cards) : null;
+      const match = card ? card.label.match(/[\u3400-\u9fff]/) : null;
+      terms.push(match ? match[0] : '我');
+      terms.push(randomOf(HOT_ARTISTS));
+    }
+    terms.push(randomOf(HOT_ARTISTS), '华语 流行');
+    return [...new Set(terms.filter(Boolean))].slice(0, 3);
+  }
+
+  async function fetchJsonWithTimeout(url, timeout = 10000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+    try {
+      const response = await fetch(url, {
+        signal: controller.signal,
+        headers: { Accept: 'application/json' }
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.json();
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  async function fetchItunes(term, china) {
+    const params = new URLSearchParams({
+      term,
+      entity: 'musicTrack',
+      limit: '30'
+    });
+    if (china) {
+      params.set('country', 'CN');
+      params.set('lang', 'zh_cn');
+    }
+    const data = await fetchJsonWithTimeout(`https://itunes.apple.com/search?${params.toString()}`, 8000);
+    const results = Array.isArray(data.results) ? data.results : [];
+    const seen = new Set();
+    const tracks = [];
+    results.forEach(result => {
+      if (!result || typeof result.trackName !== 'string' || typeof result.previewUrl !== 'string') return;
+      if (!/^https?:\/\//i.test(result.previewUrl)) return;
+      if (seen.has(result.previewUrl)) return;
+      seen.add(result.previewUrl);
+      const artwork = typeof result.artworkUrl100 === 'string'
+        ? result.artworkUrl100.replace('100x100bb', '300x300bb')
+        : '';
+      tracks.push({
+        name: result.trackName.trim().slice(0, 120),
+        artist: (result.artistName || '未知歌手').trim().slice(0, 100),
+        coverUrl: artwork,
+        previewUrl: result.previewUrl,
+        duration: 30
+      });
+    });
+    return tracks;
+  }
+
+  function filterFreshTracks(tracks) {
+    const recent = new Set(state.musicRecent.map(name => name.toLowerCase()));
+    const seen = new Set();
+    return tracks.filter(track => {
+      const name = track.name.toLowerCase();
+      if (recent.has(name) || seen.has(track.previewUrl)) return false;
+      seen.add(track.previewUrl);
+      return true;
+    });
+  }
+
+  async function searchItunesTerm(term) {
+    const hasChinese = /[\u3400-\u9fff]/.test(term);
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      try {
+        if (hasChinese) {
+          const settled = await Promise.allSettled([
+            fetchItunes(term, true).then(filterFreshTracks),
+            fetchItunes(term, false).then(filterFreshTracks)
+          ]);
+          if (settled.every(result => result.status === 'rejected')) throw new Error('music search failed');
+          const chinaTracks = settled[0].status === 'fulfilled' ? settled[0].value : [];
+          const globalTracks = settled[1].status === 'fulfilled' ? settled[1].value : [];
+          return chinaTracks.length ? chinaTracks : globalTracks;
+        }
+        return filterFreshTracks(await fetchItunes(term, false));
+      } catch (_) {
+        if (attempt === 2) throw new Error('music search failed');
+        await sleep(MUSIC_RETRY_DELAY);
+      }
+    }
+    return [];
+  }
+
+  async function findMusicTrack(terms) {
+    for (const term of terms) {
+      const tracks = await searchItunesTerm(term);
+      if (tracks.length) return randomOf(tracks);
+    }
+    const fallback = randomOf(MUSIC_FALLBACK_ARTISTS);
+    const tracks = await searchItunesTerm(fallback);
+    return tracks.length ? randomOf(tracks) : null;
+  }
+
+  async function fetchMusicLyrics(name, artist) {
+    try {
+      const query = `${cleanSongTitle(name)} ${artist}`.trim();
+      const data = await fetchJsonWithTimeout(`https://lrclib.net/api/search?q=${encodeURIComponent(query)}`, 8000);
+      if (!Array.isArray(data)) return {};
+      const match = data.find(item => item && (item.syncedLyrics || item.plainLyrics));
+      if (!match) return {};
+      return {
+        lyrics: typeof match.syncedLyrics === 'string' ? match.syncedLyrics : '',
+        lyricsPlain: typeof match.plainLyrics === 'string' ? match.plainLyrics : ''
+      };
+    } catch (_) {
+      return {};
+    }
+  }
+
+  function updateMusicCardLyrics(music) {
+    if (!music.lyrics && !music.lyricsPlain) return;
+    document.querySelectorAll('.music-card').forEach(card => {
+      const controller = card._musicController;
+      if (!controller || controller.music.previewUrl !== music.previewUrl) return;
+      controller.music.lyrics = music.lyrics || '';
+      controller.music.lyricsPlain = music.lyricsPlain || '';
+      if (controller.lyricsBtn) controller.lyricsBtn.hidden = false;
+    });
+  }
+
+  function addMusicFavorite(music, messageId) {
+    if (state.musicFavorites.some(item => item.previewUrl === music.previewUrl)) return;
+    state.musicFavorites.unshift({
+      ...music,
+      id: 'music-fav-' + uid(),
+      messageId,
+      at: Date.now()
+    });
+    state.musicFavorites = state.musicFavorites.slice(0, MAX_MUSIC_FAVORITES);
+    persistMusicFavorites();
+  }
+
+  function updateMusicShareButton() {
+    if (!els.shareMusicNow) return;
+    els.shareMusicNow.disabled = state.musicSharing;
+    els.shareMusicNow.textContent = state.musicSharing ? '正在找歌…' : '立即分享一首';
+  }
+
+  function setMusicShareStatus(text) {
+    state.musicShareStatus = text;
+    if (els.musicShareStatus) els.musicShareStatus.textContent = text || '还没有手动分享过';
+    updateMusicShareButton();
+  }
+
+  function triggerMusicShare() {
+    if (state.musicSharing) {
+      showToast('正在找歌，稍等一下');
+      return;
+    }
+    checkMusicSchedule(true);
+  }
+
+  async function shareMusic() {
+    if (state.musicSharing) return;
+    state.musicSharing = true;
+    setMusicShareStatus('正在找歌…');
+    let shared = null;
+    try {
+      const terms = buildMusicSearchTerms();
+      const track = await findMusicTrack(terms);
+      if (!track) throw new Error('no music found');
+      const music = { ...track, lyrics: '', lyricsPlain: '' };
+      const message = {
+        id: uid(),
+        from: 'them',
+        type: 'music',
+        content: JSON.stringify(music),
+        music,
+        at: Date.now()
+      };
+      addMessage(message);
+      addMusicFavorite(music, message.id);
+      state.musicRecent = [music.name, ...state.musicRecent.filter(name => name.toLowerCase() !== music.name.toLowerCase())].slice(0, 10);
+      persistMusicRecent();
+      setMusicShareStatus(`已分享《${music.name}》`);
+      showToast(`${contactName()}分享了一首歌`, '查看', () => {
+        state.musicTab = 'songs';
+        openMusicView();
+      });
+      if (state.view === 'music') renderMusicView();
+      haptic();
+      shared = { music, message };
+    } catch (_) {
+      setMusicShareStatus('这次没找到合适的歌，稍后再试');
+      showToast('这次没找到合适的歌，稍后再试');
+    } finally {
+      state.musicSharing = false;
+      updateMusicShareButton();
+    }
+    if (shared) {
+      fetchMusicLyrics(shared.music.name, shared.music.artist).then(lyrics => {
+        if (!lyrics.lyrics && !lyrics.lyricsPlain) return;
+        Object.assign(shared.music, lyrics);
+        shared.message.content = JSON.stringify(shared.music);
+        shared.message.music = shared.music;
+        const favorite = state.musicFavorites.find(item => item.messageId === shared.message.id);
+        if (favorite) {
+          favorite.lyrics = lyrics.lyrics || '';
+          favorite.lyricsPlain = lyrics.lyricsPlain || '';
+          persistMusicFavorites();
+        }
+        persistMessages();
+        updateMusicCardLyrics(shared.music);
+      }).catch(() => {});
+    }
+  }
+
+  function checkMusicSchedule(force = false) {
+    if (state.musicSharing) return;
+    if (!force) {
+      if (!state.musicSettings.enabled) return;
+      const last = Number(safeGet(KEYS.musicLastCheck)) || 0;
+      const now = Date.now();
+      if (!last) {
+        safeSet(KEYS.musicLastCheck, String(now));
+        return;
+      }
+      if (now - last < MUSIC_CHECK_INTERVAL) return;
+      safeSet(KEYS.musicLastCheck, String(now));
+      if (Math.random() * 100 >= state.musicSettings.probability) return;
+    } else {
+      safeSet(KEYS.musicLastCheck, String(Date.now()));
+    }
+    shareMusic();
+  }
+
+  function initMusic() {
+    const last = Number(safeGet(KEYS.musicLastCheck)) || 0;
+    if (!last) safeSet(KEYS.musicLastCheck, String(Date.now()));
+    setTimeout(() => checkMusicSchedule(false), 1600);
+    setInterval(() => checkMusicSchedule(false), MUSIC_CHECK_INTERVAL);
+  }
+
+  function deleteMusicFavorite(id) {
+    const favorite = state.musicFavorites.find(item => item.id === id);
+    if (!favorite) return;
+    if (activeMusicController && activeMusicController.music.previewUrl === favorite.previewUrl) {
+      stopActiveMusic();
+    }
+    state.musicFavorites = state.musicFavorites.filter(item => item.id !== id);
+    persistMusicFavorites();
+    renderMusicView();
+    showToast('已从音乐收藏中删除');
+  }
+
+  /* ————————————————————————————————
+     Calls
+  ———————————————————————————————— */
+  function formatCallDuration(seconds) {
+    const safe = Math.max(0, Math.floor(Number(seconds) || 0));
+    return `${String(Math.floor(safe / 60)).padStart(2, '0')}:${String(safe % 60).padStart(2, '0')}`;
+  }
+
+  function clearCallTimers(call) {
+    if (!call) return;
+    (call.timers || []).forEach(timer => clearTimeout(timer));
+    call.timers = [];
+    if (callTickTimer) {
+      clearInterval(callTickTimer);
+      callTickTimer = null;
+    }
+  }
+
+  function scheduleCallTimer(call, fn, delay) {
+    if (!call) return null;
+    const timer = setTimeout(() => {
+      if (activeCall === call) fn();
+    }, delay);
+    call.timers.push(timer);
+    return timer;
+  }
+
+  function startIncomingCall(options = {}) {
+    if (activeCall) return;
+    const media = options.media || (Math.random() < 0.65 ? 'voice' : 'video');
+    startCall('incoming', media, options);
+  }
+
+  function startOutgoingCall(media) {
+    if (activeCall) return;
+    startCall('outgoing', media === 'video' ? 'video' : 'voice');
+  }
+
+  function startCall(direction, media, options = {}) {
+    if (activeCall) return;
+    closeMenu();
+    if (!els.sheetLayer.hidden) closeSheet();
+    const call = {
+      direction,
+      media,
+      phase: direction === 'incoming' ? 'ringing' : 'outgoing',
+      timers: [],
+      muted: false,
+      speaker: false,
+      cameraOn: true,
+      connectedAt: 0,
+      endedLabel: '',
+      logged: false
+    };
+    activeCall = call;
+    els.callLayer.hidden = false;
+    renderCallUI();
+    requestAnimationFrame(() => els.callLayer.classList.add('show'));
+    if (direction === 'incoming') {
+      if (!options.manual && Math.random() < 0.28) {
+        scheduleCallTimer(call, () => endCall('cancelled', '对方已取消'), 3000 + Math.random() * 4500);
+      }
+      scheduleCallTimer(call, () => {
+        if (call.phase === 'ringing') endCall('missed', '未接来电');
+      }, 18000);
+    } else {
+      const outcome = Math.random();
+      if (outcome < 0.1) {
+        scheduleCallTimer(call, () => endCall('declined', '对方已拒绝'), 2800 + Math.random() * 2200);
+      } else if (outcome < 0.2) {
+        scheduleCallTimer(call, () => endCall('missed', '对方未接'), 15000);
+      } else {
+        scheduleCallTimer(call, () => connectCall(), 1800 + Math.random() * 3000);
+      }
+      scheduleCallTimer(call, () => {
+        if (call.phase === 'outgoing') endCall('missed', '对方未接');
+      }, 20000);
+    }
+  }
+
+  function connectCall() {
+    if (!activeCall || (activeCall.phase !== 'ringing' && activeCall.phase !== 'outgoing')) return;
+    const call = activeCall;
+    clearCallTimers(call);
+    call.phase = 'connected';
+    call.connectedAt = Date.now();
+    call.endedLabel = '';
+    callTickTimer = setInterval(updateCallTimer, 1000);
+    updateCallTimer();
+    renderCallUI();
+    if (Math.random() < 0.7) {
+      scheduleCallTimer(call, () => {
+        if (activeCall === call && call.phase === 'connected') endCall('answered', '对方已挂断');
+      }, 12000 + Math.random() * 30000);
+    }
+  }
+
+  function updateCallTimer() {
+    if (!activeCall || !activeCall.connectedAt) return;
+    const seconds = Math.max(0, Math.floor((Date.now() - activeCall.connectedAt) / 1000));
+    if (els.callTimer) els.callTimer.textContent = formatCallDuration(seconds);
+  }
+
+  function endCall(status, label) {
+    if (!activeCall || activeCall.phase === 'ending') return;
+    const call = activeCall;
+    call.phase = 'ending';
+    call.endedLabel = label;
+    const duration = call.connectedAt ? Math.max(1, Math.round((Date.now() - call.connectedAt) / 1000)) : 0;
+    clearCallTimers(call);
+    if (call.connectedAt) {
+      if (els.callTimer) {
+        els.callTimer.hidden = false;
+        els.callTimer.textContent = formatCallDuration(duration);
+      }
+    }
+    renderCallUI();
+    addCallLog(call, call.connectedAt ? 'answered' : status, duration);
+    haptic();
+    setTimeout(() => {
+      if (activeCall !== call) return;
+      activeCall = null;
+      els.callLayer.hidden = true;
+      els.callLayer.classList.remove('show', 'video', 'connected', 'ending', 'ringing');
+      if (state.view === 'chat') scrollBottom('smooth');
+    }, 1150);
+  }
+
+  function addCallLog(call, status, duration) {
+    if (!call || call.logged) return;
+    call.logged = true;
+    addMessage({
+      id: uid(),
+      from: 'them',
+      type: 'call',
+      direction: call.direction,
+      media: call.media,
+      status,
+      duration,
+      at: Date.now()
+    });
+  }
+
+  function renderCallUI() {
+    if (!els.callLayer) return;
+    if (!activeCall) {
+      els.callLayer.hidden = true;
+      return;
+    }
+    const call = activeCall;
+    const connected = call.phase === 'connected';
+    const ending = call.phase === 'ending';
+    const incomingRinging = call.direction === 'incoming' && call.phase === 'ringing';
+    const outgoingRinging = call.direction === 'outgoing' && call.phase === 'outgoing';
+    els.callLayer.hidden = false;
+    els.callLayer.classList.toggle('video', call.media === 'video');
+    els.callLayer.classList.toggle('connected', connected || (ending && Boolean(call.connectedAt)));
+    els.callLayer.classList.toggle('ringing', incomingRinging || outgoingRinging);
+    els.callLayer.classList.toggle('ending', ending);
+    if (els.callKind) els.callKind.textContent = call.media === 'video' ? '视频通话' : '语音通话';
+    if (els.callName) els.callName.textContent = contactName();
+    if (els.callAvatar) els.callAvatar.src = state.contact.avatar || DEFAULT_AVATAR;
+    if (els.callWallpaper) els.callWallpaper.src = state.contact.avatar || DEFAULT_AVATAR;
+    if (els.callTimer) {
+      els.callTimer.hidden = !(connected || (ending && call.connectedAt));
+      if (call.connectedAt) {
+        els.callTimer.textContent = formatCallDuration((Date.now() - call.connectedAt) / 1000);
+      }
+    }
+    if (els.callStatus) {
+      if (ending) els.callStatus.textContent = call.endedLabel || '通话结束';
+      else if (connected) els.callStatus.textContent = '通话中';
+      else if (call.direction === 'incoming') els.callStatus.textContent = `邀请你${call.media === 'video' ? '视频' : '语音'}通话…`;
+      else els.callStatus.textContent = `正在呼叫${contactName()}…`;
+    }
+    if (els.callIncomingActions) els.callIncomingActions.hidden = !incomingRinging;
+    if (els.callOutgoingActions) els.callOutgoingActions.hidden = !outgoingRinging;
+    if (els.callConnectedActions) els.callConnectedActions.hidden = call.phase !== 'connected';
+    if (els.callCameraBtn) els.callCameraBtn.hidden = call.media !== 'video';
+    if (els.callLocal) els.callLocal.hidden = call.media !== 'video' || (!connected && !ending);
+    if (els.callWave) els.callWave.hidden = call.media !== 'voice' || !connected;
+    if (els.callMuteBtn) {
+      els.callMuteBtn.setAttribute('aria-pressed', String(call.muted));
+      const label = els.callMuteBtn.querySelector('span');
+      if (label) label.textContent = call.muted ? '取消静音' : '静音';
+    }
+    if (els.callSpeakerBtn) {
+      els.callSpeakerBtn.setAttribute('aria-pressed', String(call.speaker));
+      const label = els.callSpeakerBtn.querySelector('span');
+      if (label) label.textContent = call.speaker ? '听筒' : '免提';
+    }
+    if (els.callCameraBtn) {
+      els.callCameraBtn.setAttribute('aria-pressed', String(!call.cameraOn));
+      const label = els.callCameraBtn.querySelector('span');
+      if (label) label.textContent = call.cameraOn ? '摄像头' : '已关闭';
+      const localLabel = els.callLocal ? els.callLocal.querySelector('.call-local-label') : null;
+      if (localLabel) localLabel.textContent = call.cameraOn ? '我' : '摄像头已关';
+    }
+  }
+
+  function renderCallSheet() {
+    els.sheetTitle.textContent = '通话';
+    els.sheetBody.innerHTML = `
+      <p class="call-sheet-intro">打给${contactName()}，或者等对方主动来电。接听、挂断和未接都会记在聊天里。</p>
+      <div class="call-start-options">
+        <button class="call-start-btn" type="button" data-start-call="voice">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 4.5 9 3.8l2.2 5-2 1.6a14.6 14.6 0 0 0 4.4 4.4l1.6-2 5 2.2-.7 2.4c-.4 1.4-1.7 2.2-3.1 1.9C10.6 17.7 6.3 13.4 4.7 7.6c-.3-1.4.5-2.7 1.9-3.1Z"/></svg>
+          语音通话
+        </button>
+        <button class="call-start-btn" type="button" data-start-call="video">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6.5" width="12" height="11" rx="2.5"/><path d="M15 10l5-2.5v9L15 14Z"/></svg>
+          视频通话
+        </button>
+      </div>
+      <div class="setting-block">
+        <div class="setting-head">
+          <div>
+            <p class="setting-title">对方主动来电</p>
+            <p class="setting-hint">在聊天页时，每 4 分钟按概率检查一次。</p>
+          </div>
+          <select class="range-select" id="callChance" aria-label="对方主动来电概率">
+            <option value="0"${state.callChance === 0 ? ' selected' : ''}>关闭</option>
+            <option value="5"${state.callChance === 5 ? ' selected' : ''}>5%</option>
+            <option value="10"${state.callChance === 10 ? ' selected' : ''}>10%</option>
+            <option value="20"${state.callChance === 20 ? ' selected' : ''}>20%</option>
+            <option value="30"${state.callChance === 30 ? ' selected' : ''}>30%</option>
+          </select>
+        </div>
+      </div>
+      <button class="call-incoming-test" id="testIncomingCall" type="button">模拟一次对方来电</button>
+    `;
+    els.sheetActions.innerHTML = '<button class="btn" type="button" data-sheet-action="close">关闭</button>';
+    const chance = $('#callChance');
+    if (chance) {
+      chance.addEventListener('change', () => {
+        const value = Number(chance.value);
+        state.callChance = [0, 5, 10, 20, 30].includes(value) ? value : 10;
+        persistCallChance();
+      });
+    }
+    els.sheetBody.querySelectorAll('[data-start-call]').forEach(button => {
+      button.addEventListener('click', () => {
+        const media = button.dataset.startCall;
+        closeSheet();
+        startOutgoingCall(media);
+      });
+    });
+    const testIncoming = $('#testIncomingCall');
+    if (testIncoming) {
+      testIncoming.addEventListener('click', () => {
+        closeSheet();
+        startIncomingCall({ manual: true });
+      });
+    }
+  }
+
+  function checkRandomCall() {
+    if (activeCall || !state.callChance) return;
+    if (document.hidden || state.view !== 'chat') return;
+    if (!els.sheetLayer.hidden || !els.collectionLayer.hidden || !els.menu.hidden) return;
+    if (Math.random() * 100 >= state.callChance) return;
+    startIncomingCall();
+  }
+
+  function initCalls() {
+    setInterval(checkRandomCall, CALL_CHECK_INTERVAL);
+  }
+
+  /* ————————————————————————————————
      Contact UI
   ———————————————————————————————— */
   function updateDocumentTitle() {
     if (state.view === 'moments') document.title = `朋友圈 · ${contactName()}`;
     else if (state.view === 'mail') document.title = `信箱 · ${contactName()}`;
+    else if (state.view === 'music') document.title = `音乐 · ${contactName()}`;
     else document.title = `${contactName()} · 字卡交流`;
   }
 
@@ -3466,6 +5262,36 @@ img{display:block;max-width:100%}
     return bubble;
   }
 
+  function makeCallLog(message) {
+    const kind = message.media === 'video' ? '视频通话' : '语音通话';
+    let text = kind;
+    if (message.status === 'answered') {
+      text = `${kind} · ${formatCallDuration(message.duration)}`;
+    } else if (message.direction === 'incoming') {
+      if (message.status === 'missed') text = `未接来电 · ${kind}`;
+      else if (message.status === 'cancelled') text = `对方已取消 · ${kind}`;
+      else if (message.status === 'declined') text = `已拒绝 · ${kind}`;
+    } else {
+      if (message.status === 'missed') text = `对方未接 · ${kind}`;
+      else if (message.status === 'declined') text = `对方已拒绝 · ${kind}`;
+      else if (message.status === 'cancelled') text = `已取消 · ${kind}`;
+    }
+    const wrap = document.createElement('div');
+    wrap.className = 'call-log';
+    const inner = document.createElement('div');
+    inner.className = 'call-log-inner';
+    const icon = document.createElement('span');
+    icon.innerHTML = message.media === 'video'
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6.5" width="12" height="11" rx="2.5"/><path d="M15 10l5-2.5v9L15 14Z"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.6 4.5 9 3.8l2.2 5-2 1.6a14.6 14.6 0 0 0 4.4 4.4l1.6-2 5 2.2-.7 2.4c-.4 1.4-1.7 2.2-3.1 1.9C10.6 17.7 6.3 13.4 4.7 7.6c-.3-1.4.5-2.7 1.9-3.1Z"/></svg>';
+    const label = document.createElement('span');
+    label.className = 'call-log-text';
+    label.textContent = text;
+    inner.append(icon, label);
+    wrap.appendChild(inner);
+    return wrap;
+  }
+
   function makeMessageNode(message, previous, animate) {
     const fragment = document.createDocumentFragment();
     const dayChanged = !previous || startOfDay(previous.at) !== startOfDay(message.at);
@@ -3480,6 +5306,11 @@ img{display:block;max-width:100%}
       chip.className = 'day-chip';
       chip.textContent = timeLabel(message.at);
       fragment.appendChild(chip);
+    }
+
+    if (message.type === 'call') {
+      fragment.appendChild(makeCallLog(message));
+      return fragment;
     }
 
     const row = document.createElement('div');
@@ -3545,6 +5376,9 @@ img{display:block;max-width:100%}
         wrap.appendChild(intent);
       }
       body.appendChild(wrap);
+    } else if (message.type === 'music') {
+      const music = message.music || normalizeMusicData(message.content);
+      if (music) body.appendChild(buildMusicCard(music, { context: 'chat', messageId: message.id }));
     } else if (message.type === 'decision') {
       body.appendChild(makeDecisionBubble(message));
     } else if (message.type === 'decisionAnswer') {
@@ -3676,6 +5510,23 @@ img{display:block;max-width:100%}
       return;
     }
     enqueueReply(text);
+  }
+
+  function sendStickerById(id) {
+    const sticker = state.stickers.find(item => item.id === id);
+    if (!sticker) return;
+    closeCollection();
+    addMessage({
+      id: uid(),
+      from: 'me',
+      type: 'sticker',
+      stickerId: sticker.id,
+      stickerName: sticker.name,
+      src: sticker.src,
+      at: Date.now()
+    });
+    haptic();
+    enqueueReply('');
   }
 
   function burstHearts() {
@@ -4021,6 +5872,7 @@ img{display:block;max-width:100%}
     else if (mode === 'anniversary') renderAnniversarySheet();
     else if (mode === 'promises') renderPromisesSheet();
     else if (mode === 'dailyLove') renderDailyLoveSheet();
+    else if (mode === 'call') renderCallSheet();
     else if (mode === 'reply') renderReplySettingsSheet();
     else if (mode === 'info') renderInfoSheet();
     else if (mode === 'reset') renderResetSheet();
@@ -4763,6 +6615,7 @@ img{display:block;max-width:100%}
     renderMoments();
     els.momentsScroll.scrollTop = 0;
     showToast('已发布到朋友圈');
+    scheduleMomentCardReply(moment.id);
   }
 
   /* ————————————————————————————————
@@ -4774,6 +6627,7 @@ img{display:block;max-width:100%}
     refreshContactMomentsIfNeeded();
     els.chatView.hidden = true;
     els.mailView.hidden = true;
+    els.musicView.hidden = true;
     els.momentsView.hidden = false;
     renderMoments();
     els.momentsScroll.scrollTop = 0;
@@ -4784,6 +6638,7 @@ img{display:block;max-width:100%}
     state.view = 'chat';
     els.momentsView.hidden = true;
     els.mailView.hidden = true;
+    els.musicView.hidden = true;
     els.chatView.hidden = false;
     updateDocumentTitle();
     scrollBottom('auto');
@@ -4925,9 +6780,41 @@ img{display:block;max-width:100%}
           row.className = 'moment-comment';
           const authorName = document.createElement('b');
           authorName.textContent = comment.author === 'me' ? '我' : contactName();
-          const text = document.createElement('span');
-          text.textContent = comment.text;
-          row.append(authorName, text);
+          if (comment.type === 'cards' && Array.isArray(comment.cards) && comment.cards.length) {
+            row.classList.add('moment-comment-card');
+            if (comment.replyTo) {
+              const ref = document.createElement('span');
+              ref.className = 'moment-reply-label';
+              ref.textContent = '回复我';
+              row.appendChild(authorName);
+              row.appendChild(ref);
+            } else {
+              row.appendChild(authorName);
+            }
+            const deck = document.createElement('span');
+            deck.className = 'moment-comment-cards';
+            comment.cards.forEach(card => {
+              const chip = document.createElement('span');
+              chip.className = 'moment-card-chip';
+              if (!card.noEmoji && card.emoji) {
+                const emoji = document.createElement('span');
+                emoji.className = 'moment-card-emoji';
+                emoji.textContent = card.emoji;
+                emoji.setAttribute('aria-hidden', 'true');
+                chip.appendChild(emoji);
+              }
+              const label = document.createElement('span');
+              label.className = 'moment-card-label';
+              label.textContent = card.label;
+              chip.appendChild(label);
+              deck.appendChild(chip);
+            });
+            row.appendChild(deck);
+          } else {
+            const text = document.createElement('span');
+            text.textContent = comment.text;
+            row.append(authorName, text);
+          }
           block.appendChild(row);
         });
         if (state.commentingMomentId === moment.id) {
@@ -5002,22 +6889,64 @@ img{display:block;max-width:100%}
     renderMoments();
   }
 
+  function scheduleMomentCardReply(momentId, replyTo = '') {
+    if (!state.cards.length) return;
+    const existing = momentReplyTimers.get(momentId);
+    if (existing) clearTimeout(existing);
+    const delay = 1200 + Math.random() * 1800;
+    const timer = setTimeout(() => {
+      momentReplyTimers.delete(momentId);
+      const moment = state.moments.find(item => item.id === momentId);
+      if (!moment || !state.cards.length) return;
+      const card = randomOf(state.cards);
+      if (!card) return;
+      if (!Array.isArray(moment.comments)) moment.comments = [];
+      moment.comments.push({
+        id: uid(),
+        author: 'contact',
+        type: 'cards',
+        cards: [{
+          cardId: card.id,
+          label: card.label,
+          emoji: card.noEmoji ? '' : card.emoji,
+          noEmoji: Boolean(card.noEmoji) || !card.emoji,
+          intent: card.intent || ''
+        }],
+        replyTo,
+        at: Date.now()
+      });
+      moment.comments = moment.comments.slice(-30);
+      persistMoments();
+      if (state.view === 'moments') {
+        renderMoments();
+        showToast(`${contactName()}用字卡回复了你`);
+      } else {
+        showToast(`${contactName()}用字卡回复了你的朋友圈`, '查看', openMoments);
+      }
+      haptic();
+    }, delay);
+    momentReplyTimers.set(momentId, timer);
+  }
+
   function addMomentComment(id, text) {
     const moment = state.moments.find(item => item.id === id);
     if (!moment) return;
     const value = text.trim().slice(0, 160);
     if (!value) return;
     if (!Array.isArray(moment.comments)) moment.comments = [];
-    moment.comments.push({
+    const comment = {
       id: uid(),
       author: 'me',
+      type: 'text',
       text: value,
       at: Date.now()
-    });
+    };
+    moment.comments.push(comment);
     state.commentingMomentId = null;
     persistMoments();
     renderMoments();
     showToast('评论已发布');
+    scheduleMomentCardReply(id, comment.id);
   }
 
   function deleteMoment(id) {
@@ -5025,6 +6954,11 @@ img{display:block;max-width:100%}
     if (index < 0) return;
     const moment = state.moments[index];
     if (moment.author !== 'me') return;
+    const replyTimer = momentReplyTimers.get(id);
+    if (replyTimer) {
+      clearTimeout(replyTimer);
+      momentReplyTimers.delete(id);
+    }
     state.moments.splice(index, 1);
     if (state.commentingMomentId === id) state.commentingMomentId = null;
     persistMoments();
@@ -5117,7 +7051,7 @@ img{display:block;max-width:100%}
       els.collectionSub.textContent = `点字卡可编辑意图；回复数量在设置里调整。`;
     } else {
       els.collectionTitle.textContent = '我的表情';
-      els.collectionSub.textContent = `${contactName()}也会随机挑一张表情发给你。`;
+      els.collectionSub.textContent = `点表情可以直接发送；${contactName()}也会随机使用这些表情。`;
     }
     if (options.closeForm !== false) closeInlineCardForm();
     renderCardLibrary();
@@ -5424,7 +7358,7 @@ img{display:block;max-width:100%}
       const strong = document.createElement('strong');
       strong.textContent = '还没有表情';
       const copy = document.createElement('span');
-      copy.textContent = '上传图片后，对方也会随机挑一张发给你。';
+      copy.textContent = '上传图片后可以点表情发送，对方也会随机使用。';
       const button = document.createElement('button');
       button.type = 'button';
       button.textContent = '添加表情';
@@ -5436,6 +7370,10 @@ img{display:block;max-width:100%}
     state.stickers.forEach(sticker => {
       const item = document.createElement('div');
       item.className = 'library-sticker';
+      item.dataset.sendSticker = sticker.id;
+      item.tabIndex = 0;
+      item.setAttribute('role', 'button');
+      item.setAttribute('aria-label', `发送表情：${sticker.name}`);
       const img = new Image();
       img.src = sticker.src;
       img.alt = sticker.name;
@@ -5639,6 +7577,36 @@ img{display:block;max-width:100%}
 
     els.contactBtn.addEventListener('click', () => openSheet('contact'));
     els.momentsBtn.addEventListener('click', openMoments);
+    els.callBtn.addEventListener('click', () => openSheet('call'));
+    els.callDeclineBtn.addEventListener('click', () => {
+      if (activeCall && activeCall.direction === 'incoming' && activeCall.phase === 'ringing') {
+        endCall('declined', '已拒绝');
+      }
+    });
+    els.callAcceptBtn.addEventListener('click', connectCall);
+    els.callCancelBtn.addEventListener('click', () => {
+      if (activeCall && activeCall.direction === 'outgoing' && activeCall.phase === 'outgoing') {
+        endCall('cancelled', '已取消');
+      }
+    });
+    els.callHangupBtn.addEventListener('click', () => {
+      if (activeCall && activeCall.phase === 'connected') endCall('answered', '通话结束');
+    });
+    els.callMuteBtn.addEventListener('click', () => {
+      if (!activeCall) return;
+      activeCall.muted = !activeCall.muted;
+      renderCallUI();
+    });
+    els.callSpeakerBtn.addEventListener('click', () => {
+      if (!activeCall) return;
+      activeCall.speaker = !activeCall.speaker;
+      renderCallUI();
+    });
+    els.callCameraBtn.addEventListener('click', () => {
+      if (!activeCall) return;
+      activeCall.cameraOn = !activeCall.cameraOn;
+      renderCallUI();
+    });
     els.mailBtn.addEventListener('click', openMailbox);
     els.moreBtn.addEventListener('click', event => {
       event.stopPropagation();
@@ -5653,6 +7621,7 @@ img{display:block;max-width:100%}
       else if (action === 'anniversary') openSheet('anniversary');
       else if (action === 'promises') openSheet('promises');
       else if (action === 'dailyLove') openSheet('dailyLove');
+      else if (action === 'music') openMusicView();
       else if (action === 'reply') openSheet('reply');
       else if (action === 'info') openSheet('info');
       else if (action === 'reset') openSheet('reset');
@@ -5671,6 +7640,25 @@ img{display:block;max-width:100%}
     els.composeMomentBtn.addEventListener('click', () => openSheet('moment'));
     els.mailBack.addEventListener('click', openChat);
     els.composeLetterBtn.addEventListener('click', () => openSheet('letter'));
+    els.musicBack.addEventListener('click', openChat);
+    els.musicSongsTab.addEventListener('click', () => setMusicTab('songs'));
+    els.musicSettingsTab.addEventListener('click', () => setMusicTab('settings'));
+    els.musicEnabledSwitch.addEventListener('click', () => {
+      state.musicSettings.enabled = !state.musicSettings.enabled;
+      persistMusicSettings();
+      renderMusicSettings();
+    });
+    els.musicProbability.addEventListener('change', () => {
+      const value = Number(els.musicProbability.value);
+      state.musicSettings.probability = [5, 10, 20, 30].includes(value) ? value : 5;
+      persistMusicSettings();
+      renderMusicSettings();
+    });
+    els.shareMusicNow.addEventListener('click', triggerMusicShare);
+    els.musicList.addEventListener('click', event => {
+      const remove = event.target.closest('[data-delete-music-favorite]');
+      if (remove) deleteMusicFavorite(remove.dataset.deleteMusicFavorite);
+    });
 
     els.momentList.addEventListener('click', event => {
       const like = event.target.closest('[data-like-id]');
@@ -5782,7 +7770,20 @@ img{display:block;max-width:100%}
         deleteSticker(remove.dataset.deleteSticker);
         return;
       }
-      if (event.target.closest('[data-add-sticker]')) openStickerPicker();
+      if (event.target.closest('[data-add-sticker]')) {
+        openStickerPicker();
+        return;
+      }
+      const sticker = event.target.closest('[data-send-sticker]');
+      if (sticker) sendStickerById(sticker.dataset.sendSticker);
+    });
+    els.stickerLibrary.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      if (event.target.closest('[data-delete-sticker]')) return;
+      const sticker = event.target.closest('[data-send-sticker]');
+      if (!sticker) return;
+      event.preventDefault();
+      sendStickerById(sticker.dataset.sendSticker);
     });
 
     els.stickerInput.addEventListener('change', event => handleStickerFiles(event.target.files));
@@ -5888,10 +7889,16 @@ img{display:block;max-width:100%}
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden && typingRow) hideTyping();
-      if (!document.hidden) checkMailDelivery();
+      if (!document.hidden) {
+        checkMailDelivery();
+        checkMusicSchedule(false);
+      }
     });
 
-    window.addEventListener('focus', () => checkMailDelivery());
+    window.addEventListener('focus', () => {
+      checkMailDelivery();
+      checkMusicSchedule(false);
+    });
 
     window.addEventListener('resize', () => {
       if (!els.collectionLayer.hidden) adjustCollectionHeight();
@@ -5905,6 +7912,10 @@ img{display:block;max-width:100%}
       persistAnniversary();
       persistPromises();
       persistDailyLove();
+      persistMusicSettings();
+      persistMusicFavorites();
+      persistMusicRecent();
+      persistCallChance();
       persistMoments();
       persistLetters();
       persistCustomGroups();
@@ -5921,6 +7932,10 @@ img{display:block;max-width:100%}
     loadAnniversary();
     loadPromises();
     loadDailyLove();
+    loadMusicSettings();
+    loadMusicFavorites();
+    loadMusicRecent();
+    loadCallChance();
     loadCustomGroups();
     loadCustomEmojis();
     loadReplySettings();
@@ -5950,6 +7965,8 @@ img{display:block;max-width:100%}
     updateSendButton();
     applyContactUI();
     bindEvents();
+    initMusic();
+    initCalls();
     scrollBottom('auto');
 
     setInterval(() => {
