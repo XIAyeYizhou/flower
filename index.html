@@ -235,6 +235,31 @@ img{display:block;max-width:100%}
 .avatar-spacer{width:28px;flex:none;height:1px}
 .msg-body{display:flex;flex-direction:column;min-width:0;max-width:min(82%,310px)}
 .msg.me .msg-body{align-items:flex-end}
+.quote-block{
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  max-width:100%;
+  margin-bottom:5px;
+  padding:5px 8px;
+  border-left:2px solid #D8A085;
+  border-radius:4px;
+  background:rgba(232,220,204,.55);
+  color:#8C7D6E;
+  font-size:9px;
+  line-height:1.45;
+}
+.msg.me .quote-block{align-self:flex-end;background:rgba(248,226,212,.62);border-left-color:#D98966}
+.chat-view .msg.me .quote-block{background:var(--accent-soft);border-left-color:var(--accent)}
+.chat-view .msg.them .quote-block{background:var(--chat-partner);border-left-color:#D8A085}
+.quote-author{color:#66584B;font-size:8.5px;font-weight:600}
+.quote-excerpt{
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  overflow-wrap:anywhere;
+}
 
 .card-bubble{
   max-width:100%;
@@ -246,6 +271,8 @@ img{display:block;max-width:100%}
   border-radius:4px 14px 14px 14px;
   background:var(--surface);
 }
+.chat-view .card-bubble{background:var(--chat-partner,var(--surface))}
+.chat-view .typing-bubble{background:var(--chat-partner,var(--surface))}
 .card-emoji{
   width:36px;
   height:36px;
@@ -504,7 +531,112 @@ img{display:block;max-width:100%}
 .tool-btn svg{width:12px;height:12px;color:#94867A}
 .tool-count{color:#A19588;font-size:9px}
 .tool-note{margin-left:auto;color:var(--faint);font-size:9px;letter-spacing:.01em}
+.quote-bar{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-width:0;
+  padding:5px 7px;
+  border-radius:5px;
+  background:#F7F1E8;
+}
+.quote-bar[hidden]{display:none}
+.quote-bar-mark{width:2px;height:22px;border-radius:2px;background:#D9A78E;flex:none}
+.quote-bar-copy{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+.quote-bar-label{color:var(--accent-dark);font-size:8.5px;font-weight:600;line-height:1.3}
+.quote-bar-text{color:#857568;font-size:9px;line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.quote-bar-close{width:22px;height:22px;flex:none;display:grid;place-items:center;border-radius:50%;color:#A09386;font-size:15px;line-height:1}
+.quote-bar-close:hover{background:var(--surface-alt);color:#695D52}
+.msg-menu{
+  position:absolute;
+  z-index:80;
+  min-width:108px;
+  padding:4px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:var(--surface);
+  box-shadow:0 8px 22px rgba(53,39,26,.16);
+}
+.msg-menu[hidden]{display:none}
+.msg-menu button{
+  width:100%;
+  height:32px;
+  padding:0 10px;
+  border-radius:6px;
+  color:#54483D;
+  font-size:10.5px;
+  text-align:left;
+}
+.msg-menu button:hover{background:var(--surface-alt)}
 .input-row{display:flex;align-items:center;gap:7px}
+.chat-photo-btn{
+  width:38px;
+  height:42px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border-radius:9px;
+  background:var(--surface-alt);
+  color:#8B7D6F;
+}
+.chat-photo-btn:hover{background:#EDE7DE;color:#65584C}
+.chat-photo-btn:active{transform:scale(.96)}
+.chat-photo-btn svg{width:18px;height:18px}
+.chat-image-bubble{
+  display:block;
+  max-width:230px;
+  max-height:300px;
+  margin:0;
+  padding:3px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--surface);
+  box-shadow:0 4px 12px rgba(71,53,37,.06);
+  cursor:zoom-in;
+}
+.chat-image-bubble img{
+  display:block;
+  max-width:100%;
+  max-height:292px;
+  border-radius:12px;
+  object-fit:contain;
+  -webkit-user-drag:none;
+}
+.image-viewer{
+  position:absolute;
+  inset:0;
+  z-index:220;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(13,14,17,.92);
+  backdrop-filter:blur(8px);
+}
+.image-viewer[hidden]{display:none}
+.image-viewer img{
+  max-width:100%;
+  max-height:86vh;
+  border-radius:6px;
+  object-fit:contain;
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
+.image-viewer-close{
+  position:absolute;
+  top:calc(16px + env(safe-area-inset-top,0px));
+  right:16px;
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  font-size:22px;
+  line-height:1;
+}
+.image-viewer-close:hover{background:rgba(255,255,255,.2)}
 .input-wrap{
   flex:1;
   min-width:0;
@@ -823,6 +955,293 @@ img{display:block;max-width:100%}
 }
 .mail-empty strong{display:block;margin-bottom:5px;color:#61564B;font-size:13px;font-weight:600}
 
+/* ——— Gifts & questions ——— */
+.gift-top-count,.questions-top-count{margin-left:auto;color:var(--muted);font-size:9px;padding-right:2px}
+.gift-scroll{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:15px 16px calc(26px + env(safe-area-inset-bottom,0px));
+  background:var(--bg);
+  scrollbar-width:none;
+}
+.gift-scroll::-webkit-scrollbar{display:none}
+.gift-hero{
+  padding:20px 16px 17px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:linear-gradient(140deg,#FFF9F1,#F7EDE3);
+  text-align:center;
+}
+.gift-hero-icon{font-size:28px;line-height:1;display:block;margin-bottom:8px}
+.gift-hero h2{margin:0 0 5px;color:#4F4136;font-size:16px;font-weight:650}
+.gift-hero p{margin:0;color:var(--muted);font-size:9.5px;line-height:1.6}
+.gift-catalog{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:12px 0 20px}
+.gift-item{
+  min-height:76px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:8px 3px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--surface);
+  color:#6F6154;
+  font-size:8px;
+  line-height:1.3;
+  text-align:center;
+}
+.gift-item:hover{border-color:#D9BFAE;background:#FFFAF3}
+.gift-item:active{transform:scale(.97)}
+.gift-item-emoji{font-size:23px;line-height:1}
+.gift-history-head{display:flex;align-items:center;justify-content:space-between;margin:0 2px 8px;color:#6A5B4D;font-size:10px;font-weight:600}
+.gift-history-head span{color:var(--faint);font-size:8.5px;font-weight:400}
+.gift-history{display:flex;flex-direction:column;gap:8px}
+.gift-record{display:flex;align-items:flex-start;gap:9px;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.gift-record-emoji{font-size:24px;line-height:1;flex:none}
+.gift-record-copy{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}
+.gift-record-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.gift-record-head strong{color:#5E5044;font-size:10.5px;font-weight:600}
+.gift-record-head span{color:var(--faint);font-size:8px;white-space:nowrap}
+.gift-record-note{margin:0;color:var(--muted);font-size:9px;line-height:1.55}
+.gift-record-from{color:#B1A192;font-size:8px}
+.gift-empty{padding:22px 14px;border:1px dashed var(--line);border-radius:11px;background:var(--surface);text-align:center;color:var(--muted);font-size:9.5px}
+.chat-view .msg.them .gift-bubble,.chat-view .question-bubble{background:var(--chat-partner,var(--surface))}
+.gift-bubble{
+  max-width:100%;
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  padding:9px 11px;
+  border:1px solid var(--line);
+  border-radius:4px 14px 14px 14px;
+  background:var(--surface);
+}
+.msg.me .gift-bubble{background:var(--accent-soft);border-color:#E7C9BA;border-radius:14px 4px 14px 14px}
+.gift-bubble-emoji{font-size:25px;line-height:1;flex:none}
+.gift-bubble-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+.gift-kicker{color:var(--accent-dark);font-size:8px;letter-spacing:.2px}
+.gift-name{color:#514439;font-size:11px;font-weight:600;line-height:1.35}
+.gift-note{margin:0;color:var(--muted);font-size:9px;line-height:1.5}
+.questions-scroll{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:15px 16px calc(26px + env(safe-area-inset-bottom,0px));
+  background:var(--bg);
+  scrollbar-width:none;
+}
+.questions-scroll::-webkit-scrollbar{display:none}
+.question-tabs{display:flex;gap:3px;padding:3px;border-radius:9px;background:var(--surface-alt);margin:0 0 12px}
+.question-tab{flex:1;height:30px;border-radius:7px;color:#8A7C6F;font-size:10px}
+.question-tab.active{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 4px rgba(76,58,40,.07)}
+.questions-panel[hidden]{display:none}
+.question-library-add{display:flex;align-items:center;gap:6px;margin:0 0 8px}
+.question-library-input{
+  flex:1;
+  min-width:0;
+  height:36px;
+  padding:0 10px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  outline:none;
+  background:#FFFEFA;
+  color:var(--ink);
+  font-size:10.5px;
+}
+.question-library-input:focus{border-color:#D7B7A5}
+.question-library-add-btn{
+  flex:none;
+  height:36px;
+  padding:0 12px;
+  border-radius:8px;
+  background:var(--accent);
+  color:#fff;
+  font-size:10px;
+  font-weight:600;
+}
+.question-library-add-btn:hover{background:var(--accent-dark)}
+.question-library-hint{margin:0 0 12px;color:var(--faint);font-size:8.5px;line-height:1.55}
+.custom-question-item{padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.custom-question-text{margin:0 0 8px;color:#55483C;font-size:10.5px;line-height:1.6;overflow-wrap:anywhere}
+.custom-question-actions{display:flex;align-items:center;gap:7px}
+.custom-question-ask{
+  height:26px;
+  padding:0 9px;
+  border-radius:6px;
+  background:var(--accent-soft);
+  color:var(--accent-dark);
+  font-size:8.5px;
+  font-weight:600;
+}
+.custom-question-ask:hover{background:#F5DCD1}
+.custom-question-del{
+  margin-left:auto;
+  height:24px;
+  padding:0 7px;
+  border-radius:5px;
+  color:#AC9E90;
+  font-size:8.5px;
+}
+.custom-question-del:hover{background:var(--surface-alt);color:#7E6F61}
+.question-library-empty{padding:24px 14px;border:1px dashed var(--line);border-radius:11px;background:var(--surface);text-align:center;color:var(--muted);font-size:9.5px;line-height:1.6}
+.questions-list{display:flex;flex-direction:column;gap:10px}
+.question-record{padding:12px 13px;border:1px solid var(--line);border-radius:11px;background:var(--surface)}
+.question-record-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px;color:var(--faint);font-size:8.5px}
+.question-record-q{margin:0;color:#4F4237;font-size:11px;line-height:1.6;font-weight:550}
+.question-record-a{margin:8px 0 0;padding:7px 9px;border-radius:7px;background:var(--surface-alt);color:#7A6B5D;font-size:9.5px;line-height:1.6;overflow-wrap:anywhere}
+.question-record-a.empty{color:#B2A396;background:transparent;padding:4px 0 0}
+.question-answer-btn{height:28px;margin-top:9px;padding:0 10px;border-radius:7px;background:var(--accent-soft);color:var(--accent-dark);font-size:9px;font-weight:600}
+.question-answer-btn:hover{background:#F5DCD1}
+.question-bubble{
+  max-width:100%;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:4px 14px 14px 14px;
+  background:var(--surface);
+}
+.question-kicker{color:var(--accent-dark);font-size:8px;letter-spacing:.25px;margin-bottom:4px}
+.question-text{margin:0;color:#4F4237;font-size:11.5px;line-height:1.6;font-weight:550}
+.question-answer{margin:8px 0 0;padding:7px 9px;border-radius:7px;background:var(--surface-alt);color:#77685B;font-size:9.5px;line-height:1.6;overflow-wrap:anywhere}
+.question-answer.empty{color:#B1A295;background:transparent;padding:4px 0 0}
+.question-answer-btn{height:28px;margin-top:9px;padding:0 10px;border-radius:7px;background:var(--accent-soft);color:var(--accent-dark);font-size:9px;font-weight:600}
+.question-answer-btn:hover{background:#F5DCD1}
+.answer-question{margin:0 0 10px;padding:10px 11px;border-left:2px solid var(--accent);border-radius:5px;background:var(--surface-alt);color:#5B4C3F;font-size:11px;line-height:1.65}
+.answer-textarea{
+  width:100%;
+  min-height:110px;
+  resize:vertical;
+  padding:10px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  outline:none;
+  background:#FFFEFA;
+  color:var(--ink);
+  font-size:11px;
+  line-height:1.6;
+}
+.answer-textarea:focus{border-color:#D7B7A5}
+.answer-hint{margin:8px 0 0;color:var(--faint);font-size:8.5px;line-height:1.5}
+
+/* ——— Quiz ——— */
+.quiz-best{margin-left:auto;color:var(--muted);font-size:9px;padding-right:2px}
+.quiz-scroll{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:16px 18px calc(26px + env(safe-area-inset-bottom,0px));
+  background:var(--bg);
+  scrollbar-width:none;
+}
+.quiz-scroll::-webkit-scrollbar{display:none}
+.quiz-content{max-width:100%}
+.quiz-intro{
+  margin-top:8px;
+  padding:24px 18px 20px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:var(--surface);
+  text-align:center;
+  box-shadow:0 8px 24px rgba(82,61,40,.06);
+}
+.quiz-eyebrow{display:block;color:var(--accent);font-size:9px;letter-spacing:.8px;text-transform:uppercase;margin-bottom:9px}
+.quiz-title{margin:0 0 8px;color:#4A3E34;font-size:20px;line-height:1.35;font-weight:650}
+.quiz-sub{margin:0 auto;max-width:260px;color:var(--muted);font-size:10.5px;line-height:1.7}
+.quiz-start{
+  display:block;
+  width:100%;
+  height:42px;
+  margin-top:20px;
+  border-radius:9px;
+  background:var(--accent);
+  color:#fff;
+  font-size:11.5px;
+  font-weight:600;
+}
+.quiz-start:hover{background:var(--accent-dark)}
+.quiz-progress{display:flex;align-items:center;justify-content:space-between;margin:0 2px 12px}
+.quiz-progress-text{color:var(--muted);font-size:9px}
+.quiz-dots{display:flex;gap:4px}
+.quiz-dot{width:17px;height:3px;border-radius:3px;background:#E3D8CC}
+.quiz-dot.active{background:var(--accent)}
+.quiz-dot.done{background:#D9A78E}
+.quiz-card{
+  padding:17px 15px 15px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:var(--surface);
+  box-shadow:0 6px 20px rgba(82,61,40,.05);
+}
+.quiz-question{margin:0 0 15px;color:#4A3E34;font-size:15px;line-height:1.6;font-weight:600}
+.quiz-options{display:flex;flex-direction:column;gap:7px}
+.quiz-option{
+  width:100%;
+  min-height:42px;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:#FBF7F0;
+  color:#5E5146;
+  font-size:10.5px;
+  line-height:1.5;
+  text-align:left;
+}
+.quiz-option:hover{border-color:#D9C6B6;background:#FFF9F2}
+.quiz-option.selected{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-dark);font-weight:600}
+.quiz-option.partner{border-color:#D7C3B2;background:#FFF4E9}
+.quiz-option:disabled{cursor:default}
+.quiz-reveal{margin-top:13px;padding-top:12px;border-top:1px dashed var(--line)}
+.quiz-picks{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.quiz-pick{padding:8px 9px;border-radius:8px;background:#F7F2EA;min-width:0}
+.quiz-pick-label{display:block;margin-bottom:2px;color:var(--muted);font-size:8px}
+.quiz-pick-value{display:block;color:#5B4D41;font-size:9.5px;line-height:1.45;overflow-wrap:anywhere}
+.quiz-pick.partner .quiz-pick-label{color:var(--accent-dark)}
+.quiz-verdict{display:flex;align-items:center;gap:6px;margin:11px 0 5px;color:#6D5E51;font-size:10px;font-weight:600}
+.quiz-verdict .heart{color:var(--accent);font-size:13px}
+.quiz-comment{margin:0 0 12px;color:var(--muted);font-size:10px;line-height:1.6}
+.quiz-next{
+  display:block;
+  width:100%;
+  height:36px;
+  border-radius:8px;
+  background:var(--surface-alt);
+  color:#6D5C4E;
+  font-size:10.5px;
+  font-weight:600;
+}
+.quiz-next:hover{background:#EDE5DA}
+.quiz-result{text-align:center;padding-top:10px}
+.quiz-score-ring{
+  width:128px;
+  height:128px;
+  margin:6px auto 16px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #E6D4C5;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 20%,#FFF9EF,#F7EADF);
+  box-shadow:0 12px 30px rgba(130,90,60,.08);
+}
+.quiz-score-ring strong{color:var(--accent-dark);font-size:30px;line-height:1;font-weight:650}
+.quiz-score-ring span{margin-top:5px;color:var(--muted);font-size:9px}
+.quiz-result-title{margin:0 0 7px;color:#4D4035;font-size:17px;font-weight:650}
+.quiz-result-copy{margin:0 auto;max-width:270px;color:var(--muted);font-size:10.5px;line-height:1.7}
+.quiz-actions{display:flex;gap:8px;margin-top:20px}
+.quiz-actions button{flex:1;height:38px;border-radius:8px;font-size:10.5px;font-weight:600}
+.quiz-replay{background:var(--accent);color:#fff}
+.quiz-replay:hover{background:var(--accent-dark)}
+.quiz-home{background:var(--surface);border:1px solid var(--line);color:#6D5C4E}
+.quiz-home:hover{background:#EDE5DA}
+.quiz-note{margin:15px 0 0;color:var(--faint);font-size:8.5px;text-align:center}
+.quiz-reward{margin:12px 0 0;color:#9A8777;font-size:9px;line-height:1.5}
+
 /* ——— Music ——— */
 .music-top-count{margin-left:auto;color:var(--muted);font-size:9px;padding-right:2px}
 .music-scroll{
@@ -1024,6 +1443,18 @@ img{display:block;max-width:100%}
 }
 .tab.active{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(53,39,26,.08)}
 .tab-count{color:#A29588;font-size:8.5px}
+.batch-add-btn{
+  flex:none;
+  height:28px;
+  padding:0 9px;
+  border-radius:7px;
+  background:var(--surface-alt);
+  color:#837465;
+  font-size:9.5px;
+  font-weight:600;
+  margin-left:auto;
+}
+.batch-add-btn:hover{background:#EDE6DC;color:#5F5246}
 .add-btn{
   height:29px;
   flex:none;
@@ -1209,6 +1640,37 @@ img{display:block;max-width:100%}
 }
 .card-group-heading:first-child{margin-top:0}
 .card-group-heading::before{content:"";width:4px;height:4px;border-radius:50%;background:#C3B3A3;flex:none}
+button.card-group-heading{
+  width:100%;
+  padding:5px 1px;
+  border:0;
+  border-radius:6px;
+  background:transparent;
+  text-align:left;
+  cursor:pointer;
+}
+button.card-group-heading:hover{background:#FBF7F0}
+.card-group-chevron{width:12px;height:12px;flex:none;color:#B1A599;transition:transform .16s}
+.card-group-heading.collapsed .card-group-chevron{transform:rotate(-90deg)}
+.card-library-tools{
+  grid-column:1/-1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin:1px 1px 1px;
+  color:#A29587;
+  font-size:8.5px;
+}
+.card-library-tools button{
+  height:24px;
+  padding:0 8px;
+  border-radius:6px;
+  background:var(--surface-alt);
+  color:#8B7C6D;
+  font-size:8.5px;
+}
+.card-library-tools button:hover{background:#EDE6DC;color:#65584B}
 .group-count{color:#B1A599;font-size:8.5px;font-weight:400}
 .group-line{flex:1;height:1px;background:var(--line);margin-left:2px}
 .library-card:focus-visible{outline:2px solid #D9A78E;outline-offset:1px}
@@ -1398,6 +1860,74 @@ img{display:block;max-width:100%}
 }
 .setting-switch.on{background:var(--accent)}
 .setting-switch.on span{transform:translateX(17px)}
+.batch-textarea{
+  width:100%;
+  min-height:150px;
+  resize:vertical;
+  padding:10px 11px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  outline:none;
+  background:#FFFEFA;
+  color:var(--ink);
+  font-size:12px;
+  line-height:1.75;
+}
+.batch-textarea:focus{border-color:#D7B7A5}
+.batch-group-row{display:flex;align-items:center;gap:9px;margin-top:12px}
+.batch-group-row label{flex:none;color:#6C5E51;font-size:10px;font-weight:600}
+.batch-group-row select{flex:1;min-width:0}
+.batch-hint{margin:10px 0 0;color:var(--faint);font-size:8.5px;line-height:1.55}
+.batch-add-btn-main{display:block;width:100%;height:38px;margin-top:14px}
+.theme-presets{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.theme-preset{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:5px;
+  padding:8px 3px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:var(--surface);
+  color:#75675A;
+  font-size:8px;
+}
+.theme-preset:hover{border-color:#D8C4B3;background:#FFFCF7}
+.theme-preset.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.theme-swatch{width:28px;height:28px;border-radius:50%;border:1px solid rgba(60,45,35,.1)}
+.theme-colors{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.theme-color-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.theme-color-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+.theme-color-copy strong{color:#5F5145;font-size:10px;font-weight:600}
+.theme-color-copy span{color:var(--faint);font-size:8px;line-height:1.4}
+.theme-color-row input[type="color"]{
+  width:38px;
+  height:30px;
+  flex:none;
+  padding:2px;
+  border:1px solid var(--line);
+  border-radius:6px;
+  background:#fff;
+}
+.theme-bg-preview{
+  position:relative;
+  width:100%;
+  height:104px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px dashed #D4C0AF;
+  border-radius:9px;
+  overflow:hidden;
+  background:#F8F3EB;
+  color:#A39384;
+  font-size:9px;
+}
+.theme-bg-preview img{width:100%;height:100%;object-fit:cover}
+.theme-bg-actions{display:flex;gap:7px;margin-top:8px}
+.theme-bg-actions button{flex:1;height:31px;border-radius:7px;font-size:9.5px}
+.theme-bg-choose{background:var(--accent-soft);color:var(--accent-dark);font-weight:600}
+.theme-bg-remove{background:var(--surface-alt);color:#8B7C6D}
 .settings-reset{display:block;margin:11px 2px 0 auto;color:var(--muted);font-size:9.5px;text-decoration:underline;text-underline-offset:2px}
 .anniversary-card{
   margin:0 0 14px;
@@ -2003,8 +2533,12 @@ img{display:block;max-width:100%}
         <button type="button" data-menu="contact">编辑联系人</button>
         <button type="button" data-menu="anniversary">我们的日子</button>
         <button type="button" data-menu="promises">小约定</button>
+        <button type="button" data-menu="gifts">礼物</button>
+        <button type="button" data-menu="questions">问答</button>
         <button type="button" data-menu="dailyLove">今日情话</button>
+        <button type="button" data-menu="quiz">心动问答</button>
         <button type="button" data-menu="music">音乐分享</button>
+        <button type="button" data-menu="theme">聊天主题</button>
         <button type="button" data-menu="reply">回复设置</button>
         <button type="button" data-menu="info">使用说明</button>
         <span class="menu-separator" aria-hidden="true"></span>
@@ -2046,9 +2580,24 @@ img{display:block;max-width:100%}
           </svg>
           比心
         </button>
-        <span class="tool-note">对方会挑卡或拼卡</span>
+        <span class="tool-note">长按引用 · 对方挑卡</span>
+      </div>
+      <div class="quote-bar" id="quoteBar" hidden>
+        <span class="quote-bar-mark" aria-hidden="true"></span>
+        <div class="quote-bar-copy">
+          <span class="quote-bar-label" id="quoteBarLabel">引用</span>
+          <span class="quote-bar-text" id="quoteBarText"></span>
+        </div>
+        <button class="quote-bar-close" id="quoteCancelBtn" type="button" aria-label="取消引用">×</button>
       </div>
       <form class="input-row" id="messageForm">
+        <button class="chat-photo-btn" id="chatImageBtn" type="button" aria-label="发送图片" title="发送图片">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3.5" y="5" width="17" height="14" rx="3"/>
+            <circle cx="9" cy="10" r="1.4"/>
+            <path d="M4.8 17l4.1-4 3 2.7 3.2-3.2 4.1 4.5"/>
+          </svg>
+        </button>
         <div class="input-wrap">
           <input id="messageInput" type="text" maxlength="200" placeholder="打字聊天…" autocomplete="off" enterkeyhint="send" aria-label="输入消息">
         </div>
@@ -2103,6 +2652,71 @@ img{display:block;max-width:100%}
         </span>
       </div>
       <div class="letter-list" id="letterList"></div>
+    </div>
+  </section>
+
+  <section class="view quiz-view" id="quizView" hidden>
+    <header class="moments-topbar">
+      <button class="back-btn" id="quizBack" type="button" aria-label="返回聊天">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 5l-7 7 7 7"/>
+        </svg>
+      </button>
+      <h1 class="moments-title">心动问答</h1>
+      <span class="quiz-best" id="quizBest">最高 0%</span>
+    </header>
+    <div class="quiz-scroll" id="quizScroll">
+      <div class="quiz-content" id="quizContent"></div>
+    </div>
+  </section>
+
+  <section class="view gift-view" id="giftView" hidden>
+    <header class="moments-topbar">
+      <button class="back-btn" id="giftBack" type="button" aria-label="返回聊天">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <h1 class="moments-title">礼物</h1>
+      <span class="gift-top-count" id="giftCount">0 份</span>
+    </header>
+    <div class="gift-scroll" id="giftScroll">
+      <div class="gift-hero">
+        <span class="gift-hero-icon" aria-hidden="true">🎁</span>
+        <h2>送TA一份小礼物</h2>
+        <p>不用等特别的日子，想到的时候就送一份。</p>
+      </div>
+      <div class="gift-catalog" id="giftCatalog"></div>
+      <div class="gift-history-head">
+        <h3>礼物记录</h3>
+        <span id="giftHistoryCount">0 份</span>
+      </div>
+      <div class="gift-history" id="giftHistory"></div>
+    </div>
+  </section>
+
+  <section class="view questions-view" id="questionsView" hidden>
+    <header class="moments-topbar">
+      <button class="back-btn" id="questionsBack" type="button" aria-label="返回聊天">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <h1 class="moments-title">问答</h1>
+      <span class="questions-top-count" id="questionsCount">0 个</span>
+    </header>
+    <div class="questions-scroll" id="questionsScroll">
+      <div class="question-tabs" role="tablist" aria-label="问答">
+        <button class="question-tab active" id="questionRecordsTab" type="button" role="tab" aria-selected="true">问答记录</button>
+        <button class="question-tab" id="questionLibraryTab" type="button" role="tab" aria-selected="false">问题库</button>
+      </div>
+      <div class="questions-panel" id="questionsRecordsPanel">
+        <div class="questions-list" id="questionsList"></div>
+      </div>
+      <div class="questions-panel" id="questionsLibraryPanel" hidden>
+        <div class="question-library-add">
+          <input class="question-library-input" id="customQuestionInput" type="text" maxlength="120" placeholder="写一个想问的问题…" autocomplete="off" aria-label="自定义问题">
+          <button class="question-library-add-btn" id="addCustomQuestionBtn" type="button">加入</button>
+        </div>
+        <p class="question-library-hint">加入后，对方会在下一次随机提问时从你的问题库里选；也可以直接点「让TA问」。</p>
+        <div class="questions-list" id="customQuestionsList"></div>
+      </div>
     </div>
   </section>
 
@@ -2174,6 +2788,7 @@ img{display:block;max-width:100%}
           <button class="tab active" id="collectionTabCards" type="button" role="tab" aria-selected="true" aria-controls="cardLibrary" tabindex="0">字卡 <span class="tab-count js-card-count">0</span></button>
           <button class="tab" id="collectionTabStickers" type="button" role="tab" aria-selected="false" aria-controls="stickerLibrary" tabindex="-1">表情 <span class="tab-count js-sticker-count">0</span></button>
         </div>
+        <button class="batch-add-btn" id="batchAddBtn" type="button">批量</button>
         <button class="add-btn" id="collectionAdd" type="button">+ 添加字卡</button>
       </div>
       <div class="inline-form" id="inlineCardForm" hidden>
@@ -2223,6 +2838,11 @@ img{display:block;max-width:100%}
       <div class="sheet-body" id="sheetBody"></div>
       <div class="sheet-actions" id="sheetActions"></div>
     </section>
+  </div>
+
+  <div class="image-viewer" id="imageViewer" hidden role="dialog" aria-modal="true" aria-label="查看图片">
+    <button class="image-viewer-close" id="imageViewerClose" type="button" aria-label="关闭图片">×</button>
+    <img id="imageViewerImg" alt="">
   </div>
 
   <div class="call-layer" id="callLayer" hidden role="dialog" aria-modal="true" aria-labelledby="callName">
@@ -2285,12 +2905,18 @@ img{display:block;max-width:100%}
     </div>
   </div>
 
+  <div class="msg-menu" id="msgMenu" hidden role="menu">
+    <button type="button" id="quoteMessageBtn" role="menuitem">引用回复</button>
+  </div>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </div>
 
 <input id="stickerInput" type="file" accept="image/*" multiple hidden>
 <input id="avatarInput" type="file" accept="image/*" hidden>
 <input id="momentImageInput" type="file" accept="image/*" hidden>
+<input id="chatImageInput" type="file" accept="image/*" hidden>
+<input id="chatBgInput" type="file" accept="image/*" hidden>
 
 <script>
 (() => {
@@ -2316,12 +2942,22 @@ img{display:block;max-width:100%}
     musicLastCheck: 'zika.v3.music.lastCheck',
     callChance: 'zika.v3.callChance',
     moments: 'zika.v4.moments',
+    momentsNextAt: 'zika.v4.moments.nextAt',
+    quoteNextAt: 'zika.v3.quote.nextAt',
+    proactiveNextAt: 'zika.v3.proactive.nextAt',
+    collapsedCardGroups: 'zika.v3.collapsedCardGroups',
+    chatTheme: 'zika.v3.chatTheme',
+    gifts: 'zika.v3.gifts',
+    giftNextAt: 'zika.v3.gift.nextAt',
+    questions: 'zika.v3.questions',
+    questionNextAt: 'zika.v3.question.nextAt',
+    customQuestions: 'zika.v3.customQuestions',
+    quizBest: 'zika.v3.quiz.best',
     momentSignature: 'zika.v4.moments.signature',
     letters: 'zika.v5.mail.letters',
     nextLetterAt: 'zika.v5.mail.next'
   };
   const MAX_MESSAGES = 80;
-  const MAX_CARDS = 60;
   const MAX_CUSTOM_GROUPS = 12;
   const MAX_CUSTOM_EMOJIS = 24;
   const MAX_STICKERS = 24;
@@ -2335,6 +2971,62 @@ img{display:block;max-width:100%}
   const MAX_MUSIC_FAVORITES = 100;
   const HOT_ARTISTS = ['周杰伦', '林俊杰', '陈奕迅', '五月天', '孙燕姿', '邓紫棋', '毛不易', 'Taylor Swift', 'Ed Sheeran', 'Adele'];
   const MUSIC_FALLBACK_ARTISTS = ['周深', 'Katy Perry'];
+  const GIFT_CATALOG = [
+    { id: 'rose', emoji: '🌹', name: '一朵玫瑰', note: '想把这朵花别在你今天的心情上。' },
+    { id: 'chocolate', emoji: '🍫', name: '一块巧克力', note: '甜的东西要分你一半。' },
+    { id: 'bear', emoji: '🧸', name: '一只抱抱熊', note: '我不在的时候，让它替我抱抱你。' },
+    { id: 'moon', emoji: '🌙', name: '一枚晚安月亮', note: '今晚的月亮也替我说晚安。' },
+    { id: 'star', emoji: '⭐', name: '一颗小星星', note: '从今天的好心情里摘下来送给你。' },
+    { id: 'cake', emoji: '🍰', name: '一块小蛋糕', note: '今天也值得一点甜甜的庆祝。' },
+    { id: 'cocoa', emoji: '☕', name: '一杯热可可', note: '慢慢喝，暖暖手，也暖暖心。' },
+    { id: 'letter', emoji: '💌', name: '一封小信', note: '有些话想写下来，慢慢给你看。' },
+    { id: 'scarf', emoji: '🧣', name: '一条围巾', note: '风大的时候，记得把自己裹好。' },
+    { id: 'headphones', emoji: '🎧', name: '一副耳机', note: '下次一起听一首只属于我们的歌。' },
+    { id: 'flower', emoji: '🌷', name: '一小束郁金香', note: '看见它的时候，第一反应是想送给你。' },
+    { id: 'hug', emoji: '🫂', name: '一个拥抱', note: '不用说话，先抱一下就好。' }
+  ];
+  const QUESTION_BANK = [
+    '最近有没有哪个瞬间，让你觉得“有我在真好”？',
+    '如果明天可以一起做一件小事，你想做什么？',
+    '你最近一次偷偷想我，是在做什么的时候？',
+    '如果可以把今天重新过一遍，你想改哪一段？',
+    '你觉得我最可爱的瞬间是什么时候？',
+    '最近有什么事让你有点累，但还没跟别人说？',
+    '你希望我多问你什么，少问什么？',
+    '如果现在可以收到我的一样东西，你会想要什么？',
+    '你心里理想的一个周末，是什么样子的？',
+    '最近有没有一首歌，让你想起我？',
+    '你觉得我们之间最舒服的相处方式是什么？',
+    '有什么事是你一直想试，但还没开始的？',
+    '如果我今天突然出现在你面前，你第一句话会说什么？',
+    '你最近学到的一个小道理是什么？',
+    '你希望未来的我们，保留现在哪一个小习惯？',
+    '有什么很普通的小事，会让你觉得被爱着？',
+    '你最近一次真心笑出声，是因为什么？',
+    '如果给现在的我们写一句备注，你会写什么？',
+    '你希望我在你难过的时候，多做哪一件事？',
+    '有没有什么话，你一直想听我说？'
+  ];
+  const CHAT_THEME_PRESETS = [
+    { name: '暖橘', accent: '#C56B4A', background: '#F7F1E8', partner: '#FFFDF8' },
+    { name: '雾紫', accent: '#8A6F91', background: '#F3EEF4', partner: '#FFFBFF' },
+    { name: '鼠尾草', accent: '#6E8B78', background: '#EEF2EB', partner: '#FFFDF8' },
+    { name: '海盐蓝', accent: '#6E86A1', background: '#EDF2F6', partner: '#FFFDF8' }
+  ];
+  const COUPLE_QUIZ = [
+    { question: '周末最想和我一起做什么？', options: ['去散步吹风', '窝在家看剧', '找家小店吃饭', '什么都不做，靠在一起'] },
+    { question: '我难过的时候，你最想怎么陪我？', options: ['抱抱我', '听我说完', '带我吃点好的', '安静地待在我旁边'] },
+    { question: '你觉得我们最像哪种情侣？', options: ['互补型', '一样幼稚', '一个闹一个笑', '越处越像'] },
+    { question: '如果有一整天只属于我们，你会选？', options: ['去很远的地方', '在家做顿饭', '看电影到深夜', '牵手随便走走'] },
+    { question: '你最容易被我哪个小动作打动？', options: ['突然抱你', '记住你的小事', '看着你笑', '认真听你说话'] },
+    { question: '吵架后你最希望我怎么做？', options: ['先抱一下', '好好说开', '给我一点时间', '买点好吃的'] },
+    { question: '你最想和我一起完成哪件事？', options: ['看一次日出', '去一次旅行', '养一只小动物', '把家布置成喜欢的样子'] },
+    { question: '你觉得爱意最常藏在哪儿？', options: ['日常问候', '小惊喜', '记得细节', '陪伴'] },
+    { question: '你最想听我说哪句话？', options: ['我在', '我想你', '我懂你', '我爱你'] },
+    { question: '如果给我们的默契打分，你会打？', options: ['100 分', '90 分', '80 分', '还在慢慢变高'] }
+  ];
+  const QUIZ_MATCH_LINES = ['和你选的一样。', '想到一块去了。', '这个默契，记一分。', '原来我们都在意同一件事。'];
+  const QUIZ_MISMATCH_LINES = ['原来你会选这个，记下了。', '我们不一样，但我想听听你的理由。', '下一次我会更懂你一点。', '这个答案我收好啦。'];
   const MUSIC_EMOTIONS = [
     { words: ['累', '疲惫', '困'], term: '治愈 放松' },
     { words: ['难过', '伤心', '哭'], term: '治愈 温柔' },
@@ -2572,7 +3264,8 @@ img{display:block;max-width:100%}
       cardMin: 1,
       cardMax: 3,
       merge: true,
-      theyAddCards: true
+      theyAddCards: true,
+      proactive: true
     };
   }
 
@@ -2594,12 +3287,28 @@ img{display:block;max-width:100%}
     musicTab: 'songs',
     musicSharing: false,
     callChance: 10,
+    momentsNextAt: 0,
+    quoteNextAt: 0,
+    proactiveNextAt: 0,
+    collapsedCardGroups: new Set(),
+    chatTheme: { accent: '#C56B4A', background: '#F7F1E8', partner: '#FFFDF8', backgroundImage: '' },
+    gifts: [],
+    giftNextAt: 0,
+    questions: [],
+    customQuestions: [],
+    questionNextAt: 0,
+    answeringQuestionId: null,
+    questionsTab: 'records',
+    quizBest: 0,
+    quiz: null,
     moments: [],
     momentSignature: '',
     commentingMomentId: null,
     letters: [],
     nextLetterAt: 0,
     collectionTab: 'cards',
+    quoteTarget: null,
+    messageMenuId: null,
     draftEmoji: '🌿',
     draftGroup: 'other',
     cardIntentId: null,
@@ -2612,6 +3321,8 @@ img{display:block;max-width:100%}
 
   let generation = 0;
   let replyRunning = false;
+  let proactiveSending = false;
+  let cardsDeduped = 0;
   const replyQueue = [];
   let typingRow = null;
   let toastTimer = null;
@@ -2624,6 +3335,7 @@ img{display:block;max-width:100%}
   let activeMusicController = null;
   let activeCall = null;
   let callTickTimer = null;
+  let chatImageBusy = false;
   const momentReplyTimers = new Map();
   const MUSIC_PLAY_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>';
   const MUSIC_PAUSE_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg>';
@@ -2668,6 +3380,36 @@ img{display:block;max-width:100%}
     callSpeakerBtn: $('#callSpeakerBtn'),
     callCameraBtn: $('#callCameraBtn'),
     callHangupBtn: $('#callHangupBtn'),
+    quizView: $('#quizView'),
+    quizBack: $('#quizBack'),
+    quizBest: $('#quizBest'),
+    quizScroll: $('#quizScroll'),
+    quizContent: $('#quizContent'),
+    giftView: $('#giftView'),
+    giftBack: $('#giftBack'),
+    giftCount: $('#giftCount'),
+    giftScroll: $('#giftScroll'),
+    giftCatalog: $('#giftCatalog'),
+    giftHistoryCount: $('#giftHistoryCount'),
+    giftHistory: $('#giftHistory'),
+    questionsView: $('#questionsView'),
+    questionsBack: $('#questionsBack'),
+    questionsCount: $('#questionsCount'),
+    questionsScroll: $('#questionsScroll'),
+    questionsList: $('#questionsList'),
+    questionRecordsTab: $('#questionRecordsTab'),
+    questionLibraryTab: $('#questionLibraryTab'),
+    questionsRecordsPanel: $('#questionsRecordsPanel'),
+    questionsLibraryPanel: $('#questionsLibraryPanel'),
+    customQuestionInput: $('#customQuestionInput'),
+    addCustomQuestionBtn: $('#addCustomQuestionBtn'),
+    customQuestionsList: $('#customQuestionsList'),
+    quoteBar: $('#quoteBar'),
+    quoteBarLabel: $('#quoteBarLabel'),
+    quoteBarText: $('#quoteBarText'),
+    quoteCancelBtn: $('#quoteCancelBtn'),
+    msgMenu: $('#msgMenu'),
+    quoteMessageBtn: $('#quoteMessageBtn'),
     headerAvatar: $('#headerAvatar'),
     headerName: $('#headerName'),
     contactSub: $('#contactSub'),
@@ -2720,6 +3462,7 @@ img{display:block;max-width:100%}
     saveGroupBtn: $('#saveGroupBtn'),
     cancelGroupBtn: $('#cancelGroupBtn'),
     cardLibrary: $('#cardLibrary'),
+    batchAddBtn: $('#batchAddBtn'),
     stickerLibrary: $('#stickerLibrary'),
     collectionBody: $('#collectionBody'),
     sheetLayer: $('#sheetLayer'),
@@ -2731,7 +3474,13 @@ img{display:block;max-width:100%}
     toast: $('#toast'),
     stickerInput: $('#stickerInput'),
     avatarInput: $('#avatarInput'),
-    momentImageInput: $('#momentImageInput')
+    momentImageInput: $('#momentImageInput'),
+    chatImageBtn: $('#chatImageBtn'),
+    chatImageInput: $('#chatImageInput'),
+    chatBgInput: $('#chatBgInput'),
+    imageViewer: $('#imageViewer'),
+    imageViewerImg: $('#imageViewerImg'),
+    imageViewerClose: $('#imageViewerClose')
   };
 
   /* ————————————————————————————————
@@ -2784,6 +3533,16 @@ img{display:block;max-width:100%}
     if (diff === 1) return '昨天';
     const date = new Date(timestamp);
     return `${date.getMonth() + 1}月${date.getDate()}日`;
+  }
+
+  function escapeHtml(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, match => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    })[match]);
   }
 
   function timeLabel(timestamp) {
@@ -3179,6 +3938,47 @@ img{display:block;max-width:100%}
     return safeSet(KEYS.cardGroups, JSON.stringify(state.customGroups));
   }
 
+  function loadCollapsedCardGroups() {
+    const raw = safeGet(KEYS.collapsedCardGroups);
+    if (raw === null) return;
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return;
+      state.collapsedCardGroups = new Set(parsed.filter(id => typeof id === 'string'));
+    } catch (_) {
+      state.collapsedCardGroups = new Set();
+    }
+  }
+
+  function persistCollapsedCardGroups() {
+    return safeSet(KEYS.collapsedCardGroups, JSON.stringify([...state.collapsedCardGroups]));
+  }
+
+  function normalizeThemeColor(value, fallback) {
+    return typeof value === 'string' && /^#[0-9a-f]{6}$/i.test(value) ? value.toLowerCase() : fallback;
+  }
+
+  function loadChatTheme() {
+    const raw = safeGet(KEYS.chatTheme);
+    if (raw === null) return;
+    try {
+      const parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object') return;
+      state.chatTheme = {
+        accent: normalizeThemeColor(parsed.accent, '#C56B4A'),
+        background: normalizeThemeColor(parsed.background, '#F7F1E8'),
+        partner: normalizeThemeColor(parsed.partner, '#FFFDF8'),
+        backgroundImage: typeof parsed.backgroundImage === 'string' && parsed.backgroundImage.startsWith('data:image/')
+          ? parsed.backgroundImage
+          : ''
+      };
+    } catch (_) {}
+  }
+
+  function persistChatTheme() {
+    return safeSet(KEYS.chatTheme, JSON.stringify(state.chatTheme));
+  }
+
   function loadCustomEmojis() {
     const raw = safeGet(KEYS.customEmojis);
     if (raw === null) return;
@@ -3215,6 +4015,7 @@ img{display:block;max-width:100%}
       if (!hasRanges) {
         if (typeof parsed.merge === 'boolean') state.replySettings.merge = parsed.merge;
         if (typeof parsed.theyAddCards === 'boolean') state.replySettings.theyAddCards = parsed.theyAddCards;
+        if (typeof parsed.proactive === 'boolean') state.replySettings.proactive = parsed.proactive;
         return;
       }
       const clampDelay = value => {
@@ -3243,13 +4044,36 @@ img{display:block;max-width:100%}
         cardMin,
         cardMax,
         merge: typeof parsed.merge === 'boolean' ? parsed.merge : true,
-        theyAddCards: typeof parsed.theyAddCards === 'boolean' ? parsed.theyAddCards : true
+        theyAddCards: typeof parsed.theyAddCards === 'boolean' ? parsed.theyAddCards : true,
+        proactive: typeof parsed.proactive === 'boolean' ? parsed.proactive : true
       };
     } catch (_) {}
   }
 
   function persistReplySettings() {
     return safeSet(KEYS.replySettings, JSON.stringify(state.replySettings));
+  }
+
+  function cardKey(label) {
+    return String(label || '').trim().replace(/[\s\u200b\u200c\u200d]+/g, ' ').toLowerCase();
+  }
+
+  function dedupeCards() {
+    const seen = new Set();
+    const deduped = [];
+    state.cards.forEach(card => {
+      const key = cardKey(card.label);
+      if (!key || seen.has(key)) return;
+      seen.add(key);
+      deduped.push(card);
+    });
+    const removed = state.cards.length - deduped.length;
+    if (removed > 0) {
+      state.cards = deduped;
+      cardsDeduped += removed;
+      persistCards();
+    }
+    return removed;
   }
 
   function loadCards() {
@@ -3268,7 +4092,7 @@ img{display:block;max-width:100%}
         typeof card.label === 'string' &&
         card.label.trim() &&
         typeof card.emoji === 'string'
-      ).slice(0, MAX_CARDS).map(card => {
+      ).map(card => {
         const label = card.label.trim().slice(0, 80);
         const noEmoji = Boolean(card.noEmoji) || card.emoji === '';
         return {
@@ -3281,6 +4105,7 @@ img{display:block;max-width:100%}
           createdAt: Number.isFinite(card.createdAt) ? card.createdAt : 0
         };
       });
+      dedupeCards();
     } catch (_) {
       state.cards = makeStarterCards();
       safeSet(KEYS.cards, JSON.stringify(state.cards));
@@ -3332,6 +4157,69 @@ img{display:block;max-width:100%}
     }
   }
 
+  function normalizeQuote(raw) {
+    if (!raw || typeof raw !== 'object') return null;
+    const excerpt = typeof raw.excerpt === 'string' ? raw.excerpt.trim().slice(0, 80) : '';
+    if (!excerpt) return null;
+    const from = raw.from === 'me' ? 'me' : 'them';
+    return {
+      messageId: typeof raw.messageId === 'string' ? raw.messageId : '',
+      from,
+      kind: typeof raw.kind === 'string' ? raw.kind.slice(0, 20) : 'text',
+      excerpt
+    };
+  }
+
+  function quoteFromMessage(message) {
+    if (!message) return null;
+    let excerpt = '';
+    switch (message.type) {
+      case 'text':
+        excerpt = message.text || '';
+        break;
+      case 'card':
+        excerpt = `${message.noEmoji || !message.cardEmoji ? '' : message.cardEmoji + ' '}${message.cardLabel || ''}`;
+        break;
+      case 'sticker':
+        excerpt = '发来一个表情';
+        break;
+      case 'image':
+        excerpt = '发来一张图片';
+        break;
+      case 'gift':
+        excerpt = `送了一份礼物：${message.giftName || ''}`;
+        break;
+      case 'question':
+        excerpt = `问题：${message.question || ''}`;
+        break;
+      case 'music':
+        excerpt = message.music ? `🎵 ${message.music.name}` : '分享了一首歌';
+        break;
+      case 'decision':
+        excerpt = `选择题：${message.question || ''}`;
+        break;
+      case 'decisionAnswer':
+        excerpt = `选择了：${message.answerText || ''}`;
+        break;
+      case 'heart':
+        excerpt = '比了一个心';
+        break;
+      case 'call':
+        excerpt = '通话记录';
+        break;
+      default:
+        excerpt = '一条消息';
+    }
+    excerpt = excerpt.replace(/\s+/g, ' ').trim().slice(0, 80);
+    if (!excerpt) return null;
+    return {
+      messageId: message.id || '',
+      from: message.from === 'me' ? 'me' : 'them',
+      kind: message.type || 'text',
+      excerpt
+    };
+  }
+
   function normalizeMessage(message) {
     if (!message || typeof message !== 'object' || !Number.isFinite(message.at)) return null;
     if (message.type === 'text') {
@@ -3343,6 +4231,7 @@ img{display:block;max-width:100%}
         from: 'me',
         type: 'text',
         text: text.slice(0, 200),
+        replyTo: normalizeQuote(message.replyTo),
         at: message.at
       };
     }
@@ -3381,6 +4270,35 @@ img{display:block;max-width:100%}
         at: message.at
       };
     }
+    if (message.type === 'image') {
+      if (message.from !== 'me') return null;
+      if (typeof message.src !== 'string' || !message.src.startsWith('data:image/')) return null;
+      return {
+        id: typeof message.id === 'string' ? message.id : uid(),
+        from: 'me',
+        type: 'image',
+        src: message.src,
+        replyTo: normalizeQuote(message.replyTo),
+        at: message.at
+      };
+    }
+    if (message.type === 'gift') {
+      if (message.from !== 'me' && message.from !== 'them') return null;
+      const name = typeof message.giftName === 'string' ? message.giftName.trim() : '';
+      const emoji = typeof message.giftEmoji === 'string' ? message.giftEmoji.trim().slice(0, 8) : '';
+      if (!name || !emoji) return null;
+      return {
+        id: typeof message.id === 'string' ? message.id : uid(),
+        from: message.from,
+        type: 'gift',
+        giftId: typeof message.giftId === 'string' ? message.giftId : '',
+        giftName: name.slice(0, 40),
+        giftEmoji: emoji,
+        giftNote: typeof message.giftNote === 'string' ? message.giftNote.trim().slice(0, 120) : '',
+        replyTo: normalizeQuote(message.replyTo),
+        at: message.at
+      };
+    }
     if (message.type === 'sticker') {
       if (message.from !== 'me' && message.from !== 'them') return null;
       if (typeof message.src !== 'string' || !message.src.startsWith('data:image/')) return null;
@@ -3391,10 +4309,24 @@ img{display:block;max-width:100%}
         stickerId: typeof message.stickerId === 'string' ? message.stickerId : '',
         stickerName: typeof message.stickerName === 'string' ? message.stickerName : '表情',
         src: message.src,
+        replyTo: normalizeQuote(message.replyTo),
         at: message.at
       };
     }
     if (message.from !== 'them') return null;
+    if (message.type === 'question') {
+      const question = typeof message.question === 'string' ? message.question.trim().slice(0, 120) : '';
+      if (!question) return null;
+      return {
+        id: typeof message.id === 'string' ? message.id : uid(),
+        from: 'them',
+        type: 'question',
+        questionId: typeof message.questionId === 'string' ? message.questionId : '',
+        question,
+        answer: typeof message.answer === 'string' ? message.answer.trim().slice(0, 300) : '',
+        at: message.at
+      };
+    }
     if (message.type === 'call') {
       const direction = message.direction === 'outgoing' ? 'outgoing' : 'incoming';
       const media = message.media === 'video' ? 'video' : 'voice';
@@ -3426,6 +4358,7 @@ img{display:block;max-width:100%}
         type: 'music',
         content: JSON.stringify(music),
         music,
+        replyTo: normalizeQuote(message.replyTo),
         at: message.at
       };
     }
@@ -3447,6 +4380,7 @@ img{display:block;max-width:100%}
         answerId: typeof message.answerId === 'string' ? message.answerId : '',
         answerTexts,
         answerText: answerTexts.join('，'),
+        replyTo: normalizeQuote(message.replyTo),
         at: message.at
       };
     }
@@ -3480,6 +4414,7 @@ img{display:block;max-width:100%}
         cardCount,
         cardIntent,
         cardIntents,
+        replyTo: normalizeQuote(message.replyTo),
         at: message.at
       };
     }
@@ -3505,6 +4440,123 @@ img{display:block;max-width:100%}
       state.moments = seedMoments();
       persistMoments();
     }
+  }
+
+  function loadRandomSchedules() {
+    const momentsNext = Number(safeGet(KEYS.momentsNextAt));
+    if (Number.isFinite(momentsNext) && momentsNext > 0) state.momentsNextAt = momentsNext;
+    const quoteNext = Number(safeGet(KEYS.quoteNextAt));
+    if (Number.isFinite(quoteNext) && quoteNext > 0) state.quoteNextAt = quoteNext;
+    const proactiveNext = Number(safeGet(KEYS.proactiveNextAt));
+    if (Number.isFinite(proactiveNext) && proactiveNext > 0) state.proactiveNextAt = proactiveNext;
+    const giftNext = Number(safeGet(KEYS.giftNextAt));
+    if (Number.isFinite(giftNext) && giftNext > 0) state.giftNextAt = giftNext;
+    const questionNext = Number(safeGet(KEYS.questionNextAt));
+    if (Number.isFinite(questionNext) && questionNext > 0) state.questionNextAt = questionNext;
+  }
+
+  function loadGifts() {
+    const raw = safeGet(KEYS.gifts);
+    if (raw === null) return;
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) throw new Error('bad gifts');
+      state.gifts = parsed
+        .filter(gift => gift && typeof gift.name === 'string' && typeof gift.emoji === 'string' && Number.isFinite(gift.at))
+        .slice(0, 100)
+        .map(gift => ({
+          id: typeof gift.id === 'string' ? gift.id : 'gift-' + uid(),
+          giftId: typeof gift.giftId === 'string' ? gift.giftId : '',
+          name: gift.name.slice(0, 40),
+          emoji: gift.emoji.slice(0, 8),
+          note: typeof gift.note === 'string' ? gift.note.slice(0, 120) : '',
+          from: gift.from === 'me' ? 'me' : 'them',
+          at: gift.at
+        }));
+    } catch (_) {
+      state.gifts = [];
+    }
+  }
+
+  function persistGifts() {
+    return safeSet(KEYS.gifts, JSON.stringify(state.gifts.slice(0, 100)));
+  }
+
+  function loadQuestions() {
+    const raw = safeGet(KEYS.questions);
+    if (raw === null) return;
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) throw new Error('bad questions');
+      state.questions = parsed
+        .filter(item => item && typeof item.question === 'string' && Number.isFinite(item.askedAt))
+        .slice(0, 100)
+        .map(item => ({
+          id: typeof item.id === 'string' ? item.id : 'question-' + uid(),
+          question: item.question.trim().slice(0, 120),
+          askedAt: item.askedAt,
+          answer: typeof item.answer === 'string' ? item.answer.trim().slice(0, 300) : '',
+          answeredAt: Number.isFinite(item.answeredAt) ? item.answeredAt : 0
+        }));
+    } catch (_) {
+      state.questions = [];
+    }
+  }
+
+  function persistQuestions() {
+    return safeSet(KEYS.questions, JSON.stringify(state.questions.slice(0, 100)));
+  }
+
+  function loadCustomQuestions() {
+    const raw = safeGet(KEYS.customQuestions);
+    if (raw === null) return;
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) throw new Error('bad custom questions');
+      state.customQuestions = parsed
+        .filter(item => item && typeof item.text === 'string' && item.text.trim())
+        .slice(0, 100)
+        .map(item => ({
+          id: typeof item.id === 'string' ? item.id : 'custom-question-' + uid(),
+          text: item.text.trim().slice(0, 120),
+          createdAt: Number.isFinite(item.createdAt) ? item.createdAt : Date.now()
+        }));
+    } catch (_) {
+      state.customQuestions = [];
+    }
+  }
+
+  function persistCustomQuestions() {
+    return safeSet(KEYS.customQuestions, JSON.stringify(state.customQuestions.slice(0, 100)));
+  }
+
+  function persistGiftNextAt() {
+    return safeSet(KEYS.giftNextAt, String(state.giftNextAt || 0));
+  }
+
+  function persistQuestionNextAt() {
+    return safeSet(KEYS.questionNextAt, String(state.questionNextAt || 0));
+  }
+
+  function persistMomentsNextAt() {
+    return safeSet(KEYS.momentsNextAt, String(state.momentsNextAt || 0));
+  }
+
+  function persistQuoteNextAt() {
+    return safeSet(KEYS.quoteNextAt, String(state.quoteNextAt || 0));
+  }
+
+  function persistProactiveNextAt() {
+    return safeSet(KEYS.proactiveNextAt, String(state.proactiveNextAt || 0));
+  }
+
+  function loadQuizBest() {
+    const raw = Number(safeGet(KEYS.quizBest));
+    if (Number.isFinite(raw) && raw >= 0 && raw <= 100) state.quizBest = Math.round(raw);
+  }
+
+  function persistQuizBest() {
+    return safeSet(KEYS.quizBest, String(state.quizBest || 0));
   }
 
   function normalizeMoment(moment) {
@@ -3648,13 +4700,240 @@ img{display:block;max-width:100%}
       return;
     }
     if (signature === state.momentSignature) return;
-    const userMoments = state.moments.filter(moment => moment.author === 'me');
-    const contactMoments = seedMoments();
-    state.moments = [...contactMoments, ...userMoments].sort((a, b) => b.at - a.at);
-    state.commentingMomentId = null;
     state.momentSignature = signature;
     safeSet(KEYS.momentSignature, signature);
+  }
+
+  function randomMomentGap() {
+    return 60 * 60 * 1000 + Math.random() * 23 * 60 * 60 * 1000;
+  }
+
+  function randomQuoteGap() {
+    return 2 * 60 * 60 * 1000 + Math.random() * 8 * 60 * 60 * 1000;
+  }
+
+  function scheduleNextMoment(from = Date.now()) {
+    state.momentsNextAt = from + randomMomentGap();
+    persistMomentsNextAt();
+  }
+
+  function scheduleNextQuote(from = Date.now()) {
+    state.quoteNextAt = from + randomQuoteGap();
+    persistQuoteNextAt();
+  }
+
+  function checkScheduledMoments() {
+    const now = Date.now();
+    if (!state.momentsNextAt) {
+      scheduleNextMoment(now);
+      return false;
+    }
+    let published = 0;
+    while (state.momentsNextAt <= now && published < 3) {
+      const due = state.momentsNextAt;
+      const moment = makeContactMoment(due, published === 0);
+      if (moment) {
+        state.moments.push(moment);
+        published += 1;
+      }
+      state.momentsNextAt = due + randomMomentGap();
+    }
+    if (state.momentsNextAt <= now) state.momentsNextAt = now + randomMomentGap();
+    if (!published) {
+      persistMomentsNextAt();
+      return false;
+    }
+    state.moments.sort((a, b) => b.at - a.at);
+    state.moments = state.moments.slice(0, MAX_MOMENTS);
     persistMoments();
+    persistMomentsNextAt();
+    if (state.view === 'moments') renderMoments();
+    showToast(
+      published > 1 ? `${contactName()}发布了 ${published} 条新朋友圈` : `${contactName()}发布了新的朋友圈`,
+      '查看',
+      openMoments
+    );
+    return true;
+  }
+
+  function checkScheduledQuote() {
+    const now = Date.now();
+    if (!state.quoteNextAt) {
+      scheduleNextQuote(now);
+      return false;
+    }
+    if (now < state.quoteNextAt) return false;
+    const candidates = state.messages
+      .filter(message => message.from === 'me' && message.type !== 'call' && message.type !== 'heart')
+      .slice(-20);
+    if (!candidates.length) {
+      scheduleNextQuote(now);
+      return false;
+    }
+    const target = randomOf(candidates);
+    const quote = quoteFromMessage(target);
+    if (!quote) {
+      scheduleNextQuote(now);
+      return false;
+    }
+    let reply = null;
+    if (state.cards.length) {
+      const card = randomOf(state.cards);
+      reply = {
+        type: 'card',
+        cardId: card.id,
+        cardLabel: card.label,
+        cardEmoji: card.noEmoji ? '' : card.emoji,
+        noEmoji: Boolean(card.noEmoji) || !card.emoji,
+        cardIntent: card.intent || FALLBACK_CARD_INTENT
+      };
+    } else if (state.stickers.length) {
+      const sticker = randomOf(state.stickers);
+      reply = {
+        type: 'sticker',
+        stickerId: sticker.id,
+        stickerName: sticker.name,
+        src: sticker.src
+      };
+    }
+    if (!reply) {
+      scheduleNextQuote(now);
+      return false;
+    }
+    addMessage({
+      id: uid(),
+      from: 'them',
+      ...reply,
+      replyTo: quote,
+      at: now
+    });
+    scheduleNextQuote(now);
+    if (state.view !== 'chat') {
+      showToast(`${contactName()}引用回复了你`, '查看', openChat);
+    } else {
+      showToast(`${contactName()}引用回复了你`);
+    }
+    haptic();
+    return true;
+  }
+
+  function checkScheduledRandomEvents() {
+    checkScheduledMoments();
+    checkScheduledQuote();
+  }
+
+  function initRandomEvents() {
+    if (!state.momentsNextAt) scheduleNextMoment();
+    if (!state.quoteNextAt) scheduleNextQuote();
+    setTimeout(checkScheduledRandomEvents, 1400);
+    setInterval(checkScheduledRandomEvents, 60000);
+  }
+
+  function randomProactiveGap() {
+    return 60 * 60 * 1000 + Math.random() * 3 * 60 * 60 * 1000;
+  }
+
+  function scheduleNextProactive(from = Date.now()) {
+    state.proactiveNextAt = from + randomProactiveGap();
+    persistProactiveNextAt();
+  }
+
+  async function sendProactiveMessage() {
+    if (proactiveSending) return;
+    const plan = buildReplyPlan();
+    if (!plan.length) {
+      scheduleNextProactive(Date.now());
+      return;
+    }
+    const reply = plan[0];
+    const token = generation;
+    const inChat = state.view === 'chat' && !activeCall && els.sheetLayer.hidden && els.collectionLayer.hidden;
+    proactiveSending = true;
+    if (inChat) {
+      showTyping(reply.type === 'sticker' ? '正在翻表情…' : reply.type === 'combo' ? '正在拼字卡…' : '正在挑字卡…');
+    }
+    await sleep(700 + Math.random() * 1100);
+    if (token !== generation) {
+      proactiveSending = false;
+      if (inChat) hideTyping();
+      return;
+    }
+    if (inChat) hideTyping();
+    const now = Date.now();
+    if (reply.type === 'sticker') {
+      addMessage({
+        id: uid(),
+        from: 'them',
+        type: 'sticker',
+        stickerId: reply.sticker.id,
+        stickerName: reply.sticker.name,
+        src: reply.sticker.src,
+        at: now
+      });
+    } else if (reply.type === 'combo') {
+      const first = reply.cards[0];
+      const emojiCard = reply.cards.find(card => card.emoji && !card.noEmoji);
+      const intentCards = reply.cards.filter(card => card.intent);
+      const intentCard = intentCards.length ? randomOf(intentCards) : null;
+      addMessage({
+        id: uid(),
+        from: 'them',
+        type: 'card',
+        cardId: first.id,
+        cardLabel: reply.cards.map(card => card.label).join('，'),
+        cardEmoji: emojiCard ? emojiCard.emoji : '',
+        noEmoji: !emojiCard,
+        combo: true,
+        cardCount: reply.cards.length,
+        cardIntent: intentCard ? intentCard.intent : FALLBACK_CARD_INTENT,
+        at: now
+      });
+    } else {
+      const noEmoji = Boolean(reply.card.noEmoji) || !reply.card.emoji;
+      addMessage({
+        id: uid(),
+        from: 'them',
+        type: 'card',
+        cardId: reply.card.id,
+        cardLabel: reply.card.label,
+        cardEmoji: noEmoji ? '' : reply.card.emoji,
+        noEmoji,
+        cardIntent: reply.card.intent || FALLBACK_CARD_INTENT,
+        at: now
+      });
+    }
+    proactiveSending = false;
+    scheduleNextProactive(Date.now());
+    haptic();
+    if (state.view !== 'chat') {
+      showToast(`${contactName()}主动发来一条消息`, '查看', openChat);
+    }
+  }
+
+  function checkProactive() {
+    if (!state.replySettings.proactive || document.hidden) return;
+    if (proactiveSending) return;
+    if (activeCall || !els.sheetLayer.hidden || !els.collectionLayer.hidden || !els.menu.hidden) {
+      state.proactiveNextAt = Date.now() + 10 * 60 * 1000;
+      persistProactiveNextAt();
+      return;
+    }
+    if (!state.proactiveNextAt) {
+      scheduleNextProactive(Date.now());
+      return;
+    }
+    if (Date.now() < state.proactiveNextAt) return;
+    if (!state.cards.length && !state.stickers.length) {
+      scheduleNextProactive(Date.now());
+      return;
+    }
+    sendProactiveMessage();
+  }
+
+  function initProactive() {
+    if (!state.proactiveNextAt) scheduleNextProactive(Date.now());
+    setTimeout(checkProactive, 1800);
+    setInterval(checkProactive, 60000);
   }
 
   function seedMessages() {
@@ -3955,10 +5234,14 @@ img{display:block;max-width:100%}
 
   function openMailbox() {
     closeMenu();
+    hideMessageMenu();
     state.view = 'mail';
     els.chatView.hidden = true;
     els.momentsView.hidden = true;
     els.musicView.hidden = true;
+    els.quizView.hidden = true;
+    els.giftView.hidden = true;
+    els.questionsView.hidden = true;
     els.mailView.hidden = false;
     checkMailDelivery();
     markMailRead();
@@ -4165,6 +5448,7 @@ img{display:block;max-width:100%}
           answerCount: Math.min(selectedAnswerCount, options.length),
           at: Date.now()
         };
+        clearQuoteTarget();
         addMessage(decision);
         closeSheet();
         enqueueDecisionReply(decision);
@@ -4592,10 +5876,14 @@ img{display:block;max-width:100%}
 
   function openMusicView() {
     closeMenu();
+    hideMessageMenu();
     state.view = 'music';
     els.chatView.hidden = true;
     els.momentsView.hidden = true;
     els.mailView.hidden = true;
+    els.quizView.hidden = true;
+    els.giftView.hidden = true;
+    els.questionsView.hidden = true;
     els.musicView.hidden = false;
     renderMusicView();
     if (els.musicScroll) els.musicScroll.scrollTop = 0;
@@ -4880,6 +6168,793 @@ img{display:block;max-width:100%}
   }
 
   /* ————————————————————————————————
+     Couple quiz
+  ———————————————————————————————— */
+  function openQuiz() {
+    closeMenu();
+    hideMessageMenu();
+    state.view = 'quiz';
+    els.chatView.hidden = true;
+    els.momentsView.hidden = true;
+    els.mailView.hidden = true;
+    els.musicView.hidden = true;
+    els.quizView.hidden = false;
+    renderQuiz();
+    if (els.quizScroll) els.quizScroll.scrollTop = 0;
+    updateDocumentTitle();
+  }
+
+  function startQuiz() {
+    const questions = [...COUPLE_QUIZ].sort(() => Math.random() - 0.5).slice(0, 5);
+    state.quiz = {
+      questions,
+      index: 0,
+      score: 0,
+      userPick: null,
+      partnerPick: null,
+      comment: '',
+      revealed: false,
+      finished: false,
+      rewarded: false,
+      percent: 0
+    };
+    renderQuiz();
+    if (els.quizScroll) els.quizScroll.scrollTop = 0;
+  }
+
+  function pickQuizOption(index) {
+    const quiz = state.quiz;
+    if (!quiz || quiz.finished || quiz.revealed) return;
+    const current = quiz.questions[quiz.index];
+    if (!current || !current.options[index]) return;
+    let partnerPick;
+    if (Math.random() < 0.8) {
+      partnerPick = index;
+    } else {
+      const others = current.options.map((_, i) => i).filter(i => i !== index);
+      partnerPick = randomOf(others);
+    }
+    const match = partnerPick === index;
+    quiz.userPick = index;
+    quiz.partnerPick = partnerPick;
+    quiz.revealed = true;
+    quiz.comment = randomOf(match ? QUIZ_MATCH_LINES : QUIZ_MISMATCH_LINES);
+    if (match) quiz.score += 1;
+    renderQuiz();
+    if (els.quizScroll) els.quizScroll.scrollTop = els.quizScroll.scrollHeight;
+  }
+
+  function nextQuizQuestion() {
+    const quiz = state.quiz;
+    if (!quiz || !quiz.revealed || quiz.finished) return;
+    if (quiz.index + 1 >= quiz.questions.length) {
+      quiz.finished = true;
+      quiz.percent = Math.round((quiz.score / quiz.questions.length) * 100);
+      if (quiz.percent > state.quizBest) {
+        state.quizBest = quiz.percent;
+        persistQuizBest();
+      }
+      rewardQuizCard();
+      renderQuiz();
+      if (els.quizScroll) els.quizScroll.scrollTop = 0;
+      return;
+    }
+    quiz.index += 1;
+    quiz.userPick = null;
+    quiz.partnerPick = null;
+    quiz.comment = '';
+    quiz.revealed = false;
+    renderQuiz();
+    if (els.quizScroll) els.quizScroll.scrollTop = 0;
+  }
+
+  function rewardQuizCard() {
+    const quiz = state.quiz;
+    if (!quiz || quiz.rewarded || !state.cards.length) return;
+    quiz.rewarded = true;
+    const label = quiz.percent >= 80 ? '抱抱' : quiz.percent >= 60 ? '喜欢你' : '慢慢来';
+    const card = state.cards.find(item => item.label === label) || randomOf(state.cards);
+    if (!card) return;
+    addMessage({
+      id: uid(),
+      from: 'them',
+      type: 'card',
+      cardId: card.id,
+      cardLabel: card.label,
+      cardEmoji: card.noEmoji ? '' : card.emoji,
+      noEmoji: Boolean(card.noEmoji) || !card.emoji,
+      cardIntent: '想和你再靠近一点。',
+      at: Date.now()
+    });
+    showToast(`${contactName()}把这次默契收进了聊天`);
+  }
+
+  function renderQuiz() {
+    if (!els.quizContent) return;
+    if (els.quizBest) els.quizBest.textContent = `最高 ${state.quizBest}%`;
+    const quiz = state.quiz;
+    const name = escapeHtml(contactName());
+    if (!quiz) {
+      els.quizContent.innerHTML = `
+        <div class="quiz-intro">
+          <span class="quiz-eyebrow">A LITTLE CLOSER</span>
+          <h2 class="quiz-title">来试试我们的默契</h2>
+          <p class="quiz-sub">随机 5 道小题，凭第一反应选。没有标准答案，只想借这些问题多懂你一点。</p>
+          <button class="quiz-start" type="button" data-quiz-start>开始 5 道题</button>
+          <p class="quiz-note">最高默契：${state.quizBest}% · 结束后${name}会留一张字卡在聊天里</p>
+        </div>
+      `;
+      return;
+    }
+    if (quiz.finished) {
+      const percent = quiz.percent || 0;
+      const title = percent >= 100 ? '心有灵犀' : percent >= 80 ? '很合拍' : percent >= 60 ? '默契正在长出来' : '慢慢更懂你';
+      const copy = percent >= 100
+        ? '五道题都选到了一起。想把这份默契留得久一点。'
+        : percent >= 80
+          ? '大部分时候我们都懂彼此，剩下的慢慢聊。'
+          : percent >= 60
+            ? '有一半答案一样，也有一半让我们更了解对方。'
+            : '答案不完全一样也没关系，愿意继续问、继续听，就已经很靠近了。';
+      els.quizContent.innerHTML = `
+        <div class="quiz-result">
+          <span class="quiz-eyebrow">THIS ROUND</span>
+          <div class="quiz-score-ring">
+            <strong>${percent}%</strong>
+            <span>默契度 · ${quiz.score} / ${quiz.questions.length}</span>
+          </div>
+          <h2 class="quiz-result-title">${title}</h2>
+          <p class="quiz-result-copy">${copy}</p>
+          <p class="quiz-reward">${quiz.rewarded ? `${name}已经把一张字卡放进聊天里。` : '这次没有字卡，去聊天里说句话吧。'}</p>
+          <div class="quiz-actions">
+            <button class="quiz-home" type="button" data-quiz-home>回聊天</button>
+            <button class="quiz-replay" type="button" data-quiz-retry>再来一局</button>
+          </div>
+          <p class="quiz-note">最高默契：${state.quizBest}%</p>
+        </div>
+      `;
+      return;
+    }
+    const current = quiz.questions[quiz.index];
+    if (!current) {
+      state.quiz = null;
+      renderQuiz();
+      return;
+    }
+    const dots = quiz.questions.map((_, index) => {
+      const done = index < quiz.index || (index === quiz.index && quiz.revealed);
+      const active = index === quiz.index;
+      return `<span class="quiz-dot${done ? ' done' : ''}${active ? ' active' : ''}"></span>`;
+    }).join('');
+    const options = current.options.map((option, index) => {
+      let className = 'quiz-option';
+      if (quiz.revealed) {
+        if (index === quiz.userPick) className += ' selected';
+        if (index === quiz.partnerPick && index !== quiz.userPick) className += ' partner';
+      }
+      return `<button class="${className}" type="button" data-quiz-option="${index}"${quiz.revealed ? ' disabled' : ''}>${option}</button>`;
+    }).join('');
+    const match = quiz.revealed && quiz.userPick === quiz.partnerPick;
+    const reveal = quiz.revealed ? `
+      <div class="quiz-reveal">
+        <div class="quiz-picks">
+          <div class="quiz-pick"><span class="quiz-pick-label">你选了</span><span class="quiz-pick-value">${current.options[quiz.userPick] || ''}</span></div>
+          <div class="quiz-pick partner"><span class="quiz-pick-label">${name}选了</span><span class="quiz-pick-value">${current.options[quiz.partnerPick] || ''}</span></div>
+        </div>
+        <div class="quiz-verdict"><span class="heart">${match ? '♥' : '♡'}</span>${match ? '想到一块去了' : '这次答案不一样'}</div>
+        <p class="quiz-comment">${quiz.comment}</p>
+        <button class="quiz-next" type="button" data-quiz-next>${quiz.index + 1 >= quiz.questions.length ? '看看结果' : '下一题'}</button>
+      </div>
+    ` : '';
+    els.quizContent.innerHTML = `
+      <div class="quiz-progress">
+        <span class="quiz-progress-text">第 ${quiz.index + 1} / ${quiz.questions.length} 题</span>
+        <span class="quiz-dots">${dots}</span>
+      </div>
+      <div class="quiz-card">
+        <p class="quiz-question">${current.question}</p>
+        <div class="quiz-options">${options}</div>
+        ${reveal}
+      </div>
+      <p class="quiz-note">没有标准答案，选你第一反应就好。</p>
+    `;
+  }
+
+  /* ————————————————————————————————
+     Gifts
+  ———————————————————————————————— */
+  function openGiftView() {
+    closeMenu();
+    hideMessageMenu();
+    state.view = 'gift';
+    els.chatView.hidden = true;
+    els.momentsView.hidden = true;
+    els.mailView.hidden = true;
+    els.musicView.hidden = true;
+    els.quizView.hidden = true;
+    els.giftView.hidden = true;
+    els.questionsView.hidden = true;
+    els.questionsView.hidden = true;
+    els.giftView.hidden = false;
+    renderGiftView();
+    if (els.giftScroll) els.giftScroll.scrollTop = 0;
+    updateDocumentTitle();
+  }
+
+  function renderGiftView() {
+    if (!els.giftCatalog) return;
+    if (els.giftCount) els.giftCount.textContent = `${state.gifts.length} 份`;
+    if (els.giftHistoryCount) els.giftHistoryCount.textContent = `${state.gifts.length} 份`;
+    els.giftCatalog.innerHTML = GIFT_CATALOG.map(gift => `
+      <button class="gift-item" type="button" data-gift-id="${gift.id}" aria-label="送${gift.name}">
+        <span class="gift-item-emoji" aria-hidden="true">${gift.emoji}</span>
+        <span>${gift.name}</span>
+      </button>
+    `).join('');
+    els.giftHistory.innerHTML = '';
+    if (!state.gifts.length) {
+      const empty = document.createElement('div');
+      empty.className = 'gift-empty';
+      empty.textContent = '还没有礼物记录。先送TA一份，或者等TA随机送来。';
+      els.giftHistory.appendChild(empty);
+      return;
+    }
+    state.gifts.forEach(record => {
+      const item = document.createElement('div');
+      item.className = 'gift-record';
+      const emoji = document.createElement('span');
+      emoji.className = 'gift-record-emoji';
+      emoji.textContent = record.emoji;
+      emoji.setAttribute('aria-hidden', 'true');
+      const copy = document.createElement('div');
+      copy.className = 'gift-record-copy';
+      const head = document.createElement('div');
+      head.className = 'gift-record-head';
+      const name = document.createElement('strong');
+      name.textContent = record.name;
+      const date = document.createElement('span');
+      date.textContent = dayLabel(record.at);
+      head.append(name, date);
+      const note = document.createElement('p');
+      note.className = 'gift-record-note';
+      note.textContent = record.note || '一份小心意。';
+      const from = document.createElement('span');
+      from.className = 'gift-record-from';
+      from.textContent = record.from === 'me' ? '我送的' : `${contactName()}送的`;
+      copy.append(head, note, from);
+      item.append(emoji, copy);
+      els.giftHistory.appendChild(item);
+    });
+  }
+
+  function addGiftRecord(gift, from, at) {
+    state.gifts.unshift({
+      id: 'gift-' + uid(),
+      giftId: gift.id,
+      name: gift.name,
+      emoji: gift.emoji,
+      note: gift.note,
+      from,
+      at
+    });
+    state.gifts = state.gifts.slice(0, 100);
+    persistGifts();
+  }
+
+  function addGiftMessage(gift, from) {
+    if (!gift) return;
+    const at = Date.now();
+    addMessage({
+      id: uid(),
+      from,
+      type: 'gift',
+      giftId: gift.id,
+      giftName: gift.name,
+      giftEmoji: gift.emoji,
+      giftNote: gift.note,
+      at
+    });
+    addGiftRecord(gift, from, at);
+  }
+
+  function sendGiftToPartner(giftId) {
+    const gift = GIFT_CATALOG.find(item => item.id === giftId);
+    if (!gift) return;
+    addGiftMessage(gift, 'me');
+    if (state.view === 'gift') renderGiftView();
+    showToast(`已送出「${gift.name}」`);
+    haptic();
+    if (state.cards.length || state.stickers.length) enqueueReply('');
+  }
+
+  function scheduleNextGift(from = Date.now()) {
+    state.giftNextAt = from + 60 * 60 * 1000 + Math.random() * 23 * 60 * 60 * 1000;
+    persistGiftNextAt();
+  }
+
+  function checkGiftSchedule() {
+    if (!state.giftNextAt) {
+      scheduleNextGift();
+      return;
+    }
+    if (Date.now() < state.giftNextAt) return;
+    const gift = randomOf(GIFT_CATALOG);
+    addGiftMessage(gift, 'them');
+    scheduleNextGift(Date.now());
+    if (state.view === 'gift') renderGiftView();
+    else if (state.view !== 'chat') showToast(`${contactName()}送来一份礼物`, '查看', openChat);
+    haptic();
+  }
+
+  function initGifts() {
+    if (!state.giftNextAt) scheduleNextGift();
+    setTimeout(checkGiftSchedule, 2100);
+    setInterval(checkGiftSchedule, 60000);
+  }
+
+  /* ————————————————————————————————
+     Partner questions
+  ———————————————————————————————— */
+  function openQuestionsView() {
+    closeMenu();
+    hideMessageMenu();
+    state.view = 'questions';
+    els.chatView.hidden = true;
+    els.momentsView.hidden = true;
+    els.mailView.hidden = true;
+    els.musicView.hidden = true;
+    els.quizView.hidden = true;
+    els.giftView.hidden = true;
+    els.questionsView.hidden = true;
+    els.giftView.hidden = true;
+    els.questionsView.hidden = false;
+    renderQuestionsView();
+    if (els.questionsScroll) els.questionsScroll.scrollTop = 0;
+    updateDocumentTitle();
+  }
+
+  function renderQuestionsView() {
+    if (!els.questionsList) return;
+    const library = state.questionsTab === 'library';
+    if (els.questionsCount) els.questionsCount.textContent = library ? `${state.customQuestions.length} 个问题` : `${state.questions.length} 个`;
+    if (els.questionRecordsTab) {
+      els.questionRecordsTab.classList.toggle('active', !library);
+      els.questionRecordsTab.setAttribute('aria-selected', String(!library));
+    }
+    if (els.questionLibraryTab) {
+      els.questionLibraryTab.classList.toggle('active', library);
+      els.questionLibraryTab.setAttribute('aria-selected', String(library));
+    }
+    if (els.questionsRecordsPanel) els.questionsRecordsPanel.hidden = library;
+    if (els.questionsLibraryPanel) els.questionsLibraryPanel.hidden = !library;
+    if (library) {
+      renderQuestionLibrary();
+    } else {
+      renderQuestionRecords();
+    }
+  }
+
+  function setQuestionTab(tab) {
+    state.questionsTab = tab === 'library' ? 'library' : 'records';
+    renderQuestionsView();
+    if (els.questionsScroll) els.questionsScroll.scrollTop = 0;
+  }
+
+  function renderQuestionRecords() {
+    els.questionsList.innerHTML = '';
+    if (!state.questions.length) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-state';
+      const strong = document.createElement('strong');
+      strong.textContent = '还没有提问';
+      const copy = document.createElement('span');
+      copy.textContent = `${contactName()}会在 1–24 小时内随机问你一个问题。`;
+      empty.append(strong, copy);
+      els.questionsList.appendChild(empty);
+      return;
+    }
+    state.questions.forEach(record => {
+      const item = document.createElement('article');
+      item.className = 'question-record';
+      const head = document.createElement('div');
+      head.className = 'question-record-head';
+      const date = document.createElement('span');
+      date.textContent = dayLabel(record.askedAt);
+      const status = document.createElement('span');
+      status.textContent = record.answer ? '已回答' : '等你回答';
+      head.append(date, status);
+      const question = document.createElement('p');
+      question.className = 'question-record-q';
+      question.textContent = record.question;
+      const answer = document.createElement('p');
+      answer.className = 'question-record-a' + (record.answer ? '' : ' empty');
+      answer.textContent = record.answer || '还没有回答';
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'question-answer-btn';
+      button.dataset.answerQuestion = record.id;
+      button.textContent = record.answer ? '修改回答' : '回答';
+      item.append(head, question, answer, button);
+      els.questionsList.appendChild(item);
+    });
+  }
+
+  function renderQuestionLibrary() {
+    if (!els.customQuestionsList) return;
+    if (els.questionsCount) els.questionsCount.textContent = `${state.customQuestions.length} 个问题`;
+    els.customQuestionsList.innerHTML = '';
+    if (!state.customQuestions.length) {
+      const empty = document.createElement('div');
+      empty.className = 'question-library-empty';
+      empty.textContent = '问题库还是空的。加几个你想被问到的问题，对方会从里面随机挑一个来问。';
+      els.customQuestionsList.appendChild(empty);
+      return;
+    }
+    state.customQuestions.forEach(item => {
+      const row = document.createElement('article');
+      row.className = 'custom-question-item';
+      const text = document.createElement('p');
+      text.className = 'custom-question-text';
+      text.textContent = item.text;
+      const actions = document.createElement('div');
+      actions.className = 'custom-question-actions';
+      const ask = document.createElement('button');
+      ask.type = 'button';
+      ask.className = 'custom-question-ask';
+      ask.dataset.askCustomQuestion = item.id;
+      ask.textContent = '让TA问';
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'custom-question-del';
+      remove.dataset.deleteCustomQuestion = item.id;
+      remove.textContent = '删除';
+      actions.append(ask, remove);
+      row.append(text, actions);
+      els.customQuestionsList.appendChild(row);
+    });
+  }
+
+  function addCustomQuestion() {
+    if (!els.customQuestionInput) return;
+    const text = els.customQuestionInput.value.trim().replace(/\s+/g, ' ').slice(0, 120);
+    if (!text) return;
+    if (state.customQuestions.some(item => item.text === text)) {
+      showToast('问题库里已经有这个问题了');
+      return;
+    }
+    state.customQuestions.unshift({
+      id: 'custom-question-' + uid(),
+      text,
+      createdAt: Date.now()
+    });
+    state.customQuestions = state.customQuestions.slice(0, 100);
+    persistCustomQuestions();
+    els.customQuestionInput.value = '';
+    renderQuestionLibrary();
+    showToast(state.questionsTab === 'library' ? '已加入问题库' : '已加入问题库，可以去问题库看看');
+    haptic();
+    els.customQuestionInput.focus({ preventScroll: true });
+  }
+
+  function askCustomQuestion(id) {
+    const item = state.customQuestions.find(question => question.id === id);
+    if (!item) return;
+    if (state.questions.some(question => !question.answer)) {
+      showToast('先回答上一个问题，再让TA问新的');
+      setQuestionTab('records');
+      return;
+    }
+    if (askPartnerQuestion(item.text)) {
+      setQuestionTab('records');
+      showToast('TA问你了');
+    }
+  }
+
+  function deleteCustomQuestion(id) {
+    const index = state.customQuestions.findIndex(item => item.id === id);
+    if (index < 0) return;
+    state.customQuestions.splice(index, 1);
+    persistCustomQuestions();
+    renderQuestionLibrary();
+    showToast('已从问题库删除');
+  }
+
+  function openQuestionAnswer(questionId) {
+    const record = state.questions.find(item => item.id === questionId);
+    if (!record) return;
+    state.answeringQuestionId = questionId;
+    openSheet('questionAnswer');
+  }
+
+  function renderQuestionAnswerSheet() {
+    const record = state.questions.find(item => item.id === state.answeringQuestionId);
+    if (!record) {
+      closeSheet();
+      return;
+    }
+    els.sheetTitle.textContent = '回答问题';
+    els.sheetBody.innerHTML = `
+      <p class="answer-question">${escapeHtml(record.question)}</p>
+      <textarea class="answer-textarea" id="questionAnswerInput" maxlength="300" placeholder="慢慢写，想到什么就说什么…">${escapeHtml(record.answer || '')}</textarea>
+      <p class="answer-hint">回答会保存在「问答」记录里，也可以之后再修改。</p>
+    `;
+    els.sheetActions.innerHTML = `
+      <button class="btn" type="button" data-sheet-action="close">取消</button>
+      <button class="btn primary" type="button" data-sheet-action="save-answer">保存回答</button>
+    `;
+    const input = $('#questionAnswerInput');
+    if (input) requestAnimationFrame(() => input.focus({ preventScroll: true }));
+  }
+
+  function saveQuestionAnswer() {
+    const record = state.questions.find(item => item.id === state.answeringQuestionId);
+    const input = $('#questionAnswerInput');
+    if (!record || !input) return;
+    const answer = input.value.trim().slice(0, 300);
+    if (!answer) {
+      showToast('写一点回答再保存吧');
+      input.focus();
+      return;
+    }
+    record.answer = answer;
+    record.answeredAt = Date.now();
+    persistQuestions();
+    state.messages.forEach(message => {
+      if (message.type === 'question' && message.questionId === record.id) message.answer = answer;
+    });
+    persistMessages();
+    closeSheet();
+    if (state.view === 'questions') renderQuestionsView();
+    if (state.view === 'chat') {
+      renderChat();
+      scrollBottom('smooth');
+    }
+    showToast('回答已保存');
+  }
+
+  function askPartnerQuestion(questionOverride = '') {
+    if (state.questions.some(item => !item.answer)) {
+      scheduleNextQuestion(Date.now());
+      return false;
+    }
+    const recent = new Set(state.questions.slice(0, 8).map(item => item.question));
+    const customPool = state.customQuestions.map(item => item.text).filter(Boolean);
+    const basePool = customPool.length ? customPool : QUESTION_BANK;
+    const fresh = basePool.filter(question => !recent.has(question));
+    const override = String(questionOverride || '').trim().slice(0, 120);
+    const question = override || randomOf(fresh.length ? fresh : basePool);
+    const record = {
+      id: 'question-' + uid(),
+      question,
+      askedAt: Date.now(),
+      answer: '',
+      answeredAt: 0
+    };
+    state.questions.unshift(record);
+    state.questions = state.questions.slice(0, 100);
+    persistQuestions();
+    addMessage({
+      id: uid(),
+      from: 'them',
+      type: 'question',
+      questionId: record.id,
+      question,
+      answer: '',
+      at: record.askedAt
+    });
+    scheduleNextQuestion(Date.now());
+    if (state.view === 'questions') renderQuestionsView();
+    if (state.view !== 'chat') showToast(`${contactName()}想问你一个问题`, '查看', openChat);
+    return true;
+  }
+
+  function scheduleNextQuestion(from = Date.now()) {
+    state.questionNextAt = from + 60 * 60 * 1000 + Math.random() * 23 * 60 * 60 * 1000;
+    persistQuestionNextAt();
+  }
+
+  function checkQuestionSchedule() {
+    if (!state.questionNextAt) {
+      scheduleNextQuestion();
+      return;
+    }
+    if (Date.now() < state.questionNextAt) return;
+    if (state.questions.some(item => !item.answer)) {
+      scheduleNextQuestion(Date.now());
+      return;
+    }
+    askPartnerQuestion();
+  }
+
+  function initQuestions() {
+    if (!state.questionNextAt) scheduleNextQuestion();
+    setTimeout(checkQuestionSchedule, 2300);
+    setInterval(checkQuestionSchedule, 60000);
+  }
+
+  /* ————————————————————————————————
+     Chat theme
+  ———————————————————————————————— */
+  function hexToRgb(hex) {
+    const value = String(hex || '').replace('#', '');
+    if (!/^[0-9a-f]{6}$/i.test(value)) return { r: 197, g: 107, b: 74 };
+    return {
+      r: parseInt(value.slice(0, 2), 16),
+      g: parseInt(value.slice(2, 4), 16),
+      b: parseInt(value.slice(4, 6), 16)
+    };
+  }
+
+  function mixHex(color, target, weight) {
+    const a = hexToRgb(color);
+    const b = hexToRgb(target);
+    const ratio = Math.min(1, Math.max(0, weight));
+    const channel = key => Math.round(a[key] * ratio + b[key] * (1 - ratio)).toString(16).padStart(2, '0');
+    return `#${channel('r')}${channel('g')}${channel('b')}`;
+  }
+
+  function hexToRgba(hex, alpha) {
+    const { r, g, b } = hexToRgb(hex);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+
+  function applyChatTheme() {
+    if (!els.chatView || !els.chat) return;
+    const theme = state.chatTheme;
+    els.chatView.style.setProperty('--accent', theme.accent);
+    els.chatView.style.setProperty('--accent-dark', mixHex(theme.accent, '#2B211B', 0.78));
+    els.chatView.style.setProperty('--accent-soft', mixHex(theme.accent, '#FFFFFF', 0.16));
+    els.chatView.style.setProperty('--chat-bg', theme.background);
+    els.chatView.style.setProperty('--chat-partner', theme.partner);
+    els.chatView.style.backgroundColor = theme.background;
+    els.chat.style.backgroundColor = theme.background;
+    if (theme.backgroundImage) {
+      const overlay = hexToRgba(theme.background, 0.62);
+      els.chat.style.backgroundImage = `linear-gradient(${overlay}, ${overlay}), url("${theme.backgroundImage}")`;
+      els.chat.style.backgroundSize = 'cover';
+      els.chat.style.backgroundPosition = 'center';
+      els.chat.style.backgroundRepeat = 'no-repeat';
+    } else {
+      els.chat.style.backgroundImage = 'none';
+    }
+  }
+
+  function renderChatThemeSheet() {
+    const theme = state.chatTheme;
+    const presetHtml = CHAT_THEME_PRESETS.map((preset, index) => {
+      const active = theme.accent === preset.accent && theme.background === preset.background && theme.partner === preset.partner;
+      return `
+        <button class="theme-preset${active ? ' active' : ''}" type="button" data-theme-preset="${index}">
+          <span class="theme-swatch" style="background:linear-gradient(135deg,${preset.accent} 0 50%,${preset.background} 50% 100%)"></span>
+          <span>${preset.name}</span>
+        </button>
+      `;
+    }).join('');
+    els.sheetTitle.textContent = '聊天主题';
+    els.sheetBody.innerHTML = `
+      <p class="settings-intro">只改变聊天页的颜色和气泡。可以选预设，也可以自己调；背景图会尽量压缩到 20KB 内。</p>
+      <div class="theme-presets">${presetHtml}</div>
+      <div class="theme-colors">
+        <label class="theme-color-row">
+          <span class="theme-color-copy"><strong>主题主色 / 我的气泡</strong><span>按钮、比心和右侧文字气泡</span></span>
+          <input type="color" id="themeAccent" value="${theme.accent}" aria-label="主题主色">
+        </label>
+        <label class="theme-color-row">
+          <span class="theme-color-copy"><strong>聊天背景</strong><span>消息区底色</span></span>
+          <input type="color" id="themeBackground" value="${theme.background}" aria-label="聊天背景颜色">
+        </label>
+        <label class="theme-color-row">
+          <span class="theme-color-copy"><strong>对方气泡</strong><span>对方字卡和正在输入的底色</span></span>
+          <input type="color" id="themePartner" value="${theme.partner}" aria-label="对方气泡颜色">
+        </label>
+      </div>
+      <div class="setting-block">
+        <div class="setting-head">
+          <div>
+            <p class="setting-title">聊天背景图片</p>
+            <p class="setting-hint">会铺在消息区，上面加一层透明底色保证可读。</p>
+          </div>
+        </div>
+        <div class="theme-bg-preview" id="themeBgPreview">
+          ${theme.backgroundImage ? `<img src="${theme.backgroundImage}" alt="聊天背景预览">` : '还没有自定义背景图'}
+        </div>
+        <div class="theme-bg-actions">
+          <button class="theme-bg-choose" id="themeBgChoose" type="button">选择图片</button>
+          <button class="theme-bg-remove" id="themeBgRemove" type="button">移除背景图</button>
+        </div>
+      </div>
+      <button class="settings-reset" id="themeReset" type="button">恢复默认主题</button>
+    `;
+    els.sheetActions.innerHTML = '<button class="btn primary" type="button" data-sheet-action="close">完成</button>';
+
+    els.sheetBody.querySelectorAll('[data-theme-preset]').forEach(button => {
+      button.addEventListener('click', () => {
+        const preset = CHAT_THEME_PRESETS[Number(button.dataset.themePreset)];
+        if (!preset) return;
+        state.chatTheme = {
+          accent: preset.accent,
+          background: preset.background,
+          partner: preset.partner,
+          backgroundImage: state.chatTheme.backgroundImage
+        };
+        persistChatTheme();
+        applyChatTheme();
+        renderChatThemeSheet();
+      });
+    });
+    const bindColor = (id, key) => {
+      const input = $('#' + id);
+      if (!input) return;
+      input.addEventListener('input', () => {
+        state.chatTheme[key] = normalizeThemeColor(input.value, state.chatTheme[key]);
+        applyChatTheme();
+        persistChatTheme();
+      });
+    };
+    bindColor('themeAccent', 'accent');
+    bindColor('themeBackground', 'background');
+    bindColor('themePartner', 'partner');
+    const choose = $('#themeBgChoose');
+    if (choose) {
+      choose.addEventListener('click', () => {
+        els.chatBgInput.value = '';
+        els.chatBgInput.click();
+      });
+    }
+    const remove = $('#themeBgRemove');
+    if (remove) {
+      remove.addEventListener('click', () => {
+        state.chatTheme.backgroundImage = '';
+        persistChatTheme();
+        applyChatTheme();
+        renderChatThemeSheet();
+        showToast('已移除聊天背景图');
+      });
+    }
+    const reset = $('#themeReset');
+    if (reset) {
+      reset.addEventListener('click', () => {
+        state.chatTheme = { accent: '#C56B4A', background: '#F7F1E8', partner: '#FFFDF8', backgroundImage: '' };
+        persistChatTheme();
+        applyChatTheme();
+        renderChatThemeSheet();
+        showToast('已恢复默认主题');
+      });
+    }
+  }
+
+  async function handleChatBackgroundFile(file) {
+    if (!file || state.sheetMode !== 'theme') return;
+    if (!isImageFile(file)) {
+      showToast('请选择图片文件');
+      return;
+    }
+    if (file.size > MAX_FILE_BYTES) {
+      showToast('图片太大了，请选择 12MB 以内的图片');
+      return;
+    }
+    try {
+      showToast('正在压缩背景图…');
+      const dataUrl = await readAsDataURL(file);
+      const image = await loadImage(dataUrl);
+      const compressed = compressMomentPhoto(image);
+      if (!compressed || !compressed.startsWith('data:image/') || compressed.length > IMAGE_TARGET_BYTES) {
+        showToast('这张背景图压缩后仍然太大，换一张试试');
+        return;
+      }
+      state.chatTheme.backgroundImage = compressed;
+      persistChatTheme();
+      applyChatTheme();
+      if (state.sheetMode === 'theme') renderChatThemeSheet();
+      showToast(`背景图已更新 · ${Math.max(1, Math.round(compressed.length / 1024))}KB`);
+    } catch (_) {
+      showToast('背景图读取失败，请换一张试试');
+    } finally {
+      els.chatBgInput.value = '';
+    }
+  }
+
+  /* ————————————————————————————————
      Calls
   ———————————————————————————————— */
   function formatCallDuration(seconds) {
@@ -5154,6 +7229,9 @@ img{display:block;max-width:100%}
     if (state.view === 'moments') document.title = `朋友圈 · ${contactName()}`;
     else if (state.view === 'mail') document.title = `信箱 · ${contactName()}`;
     else if (state.view === 'music') document.title = `音乐 · ${contactName()}`;
+    else if (state.view === 'quiz') document.title = `心动问答 · ${contactName()}`;
+    else if (state.view === 'gift') document.title = `礼物 · ${contactName()}`;
+    else if (state.view === 'questions') document.title = `问答 · ${contactName()}`;
     else document.title = `${contactName()} · 字卡交流`;
   }
 
@@ -5292,6 +7370,32 @@ img{display:block;max-width:100%}
     return wrap;
   }
 
+  function openImageViewer(src) {
+    if (!els.imageViewer) return;
+    els.imageViewerImg.src = src;
+    els.imageViewer.hidden = false;
+    requestAnimationFrame(() => els.imageViewerClose.focus({ preventScroll: true }));
+  }
+
+  function closeImageViewer() {
+    if (!els.imageViewer || els.imageViewer.hidden) return;
+    els.imageViewer.hidden = true;
+    els.imageViewerImg.removeAttribute('src');
+  }
+
+  function makeQuoteBlock(quote) {
+    const block = document.createElement('div');
+    block.className = 'quote-block' + (quote.from === 'me' ? ' from-me' : '');
+    const author = document.createElement('span');
+    author.className = 'quote-author';
+    author.textContent = quote.from === 'me' ? '我' : contactName();
+    const excerpt = document.createElement('span');
+    excerpt.className = 'quote-excerpt';
+    excerpt.textContent = quote.excerpt;
+    block.append(author, excerpt);
+    return block;
+  }
+
   function makeMessageNode(message, previous, animate) {
     const fragment = document.createDocumentFragment();
     const dayChanged = !previous || startOfDay(previous.at) !== startOfDay(message.at);
@@ -5331,11 +7435,78 @@ img{display:block;max-width:100%}
 
     const body = document.createElement('div');
     body.className = 'msg-body';
+    if (message.replyTo) body.appendChild(makeQuoteBlock(message.replyTo));
 
     if (message.type === 'text') {
       const bubble = document.createElement('div');
       bubble.className = 'text-bubble';
       bubble.textContent = message.text;
+      body.appendChild(bubble);
+    } else if (message.type === 'gift') {
+      const bubble = document.createElement('div');
+      bubble.className = 'gift-bubble';
+      const emoji = document.createElement('span');
+      emoji.className = 'gift-bubble-emoji';
+      emoji.textContent = message.giftEmoji;
+      emoji.setAttribute('aria-hidden', 'true');
+      const copy = document.createElement('div');
+      copy.className = 'gift-bubble-copy';
+      const kicker = document.createElement('span');
+      kicker.className = 'gift-kicker';
+      kicker.textContent = message.from === 'me' ? '送出一份礼物' : '收到一份礼物';
+      const name = document.createElement('span');
+      name.className = 'gift-name';
+      name.textContent = message.giftName;
+      copy.append(kicker, name);
+      if (message.giftNote) {
+        const note = document.createElement('p');
+        note.className = 'gift-note';
+        note.textContent = message.giftNote;
+        copy.appendChild(note);
+      }
+      bubble.append(emoji, copy);
+      body.appendChild(bubble);
+    } else if (message.type === 'question') {
+      const bubble = document.createElement('div');
+      bubble.className = 'question-bubble';
+      const kicker = document.createElement('div');
+      kicker.className = 'question-kicker';
+      kicker.textContent = `${contactName()}想问你`;
+      const text = document.createElement('p');
+      text.className = 'question-text';
+      text.textContent = message.question;
+      const answer = document.createElement('p');
+      answer.className = 'question-answer' + (message.answer ? '' : ' empty');
+      answer.textContent = message.answer || '还没有回答';
+      const answerBtn = document.createElement('button');
+      answerBtn.type = 'button';
+      answerBtn.className = 'question-answer-btn';
+      answerBtn.dataset.answerQuestion = message.questionId;
+      answerBtn.textContent = message.answer ? '修改回答' : '回答这个问题';
+      bubble.append(kicker, text, answer, answerBtn);
+      body.appendChild(bubble);
+    } else if (message.type === 'image') {
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-image-bubble';
+      bubble.tabIndex = 0;
+      bubble.setAttribute('role', 'button');
+      bubble.setAttribute('aria-label', '查看发送的图片');
+      const image = new Image();
+      image.src = message.src;
+      image.alt = '聊天图片';
+      image.loading = 'lazy';
+      image.draggable = false;
+      bubble.appendChild(image);
+      bubble.addEventListener('click', () => {
+        if (!els.msgMenu.hidden) return;
+        openImageViewer(message.src);
+      });
+      bubble.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openImageViewer(message.src);
+        }
+      });
       body.appendChild(bubble);
     } else if (message.type === 'card') {
       const noEmoji = Boolean(message.noEmoji) || !message.cardEmoji;
@@ -5490,17 +7661,71 @@ img{display:block;max-width:100%}
     els.sendBtn.classList.toggle('enabled', enabled);
   }
 
+  function renderQuoteBar() {
+    if (!els.quoteBar) return;
+    if (!state.quoteTarget) {
+      els.quoteBar.hidden = true;
+      return;
+    }
+    els.quoteBar.hidden = false;
+    if (els.quoteBarLabel) {
+      els.quoteBarLabel.textContent = `引用 ${state.quoteTarget.from === 'me' ? '我' : contactName()}`;
+    }
+    if (els.quoteBarText) els.quoteBarText.textContent = state.quoteTarget.excerpt;
+  }
+
+  function clearQuoteTarget() {
+    state.quoteTarget = null;
+    renderQuoteBar();
+  }
+
+  function hideMessageMenu() {
+    state.messageMenuId = null;
+    if (els.msgMenu) els.msgMenu.hidden = true;
+  }
+
+  function showMessageMenu(messageId, clientX, clientY) {
+    if (!els.msgMenu) return;
+    const message = state.messages.find(item => item.id === messageId);
+    if (!message || message.type === 'call') return;
+    state.messageMenuId = messageId;
+    els.msgMenu.hidden = false;
+    const appRect = els.app.getBoundingClientRect();
+    const menuWidth = 108;
+    let left = clientX - appRect.left - menuWidth + 12;
+    let top = clientY - appRect.top - 44;
+    left = Math.max(8, Math.min(left, appRect.width - menuWidth - 8));
+    if (top < 8) top = clientY - appRect.top + 18;
+    top = Math.max(8, Math.min(top, appRect.height - 50));
+    els.msgMenu.style.left = `${Math.round(left)}px`;
+    els.msgMenu.style.top = `${Math.round(top)}px`;
+  }
+
+  function startQuote(messageId) {
+    const message = state.messages.find(item => item.id === messageId);
+    if (!message) return;
+    const quote = quoteFromMessage(message);
+    if (!quote) return;
+    state.quoteTarget = quote;
+    hideMessageMenu();
+    renderQuoteBar();
+    els.messageInput.focus({ preventScroll: true });
+  }
+
   function sendText() {
     const text = els.messageInput.value.trim();
     if (!text) return;
+    const quote = state.quoteTarget;
     addMessage({
       id: uid(),
       from: 'me',
       type: 'text',
       text: text.slice(0, 200),
+      replyTo: quote,
       at: Date.now()
     });
     els.messageInput.value = '';
+    clearQuoteTarget();
     updateSendButton();
     haptic();
     els.messageInput.focus({ preventScroll: true });
@@ -5512,10 +7737,55 @@ img{display:block;max-width:100%}
     enqueueReply(text);
   }
 
+  async function handleChatImageFile(file) {
+    if (!file || chatImageBusy) return;
+    if (!isImageFile(file)) {
+      showToast('请选择图片文件');
+      return;
+    }
+    if (file.size > MAX_FILE_BYTES) {
+      showToast('图片太大了，请选择 12MB 以内的图片');
+      return;
+    }
+    chatImageBusy = true;
+    try {
+      showToast('正在压缩图片…');
+      const dataUrl = await readAsDataURL(file);
+      const image = await loadImage(dataUrl);
+      const compressed = compressMomentPhoto(image);
+      if (!compressed || !compressed.startsWith('data:image/') || compressed.length > IMAGE_TARGET_BYTES) {
+        showToast('这张图片压缩后仍然太大，换一张试试');
+        return;
+      }
+      clearQuoteTarget();
+      addMessage({
+        id: uid(),
+        from: 'me',
+        type: 'image',
+        src: compressed,
+        at: Date.now()
+      });
+      const sizeKb = Math.max(1, Math.round(compressed.length / 1024));
+      showToast(`图片已发送 · ${sizeKb}KB`);
+      haptic();
+      if (state.cards.length || state.stickers.length) {
+        enqueueReply('');
+      } else {
+        showToast(`图片已发送 · ${sizeKb}KB；先添加字卡或表情，对方才能回应`, '去添加', () => openCollection('cards'));
+      }
+    } catch (_) {
+      showToast('图片读取失败，请换一张试试');
+    } finally {
+      chatImageBusy = false;
+      if (els.chatImageInput) els.chatImageInput.value = '';
+    }
+  }
+
   function sendStickerById(id) {
     const sticker = state.stickers.find(item => item.id === id);
     if (!sticker) return;
     closeCollection();
+    clearQuoteTarget();
     addMessage({
       id: uid(),
       from: 'me',
@@ -5548,6 +7818,7 @@ img{display:block;max-width:100%}
   }
 
   function sendHeart() {
+    clearQuoteTarget();
     addMessage({
       id: uid(),
       from: 'me',
@@ -5645,6 +7916,14 @@ img{display:block;max-width:100%}
       }
     }
     return plan;
+  }
+
+  function pickPartnerQuote() {
+    const candidates = state.messages
+      .filter(message => message.from === 'me' && message.type !== 'call' && message.type !== 'heart')
+      .slice(-12);
+    if (!candidates.length || Math.random() > 0.24) return null;
+    return quoteFromMessage(randomOf(candidates));
   }
 
   function maybeSaveCardFromReply(sourceText, plan) {
@@ -5766,6 +8045,8 @@ img{display:block;max-width:100%}
           updateAssetWarning();
           continue;
         }
+        const partnerQuote = pickPartnerQuote();
+        let quoteUsed = false;
         for (const reply of plan) {
           const delaySeconds = state.replySettings.delayMin
             + Math.random() * (state.replySettings.delayMax - state.replySettings.delayMin);
@@ -5779,6 +8060,10 @@ img{display:block;max-width:100%}
           await sleep(delayMs);
           if (token !== generation) return;
           hideTyping();
+          const replyTo = partnerQuote && !quoteUsed && ['sticker', 'combo', 'card'].includes(reply.type)
+            ? partnerQuote
+            : null;
+          if (replyTo) quoteUsed = true;
           if (reply.type === 'sticker') {
             addMessage({
               id: uid(),
@@ -5787,6 +8072,7 @@ img{display:block;max-width:100%}
               stickerId: reply.sticker.id,
               stickerName: reply.sticker.name,
               src: reply.sticker.src,
+              replyTo,
               at: Date.now()
             });
           } else if (reply.type === 'combo') {
@@ -5805,6 +8091,7 @@ img{display:block;max-width:100%}
               combo: true,
               cardCount: reply.cards.length,
               cardIntent: intentCard ? intentCard.intent : FALLBACK_CARD_INTENT,
+              replyTo,
               at: Date.now()
             });
           } else {
@@ -5818,6 +8105,7 @@ img{display:block;max-width:100%}
               cardEmoji: noEmoji ? '' : reply.card.emoji,
               noEmoji,
               cardIntent: reply.card.intent || FALLBACK_CARD_INTENT,
+              replyTo,
               at: Date.now()
             });
           }
@@ -5863,12 +8151,16 @@ img{display:block;max-width:100%}
 
   function openSheet(mode) {
     closeMenu();
+    hideMessageMenu();
     state.sheetMode = mode;
     lastFocusSheet = document.activeElement && !document.activeElement.closest('#menu')
       ? document.activeElement
       : els.moreBtn;
     if (mode === 'contact') renderContactSheet();
     else if (mode === 'cardIntent') renderCardIntentSheet();
+    else if (mode === 'batchCards') renderBatchCardsSheet();
+    else if (mode === 'theme') renderChatThemeSheet();
+    else if (mode === 'questionAnswer') renderQuestionAnswerSheet();
     else if (mode === 'anniversary') renderAnniversarySheet();
     else if (mode === 'promises') renderPromisesSheet();
     else if (mode === 'dailyLove') renderDailyLoveSheet();
@@ -5889,6 +8181,7 @@ img{display:block;max-width:100%}
     els.sheetActions.innerHTML = '';
     state.sheetMode = null;
     state.cardIntentId = null;
+    state.answeringQuestionId = null;
     state.contactDraft = null;
     state.momentDraft = { text: '', image: null };
     if (lastFocusSheet && document.contains(lastFocusSheet)) {
@@ -5973,6 +8266,15 @@ img{display:block;max-width:100%}
           <button class="setting-switch${settings.theyAddCards ? ' on' : ''}" id="theyAddCardsSwitch" type="button" role="switch" aria-checked="${settings.theyAddCards}" aria-label="对方添加字卡"><span></span></button>
         </div>
       </div>
+      <div class="setting-block">
+        <div class="setting-head">
+          <div>
+            <p class="setting-title">主动聊天</p>
+            <p class="setting-hint">开启后，对方会在 1–4 小时内随机发一条消息给你；关掉网页后会保留时间，下次打开补上。</p>
+          </div>
+          <button class="setting-switch${settings.proactive ? ' on' : ''}" id="proactiveSwitch" type="button" role="switch" aria-checked="${settings.proactive}" aria-label="主动聊天"><span></span></button>
+        </div>
+      </div>
       <button class="settings-reset" id="replySettingsReset" type="button">恢复默认</button>
     `;
     els.sheetActions.innerHTML = '<button class="btn primary" type="button" data-sheet-action="close">完成</button>';
@@ -6035,6 +8337,17 @@ img{display:block;max-width:100%}
         theyAddSwitch.classList.toggle('on', state.replySettings.theyAddCards);
         theyAddSwitch.setAttribute('aria-checked', String(state.replySettings.theyAddCards));
         persistReplySettings();
+      });
+    }
+
+    const proactiveSwitch = $('#proactiveSwitch');
+    if (proactiveSwitch) {
+      proactiveSwitch.addEventListener('click', () => {
+        state.replySettings.proactive = !state.replySettings.proactive;
+        proactiveSwitch.classList.toggle('on', state.replySettings.proactive);
+        proactiveSwitch.setAttribute('aria-checked', String(state.replySettings.proactive));
+        persistReplySettings();
+        if (state.replySettings.proactive) scheduleNextProactive(Date.now());
       });
     }
 
@@ -6401,7 +8714,15 @@ img{display:block;max-width:100%}
     els.sheetTitle.textContent = '使用说明';
     els.sheetBody.innerHTML = `
       <ul class="info-list">
-        <li>直接在底部输入框打字发送消息。</li>
+        <li>直接在底部输入框打字发送消息。长按消息（电脑上也可右键）可以引用回复，对方也会随机引用你以前的话。</li>
+        <li>字卡数量不设上限，可以一直添加；重复的字卡会自动合并，点分组标题可以收起或展开。</li>
+        <li>输入框左边的图片按钮可以发图片，发送前会尽量压缩到 20KB 内，点图片可放大。</li>
+        <li>「…」→「心动问答」有 5 道默契题，看看你们会选到多近，结束后对方会留一张字卡在聊天里。</li>
+        <li>字卡库的「批量」可以一次粘贴多行，一行一张，不带意图；重复的会自动跳过。</li>
+        <li>「…」→「聊天主题」可以换配色、双方气泡颜色，也可以放一张聊天背景图。</li>
+        <li>「…」→「礼物」可以主动送TA礼物；对方也会在 1–24 小时内随机送一份，礼物记录会保留。</li>
+        <li>「…」→「问答」会保存TA随机问你的问题；可以在聊天卡片或问答页回答，也能修改回答。</li>
+        <li>「问答」→「问题库」可以自己添加问题；有自定义问题后，TA会优先从你的问题库里随机提问，也可以点「让TA问」。</li>
         <li>点底部的「出题」可以问一道带选项的问题，并设置对方选一个或多个回答。</li>
         <li>对方偶尔会把你发的消息或自己拼的字卡加进「对方加的」分组。</li>
         <li>「…」→「我们的日子」设置纪念日，聊天页会显示在一起第几天。</li>
@@ -6414,9 +8735,11 @@ img{display:block;max-width:100%}
         <li>点字卡可修改意图。对方偶尔会把一张字卡的意图收进字卡库，这种卡不带 emoji。</li>
         <li>在「表情」里上传图片，对方也会随机使用。</li>
         <li>点顶部的名字可以修改联系人姓名和头像。</li>
-        <li>「朋友圈」里对方的动态会用你的字卡随机拼成，偶尔搭配一张表情。</li>
+        <li>「朋友圈」里对方的动态会用你的字卡随机拼成，偶尔搭配一张表情；对方每 1–24 小时会随机发一条新动态。</li>
+        <li>关掉网页后，错过的朋友圈和随机引用回复会在下次打开时按保存的时间补触发。</li>
         <li>开启「合并字卡回复」时，多张字卡拼成一条，只显示一个 emoji 符号。</li>
         <li>右上角「…」→「回复设置」可以调整回复间隔、信息条数、每条字卡数量区间和是否合并。</li>
+        <li>回复设置里可以打开或关闭「主动聊天」；开启后对方会在 1–4 小时内随机发消息，关掉网页后下次打开会补上。</li>
         <li>朋友圈可以点赞、点踩和评论，也可以发布自己的文字或图片。</li>
         <li>「信箱」里对方会在 1–24 小时内寄来一封随机字卡拼成的信，你也可以打字写信。</li>
       </ul>
@@ -6623,11 +8946,15 @@ img{display:block;max-width:100%}
   ———————————————————————————————— */
   function openMoments() {
     closeMenu();
+    hideMessageMenu();
     state.view = 'moments';
     refreshContactMomentsIfNeeded();
     els.chatView.hidden = true;
     els.mailView.hidden = true;
     els.musicView.hidden = true;
+    els.quizView.hidden = true;
+    els.giftView.hidden = true;
+    els.questionsView.hidden = true;
     els.momentsView.hidden = false;
     renderMoments();
     els.momentsScroll.scrollTop = 0;
@@ -6639,6 +8966,9 @@ img{display:block;max-width:100%}
     els.momentsView.hidden = true;
     els.mailView.hidden = true;
     els.musicView.hidden = true;
+    els.quizView.hidden = true;
+    els.giftView.hidden = true;
+    els.questionsView.hidden = true;
     els.chatView.hidden = false;
     updateDocumentTitle();
     scrollBottom('auto');
@@ -6976,6 +9306,7 @@ img{display:block;max-width:100%}
   ———————————————————————————————— */
   function openCollection(tab = 'cards') {
     closeMenu();
+    hideMessageMenu();
     if (document.activeElement === els.messageInput) els.messageInput.blur();
     lastFocusCollection = document.activeElement;
     els.collectionLayer.hidden = false;
@@ -7044,6 +9375,7 @@ img{display:block;max-width:100%}
     els.collectionTabStickers.setAttribute('aria-selected', String(!isCards));
     els.collectionTabCards.tabIndex = isCards ? 0 : -1;
     els.collectionTabStickers.tabIndex = isCards ? -1 : 0;
+    els.batchAddBtn.hidden = !isCards;
     els.cardLibrary.hidden = !isCards;
     els.stickerLibrary.hidden = isCards;
     if (isCards) {
@@ -7208,16 +9540,93 @@ img{display:block;max-width:100%}
     els.addCardSubmit.disabled = !els.cardInput.value.trim();
   }
 
+  function renderBatchCardsSheet() {
+    const groups = allGroups().filter(group => group.id !== 'theirs');
+    if (!groups.some(group => group.id === state.draftGroup)) state.draftGroup = 'other';
+    const groupOptions = groups.map(group =>
+      `<option value="${group.id}"${group.id === state.draftGroup ? ' selected' : ''}>${escapeHtml(group.name)}</option>`
+    ).join('');
+    const emoji = normalizeEmoji(state.draftEmoji, '🌿');
+    els.sheetTitle.textContent = '批量添加字卡';
+    els.sheetBody.innerHTML = `
+      <p class="settings-intro">一行算一张字卡，空行会跳过；重复的字卡会自动略过，不需要填写意图。</p>
+      <textarea class="batch-textarea" id="batchCardInput" maxlength="2000" placeholder="摸摸头&#10;早点睡&#10;想你了"></textarea>
+      <div class="batch-group-row">
+        <label for="batchCardGroup">放进分组</label>
+        <select class="range-select" id="batchCardGroup">${groupOptions}</select>
+      </div>
+      <p class="batch-hint">每行最多 12 个字 · 这批字卡统一使用 emoji ${escapeHtml(emoji)} · 之后仍可单独点字卡编辑意图</p>
+      <button class="btn primary batch-add-btn-main" id="batchAddSubmit" type="button">添加这一批</button>
+    `;
+    els.sheetActions.innerHTML = '<button class="btn" type="button" data-sheet-action="close">取消</button>';
+    const input = $('#batchCardInput');
+    const group = $('#batchCardGroup');
+    const submit = $('#batchAddSubmit');
+    if (input) requestAnimationFrame(() => input.focus({ preventScroll: true }));
+    if (submit) {
+      submit.addEventListener('click', () => {
+        addBatchCards(input ? input.value : '', group ? group.value : state.draftGroup, emoji);
+      });
+    }
+  }
+
+  function addBatchCards(text, groupId, emoji) {
+    const group = normalizeCardGroup(groupId, 'other');
+    const lines = String(text || '').split(/\r?\n/);
+    const existing = new Set(state.cards.map(card => cardKey(card.label)));
+    const batchSeen = new Set();
+    const newCards = [];
+    let skipped = 0;
+    lines.forEach((line, index) => {
+      const label = line.trim().replace(/\s+/g, ' ').slice(0, 12);
+      if (!label) return;
+      const key = cardKey(label);
+      if (existing.has(key) || batchSeen.has(key)) {
+        skipped += 1;
+        return;
+      }
+      batchSeen.add(key);
+      newCards.push({
+        id: 'card-' + uid(),
+        label,
+        emoji: normalizeEmoji(emoji, '🌿'),
+        noEmoji: false,
+        group,
+        intent: '',
+        createdAt: Date.now() + index
+      });
+    });
+    if (!newCards.length) {
+      showToast(skipped ? '这些字卡都已经有了' : '请输入至少一张字卡');
+      return;
+    }
+    state.cards.unshift(...newCards);
+    state.collapsedCardGroups.delete(group);
+    persistCollapsedCardGroups();
+    persistCards();
+    state.draftGroup = group;
+    renderGroupChoices();
+    renderCardLibrary();
+    updateCounts();
+    updateAssetWarning();
+    adjustCollectionHeight();
+    closeSheet();
+    showToast(skipped > 0 ? `已添加 ${newCards.length} 张，跳过 ${skipped} 张重复` : `已添加 ${newCards.length} 张字卡`);
+    haptic();
+  }
+
   function addCardFromForm() {
     const label = els.cardInput.value.trim().replace(/\s+/g, ' ');
     if (!label) return;
-    if (state.cards.length >= MAX_CARDS) {
-      showToast(`最多保存 ${MAX_CARDS} 张字卡`);
+    const labelText = label.slice(0, 12);
+    if (state.cards.some(card => cardKey(card.label) === cardKey(labelText))) {
+      showToast('字卡库里已经有这张卡了');
+      els.cardInput.focus({ preventScroll: true });
       return;
     }
     const card = {
       id: 'card-' + uid(),
-      label: label.slice(0, 12),
+      label: labelText,
       emoji: normalizeEmoji(state.draftEmoji, '🌿'),
       noEmoji: false,
       group: normalizeCardGroup(state.draftGroup, label),
@@ -7225,6 +9634,7 @@ img{display:block;max-width:100%}
       createdAt: Date.now()
     };
     state.cards.unshift(card);
+    if (state.collapsedCardGroups.delete(card.group)) persistCollapsedCardGroups();
     persistCards();
     renderCardLibrary();
     updateCounts();
@@ -7263,8 +9673,7 @@ img{display:block;max-width:100%}
   function addThemCard(label, emoji, options = {}) {
     const text = String(label || '').trim().slice(0, options.maxLength || 40);
     if (!text) return;
-    if (state.cards.length >= MAX_CARDS) return;
-    if (state.cards.some(card => card.label.toLowerCase() === text.toLowerCase())) return;
+    if (state.cards.some(card => cardKey(card.label) === cardKey(text))) return;
     const noEmoji = Boolean(options.noEmoji);
     const card = {
       id: 'them-card-' + uid(),
@@ -7286,6 +9695,34 @@ img{display:block;max-width:100%}
     showToast(options.toastMessage || `${contactName()}往字卡库加了一张字卡`, '查看', () => openCollection('cards'));
   }
 
+  function visibleCardGroupIds() {
+    return allGroups()
+      .filter(group => state.cards.some(card => normalizeCardGroup(card.group, card.label) === group.id))
+      .map(group => group.id);
+  }
+
+  function toggleCardGroup(id) {
+    if (!id) return;
+    if (state.collapsedCardGroups.has(id)) state.collapsedCardGroups.delete(id);
+    else state.collapsedCardGroups.add(id);
+    persistCollapsedCardGroups();
+    renderCardLibrary();
+    adjustCollectionHeight();
+  }
+
+  function toggleAllCardGroups() {
+    const ids = visibleCardGroupIds();
+    if (!ids.length) return;
+    const allCollapsed = ids.every(id => state.collapsedCardGroups.has(id));
+    ids.forEach(id => {
+      if (allCollapsed) state.collapsedCardGroups.delete(id);
+      else state.collapsedCardGroups.add(id);
+    });
+    persistCollapsedCardGroups();
+    renderCardLibrary();
+    adjustCollectionHeight();
+  }
+
   function renderCardLibrary() {
     els.cardLibrary.innerHTML = '';
     if (!state.cards.length) {
@@ -7303,11 +9740,32 @@ img{display:block;max-width:100%}
       els.cardLibrary.appendChild(empty);
       return;
     }
-    allGroups().forEach(group => {
-      const cards = state.cards.filter(card => normalizeCardGroup(card.group, card.label) === group.id);
-      if (!cards.length) return;
-      const heading = document.createElement('div');
-      heading.className = 'card-group-heading';
+    const groups = allGroups()
+      .map(group => ({
+        group,
+        cards: state.cards.filter(card => normalizeCardGroup(card.group, card.label) === group.id)
+      }))
+      .filter(item => item.cards.length);
+    const allCollapsed = groups.length > 0 && groups.every(item => state.collapsedCardGroups.has(item.group.id));
+    const tools = document.createElement('div');
+    tools.className = 'card-library-tools';
+    const summary = document.createElement('span');
+    summary.textContent = `${state.cards.length} 张字卡 · ${groups.length} 个分组`;
+    const toggleAll = document.createElement('button');
+    toggleAll.type = 'button';
+    toggleAll.dataset.cardGroupToggleAll = 'true';
+    toggleAll.textContent = allCollapsed ? '全部展开' : '全部收起';
+    tools.append(summary, toggleAll);
+    els.cardLibrary.appendChild(tools);
+
+    groups.forEach(({ group, cards }) => {
+      const collapsed = state.collapsedCardGroups.has(group.id);
+      const heading = document.createElement('button');
+      heading.type = 'button';
+      heading.className = 'card-group-heading' + (collapsed ? ' collapsed' : '');
+      heading.dataset.cardGroupToggle = group.id;
+      heading.setAttribute('aria-expanded', String(!collapsed));
+      heading.setAttribute('aria-label', `${collapsed ? '展开' : '收起'}分组 ${group.name}`);
       const name = document.createElement('span');
       name.textContent = group.name;
       const count = document.createElement('span');
@@ -7316,8 +9774,12 @@ img{display:block;max-width:100%}
       const line = document.createElement('span');
       line.className = 'group-line';
       line.setAttribute('aria-hidden', 'true');
-      heading.append(name, count, line);
+      const chevron = document.createElement('span');
+      chevron.className = 'card-group-chevron';
+      chevron.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>';
+      heading.append(name, count, line, chevron);
       els.cardLibrary.appendChild(heading);
+      if (collapsed) return;
 
       cards.forEach(card => {
         const item = document.createElement('div');
@@ -7491,6 +9953,8 @@ img{display:block;max-width:100%}
     hideTyping();
     state.messages = seedMessages();
     persistMessages();
+    clearQuoteTarget();
+    hideMessageMenu();
     renderChat();
     closeSheet();
     scrollBottom('auto');
@@ -7574,6 +10038,120 @@ img{display:block;max-width:100%}
         sendText();
       }
     });
+    els.chatImageBtn.addEventListener('click', () => {
+      if (chatImageBusy) return;
+      els.chatImageInput.value = '';
+      els.chatImageInput.click();
+    });
+    els.chatImageInput.addEventListener('change', event => {
+      const file = event.target.files && event.target.files[0];
+      handleChatImageFile(file);
+    });
+    els.chatBgInput.addEventListener('change', event => {
+      const file = event.target.files && event.target.files[0];
+      handleChatBackgroundFile(file);
+    });
+    els.imageViewerClose.addEventListener('click', closeImageViewer);
+    els.imageViewer.addEventListener('click', event => {
+      if (event.target === els.imageViewer || event.target === els.imageViewerImg) closeImageViewer();
+    });
+    els.quoteCancelBtn.addEventListener('click', clearQuoteTarget);
+    els.quoteMessageBtn.addEventListener('click', () => {
+      if (state.messageMenuId) startQuote(state.messageMenuId);
+    });
+    document.addEventListener('pointerdown', event => {
+      if (els.msgMenu.hidden) return;
+      if (event.target.closest('#msgMenu')) return;
+      hideMessageMenu();
+    }, true);
+    let quotePressTimer = null;
+    let quotePressStart = null;
+    const cancelQuotePress = () => {
+      if (quotePressTimer) clearTimeout(quotePressTimer);
+      quotePressTimer = null;
+      quotePressStart = null;
+    };
+    els.chat.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      if (event.target.closest('button, input, textarea, a, .music-range, .decision-option')) return;
+      const row = event.target.closest('.msg');
+      if (!row || !row.dataset.messageId) return;
+      cancelQuotePress();
+      quotePressStart = {
+        id: row.dataset.messageId,
+        x: event.clientX,
+        y: event.clientY
+      };
+      quotePressTimer = setTimeout(() => {
+        if (!quotePressStart) return;
+        showMessageMenu(quotePressStart.id, quotePressStart.x, quotePressStart.y);
+        quotePressStart = null;
+      }, 480);
+    });
+    els.chat.addEventListener('pointerup', cancelQuotePress);
+    els.chat.addEventListener('pointercancel', cancelQuotePress);
+    els.chat.addEventListener('pointermove', event => {
+      if (!quotePressStart) return;
+      if (Math.abs(event.clientX - quotePressStart.x) > 8 || Math.abs(event.clientY - quotePressStart.y) > 8) {
+        cancelQuotePress();
+      }
+    });
+    els.chat.addEventListener('contextmenu', event => {
+      const row = event.target.closest('.msg');
+      if (!row || !row.dataset.messageId) return;
+      event.preventDefault();
+      showMessageMenu(row.dataset.messageId, event.clientX, event.clientY);
+    });
+    els.chat.addEventListener('scroll', hideMessageMenu, { passive: true });
+
+    els.quizBack.addEventListener('click', openChat);
+    els.giftBack.addEventListener('click', openChat);
+    els.questionsBack.addEventListener('click', openChat);
+    els.questionRecordsTab.addEventListener('click', () => setQuestionTab('records'));
+    els.questionLibraryTab.addEventListener('click', () => setQuestionTab('library'));
+    els.addCustomQuestionBtn.addEventListener('click', addCustomQuestion);
+    els.customQuestionInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter' && !event.isComposing) {
+        event.preventDefault();
+        addCustomQuestion();
+      }
+    });
+    els.customQuestionsList.addEventListener('click', event => {
+      const ask = event.target.closest('[data-ask-custom-question]');
+      if (ask) {
+        askCustomQuestion(ask.dataset.askCustomQuestion);
+        return;
+      }
+      const remove = event.target.closest('[data-delete-custom-question]');
+      if (remove) deleteCustomQuestion(remove.dataset.deleteCustomQuestion);
+    });
+    els.giftCatalog.addEventListener('click', event => {
+      const button = event.target.closest('[data-gift-id]');
+      if (button) sendGiftToPartner(button.dataset.giftId);
+    });
+    const handleAnswerButton = event => {
+      const button = event.target.closest('[data-answer-question]');
+      if (button) openQuestionAnswer(button.dataset.answerQuestion);
+    };
+    els.chat.addEventListener('click', handleAnswerButton);
+    els.questionsList.addEventListener('click', handleAnswerButton);
+    els.quizContent.addEventListener('click', event => {
+      const start = event.target.closest('[data-quiz-start], [data-quiz-retry]');
+      if (start) {
+        startQuiz();
+        return;
+      }
+      const option = event.target.closest('[data-quiz-option]');
+      if (option) {
+        pickQuizOption(Number(option.dataset.quizOption));
+        return;
+      }
+      if (event.target.closest('[data-quiz-next]')) {
+        nextQuizQuestion();
+        return;
+      }
+      if (event.target.closest('[data-quiz-home]')) openChat();
+    });
 
     els.contactBtn.addEventListener('click', () => openSheet('contact'));
     els.momentsBtn.addEventListener('click', openMoments);
@@ -7620,8 +10198,12 @@ img{display:block;max-width:100%}
       if (action === 'contact') openSheet('contact');
       else if (action === 'anniversary') openSheet('anniversary');
       else if (action === 'promises') openSheet('promises');
+      else if (action === 'gifts') openGiftView();
+      else if (action === 'questions') openQuestionsView();
       else if (action === 'dailyLove') openSheet('dailyLove');
+      else if (action === 'quiz') openQuiz();
       else if (action === 'music') openMusicView();
+      else if (action === 'theme') openSheet('theme');
       else if (action === 'reply') openSheet('reply');
       else if (action === 'info') openSheet('info');
       else if (action === 'reset') openSheet('reset');
@@ -7708,6 +10290,7 @@ img{display:block;max-width:100%}
       else if (els.inlineCardForm.hidden) openInlineCardForm();
       else closeInlineCardForm();
     });
+    els.batchAddBtn.addEventListener('click', () => openSheet('batchCards'));
     els.addCardSubmit.addEventListener('click', addCardFromForm);
     els.cardInput.addEventListener('input', updateAddCardState);
     els.cardInput.addEventListener('keydown', event => {
@@ -7748,6 +10331,15 @@ img{display:block;max-width:100%}
     });
 
     els.cardLibrary.addEventListener('click', event => {
+      if (event.target.closest('[data-card-group-toggle-all]')) {
+        toggleAllCardGroups();
+        return;
+      }
+      const groupToggle = event.target.closest('[data-card-group-toggle]');
+      if (groupToggle) {
+        toggleCardGroup(groupToggle.dataset.cardGroupToggle);
+        return;
+      }
       const remove = event.target.closest('[data-delete-card]');
       if (remove) {
         deleteCard(remove.dataset.deleteCard);
@@ -7848,6 +10440,7 @@ img{display:block;max-width:100%}
       if (value === 'close') closeSheet();
       else if (value === 'reset') resetConversation();
       else if (value === 'save-contact') saveContactFromSheet();
+      else if (value === 'save-answer') saveQuestionAnswer();
       else if (value === 'publish-moment') publishMomentFromSheet();
       else if (value === 'send-letter') sendLetterFromSheet();
     });
@@ -7864,6 +10457,11 @@ img{display:block;max-width:100%}
     });
 
     document.addEventListener('keydown', event => {
+      if (!els.imageViewer.hidden && event.key === 'Escape') {
+        event.preventDefault();
+        closeImageViewer();
+        return;
+      }
       if (!els.sheetLayer.hidden) {
         if (event.key === 'Escape') {
           event.preventDefault();
@@ -7892,12 +10490,20 @@ img{display:block;max-width:100%}
       if (!document.hidden) {
         checkMailDelivery();
         checkMusicSchedule(false);
+        checkScheduledRandomEvents();
+        checkProactive();
+        checkGiftSchedule();
+        checkQuestionSchedule();
       }
     });
 
     window.addEventListener('focus', () => {
       checkMailDelivery();
       checkMusicSchedule(false);
+      checkScheduledRandomEvents();
+      checkProactive();
+      checkGiftSchedule();
+      checkQuestionSchedule();
     });
 
     window.addEventListener('resize', () => {
@@ -7916,6 +10522,17 @@ img{display:block;max-width:100%}
       persistMusicFavorites();
       persistMusicRecent();
       persistCallChance();
+      persistMomentsNextAt();
+      persistQuoteNextAt();
+      persistProactiveNextAt();
+      persistQuizBest();
+      persistCollapsedCardGroups();
+      persistChatTheme();
+      persistGifts();
+      persistQuestions();
+      persistCustomQuestions();
+      persistGiftNextAt();
+      persistQuestionNextAt();
       persistMoments();
       persistLetters();
       persistCustomGroups();
@@ -7936,6 +10553,8 @@ img{display:block;max-width:100%}
     loadMusicFavorites();
     loadMusicRecent();
     loadCallChance();
+    loadCollapsedCardGroups();
+    loadChatTheme();
     loadCustomGroups();
     loadCustomEmojis();
     loadReplySettings();
@@ -7947,6 +10566,11 @@ img{display:block;max-width:100%}
       persistMessages();
     }
     loadMoments();
+    loadRandomSchedules();
+    loadGifts();
+    loadQuestions();
+    loadCustomQuestions();
+    loadQuizBest();
     state.momentSignature = safeGet(KEYS.momentSignature) || '';
     if (!state.momentSignature) {
       state.momentSignature = assetSignature();
@@ -7964,10 +10588,20 @@ img{display:block;max-width:100%}
     updateCounts();
     updateSendButton();
     applyContactUI();
+    applyChatTheme();
     bindEvents();
     initMusic();
     initCalls();
+    initRandomEvents();
+    initProactive();
+    initGifts();
+    initQuestions();
     scrollBottom('auto');
+    if (cardsDeduped > 0) {
+      const removed = cardsDeduped;
+      cardsDeduped = 0;
+      setTimeout(() => showToast(`已自动合并 ${removed} 张重复字卡`), 900);
+    }
 
     setInterval(() => {
       if (state.view === 'mail') updateNextMailLabel();
