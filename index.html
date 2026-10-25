@@ -1026,6 +1026,57 @@ img{display:block;max-width:100%}
 .gift-kicker{color:var(--accent-dark);font-size:8px;letter-spacing:.2px}
 .gift-name{color:#514439;font-size:11px;font-weight:600;line-height:1.35}
 .gift-note{margin:0;color:var(--muted);font-size:9px;line-height:1.5}
+.reviews-top-count{margin-left:auto;color:var(--muted);font-size:9px;padding-right:2px}
+.reviews-scroll{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:15px 16px calc(26px + env(safe-area-inset-bottom,0px));
+  background:var(--bg);
+  scrollbar-width:none;
+}
+.reviews-scroll::-webkit-scrollbar{display:none}
+.review-tabs{display:flex;gap:3px;padding:3px;border-radius:9px;background:var(--surface-alt);margin:0 0 12px}
+.review-tab{flex:1;height:30px;border-radius:7px;color:#8A7C6F;font-size:10px}
+.review-tab.active{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 4px rgba(76,58,40,.07)}
+.reviews-panel[hidden]{display:none}
+.review-library-add{display:flex;align-items:center;gap:6px;margin:0 0 8px}
+.review-library-input{flex:1;min-width:0;height:36px;padding:0 10px;border:1px solid var(--line);border-radius:8px;outline:none;background:#FFFEFA;color:var(--ink);font-size:10.5px}
+.review-library-input:focus{border-color:#D7B7A5}
+.review-library-add-btn{flex:none;height:36px;padding:0 12px;border-radius:8px;background:var(--accent);color:#fff;font-size:10px;font-weight:600}
+.review-library-add-btn:hover{background:var(--accent-dark)}
+.review-library-hint{margin:0 0 12px;color:var(--faint);font-size:8.5px;line-height:1.55}
+.reviews-list{display:flex;flex-direction:column;gap:9px}
+.review-card-item{padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.review-card-text{margin:0 0 8px;color:#55483C;font-size:10.5px;line-height:1.55;overflow-wrap:anywhere}
+.review-card-actions{display:flex;align-items:center;gap:7px}
+.review-ask-btn{height:26px;padding:0 9px;border-radius:6px;background:var(--accent-soft);color:var(--accent-dark);font-size:8.5px;font-weight:600}
+.review-ask-btn:hover{background:#F5DCD1}
+.review-del-btn{margin-left:auto;height:24px;padding:0 7px;border-radius:5px;color:#AC9E90;font-size:8.5px}
+.review-del-btn:hover{background:var(--surface-alt);color:#7E6F61}
+.review-library-empty{padding:24px 14px;border:1px dashed var(--line);border-radius:11px;background:var(--surface);text-align:center;color:var(--muted);font-size:9.5px;line-height:1.6}
+.review-record{padding:12px 13px;border:1px solid var(--line);border-radius:11px;background:var(--surface)}
+.review-record-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:6px}
+.review-record-date{color:var(--faint);font-size:8.5px;line-height:1.4}
+.review-record-rating{flex:none;text-align:right;line-height:1}
+.review-record-rating strong{color:var(--accent-dark);font-size:18px;font-weight:700;font-variant-numeric:tabular-nums}
+.review-record-rating span{color:var(--faint);font-size:8px}
+.review-record-item{margin:0;color:#4F4237;font-size:11px;line-height:1.55;font-weight:600;overflow-wrap:anywhere}
+.review-record-comment{margin:7px 0 0;padding:7px 9px;border-radius:7px;background:var(--surface-alt);color:#77685B;font-size:9.5px;line-height:1.6;overflow-wrap:anywhere}
+.review-bubble{
+  max-width:100%;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:4px 14px 14px 14px;
+  background:var(--surface);
+}
+.chat-view .review-bubble{background:var(--chat-partner,var(--surface))}
+.review-kicker{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px;color:var(--accent-dark);font-size:8px;letter-spacing:.2px}
+.review-kicker .review-score{font-size:15px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.review-kicker .review-score span{color:var(--faint);font-size:7.5px;font-weight:400}
+.review-item{margin:0;color:#514439;font-size:10.5px;line-height:1.55;font-weight:600;overflow-wrap:anywhere}
+.review-comment{margin:6px 0 0;color:var(--muted);font-size:9.5px;line-height:1.55}
 .questions-scroll{
   flex:1;
   min-height:0;
@@ -1860,6 +1911,49 @@ button.card-group-heading:hover{background:#FBF7F0}
 }
 .setting-switch.on{background:var(--accent)}
 .setting-switch.on span{transform:translateX(17px)}
+.identity-current{display:flex;align-items:center;gap:10px;padding:10px 11px;border:1px solid var(--line);border-radius:11px;background:linear-gradient(135deg,#FFF9F1,#F7EEE5)}
+.identity-current-avatar{width:48px;height:48px;flex:none;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 1px 4px rgba(80,60,42,.14)}
+.identity-current-copy{min-width:0;flex:1;display:flex;flex-direction:column;gap:1px}
+.identity-current-copy span{color:var(--faint);font-size:8px}
+.identity-current-copy strong{color:#4F4136;font-size:14px;font-weight:650;line-height:1.3}
+.identity-current-copy p{margin:1px 0 0;color:var(--muted);font-size:8.5px;line-height:1.4}
+.identity-shuffle{
+  flex:none;
+  height:29px;
+  padding:0 10px;
+  border-radius:7px;
+  background:var(--accent-soft);
+  color:var(--accent-dark);
+  font-size:9px;
+  font-weight:600;
+}
+.identity-shuffle:hover{background:#F5DCD1}
+.identity-toggle-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 2px;border-bottom:1px solid var(--line)}
+.identity-toggle-row > div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.identity-toggle-row strong{color:#51453A;font-size:10.5px;font-weight:600}
+.identity-toggle-row span{color:var(--muted);font-size:8.5px;line-height:1.45}
+.identity-hint{margin:10px 0 9px;color:var(--faint);font-size:8.5px;line-height:1.55}
+.identity-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.identity-card{
+  min-height:77px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  padding:7px 3px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--surface);
+  color:#6C5F52;
+  font-size:9px;
+}
+.identity-card img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid #EDE3D8;background:#F4EDE3}
+.identity-card span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:550}
+.identity-card small{color:var(--faint);font-size:7px;line-height:1.2}
+.identity-card:hover{border-color:#D8C2B1;background:#FFFCF7}
+.identity-card.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;background:#FFF9F4}
+.identity-card.active small{color:var(--accent-dark)}
 .batch-textarea{
   width:100%;
   min-height:150px;
@@ -2168,12 +2262,75 @@ button.card-group-heading:hover{background:#FBF7F0}
 .call-topline{
   position:absolute;
   top:calc(24px + env(safe-area-inset-top,0px));
-  left:24px;
-  right:24px;
+  left:20px;
+  right:20px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  gap:8px;
 }
+.call-minimize{
+  width:32px;
+  height:32px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  color:rgba(255,255,255,.8);
+  backdrop-filter:blur(8px);
+}
+.call-minimize:hover{background:rgba(255,255,255,.15)}
+.call-minimize svg{width:17px;height:17px}
+.call-topline .call-kind{margin-right:auto}
+.call-float{
+  position:absolute;
+  z-index:140;
+  left:50%;
+  bottom:calc(104px + env(safe-area-inset-bottom,0px));
+  transform:translateX(-50%);
+  width:calc(100% - 24px);
+  max-width:406px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:16px;
+  background:linear-gradient(135deg,#262B34,#161A21);
+  color:#fff;
+  box-shadow:0 12px 30px rgba(26,20,14,.28);
+  animation:callFloatIn .22s cubic-bezier(.2,.8,.3,1);
+}
+.call-float[hidden]{display:none}
+@keyframes callFloatIn{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+.call-float-main{
+  flex:1;
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:0;
+  color:inherit;
+  text-align:left;
+}
+.call-float-avatar{width:36px;height:36px;flex:none;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,255,255,.45);background:#3B414B}
+.call-float-copy{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}
+.call-float-copy strong{font-size:11.5px;font-weight:600;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.call-float-copy span{color:rgba(255,255,255,.62);font-size:8.5px;line-height:1.35;font-variant-numeric:tabular-nums;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.call-float-back{flex:none;color:rgba(255,255,255,.55);font-size:8.5px}
+.call-float-end{
+  width:34px;
+  height:34px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#C85F5B;
+  color:#fff;
+}
+.call-float-end:hover{background:#D76B66}
+.call-float-end svg{width:19px;height:19px}
 .call-kind{
   padding:5px 10px;
   border:1px solid rgba(255,255,255,.14);
@@ -2531,10 +2688,12 @@ button.card-group-heading:hover{background:#FBF7F0}
       </div>
       <div class="menu" id="menu" hidden>
         <button type="button" data-menu="contact">编辑联系人</button>
+        <button type="button" data-menu="identity">随机身份</button>
         <button type="button" data-menu="anniversary">我们的日子</button>
         <button type="button" data-menu="promises">小约定</button>
         <button type="button" data-menu="gifts">礼物</button>
         <button type="button" data-menu="questions">问答</button>
+        <button type="button" data-menu="reviews">评价</button>
         <button type="button" data-menu="dailyLove">今日情话</button>
         <button type="button" data-menu="quiz">心动问答</button>
         <button type="button" data-menu="music">音乐分享</button>
@@ -2720,6 +2879,33 @@ button.card-group-heading:hover{background:#FBF7F0}
     </div>
   </section>
 
+  <section class="view reviews-view" id="reviewsView" hidden>
+    <header class="moments-topbar">
+      <button class="back-btn" id="reviewsBack" type="button" aria-label="返回聊天">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <h1 class="moments-title">评价</h1>
+      <span class="reviews-top-count" id="reviewsCount">0 个</span>
+    </header>
+    <div class="reviews-scroll" id="reviewsScroll">
+      <div class="review-tabs" role="tablist" aria-label="评价">
+        <button class="review-tab active" id="reviewRecordsTab" type="button" role="tab" aria-selected="true">评价记录</button>
+        <button class="review-tab" id="reviewLibraryTab" type="button" role="tab" aria-selected="false">评价库</button>
+      </div>
+      <div class="reviews-panel" id="reviewsRecordsPanel">
+        <div class="reviews-list" id="reviewsList"></div>
+      </div>
+      <div class="reviews-panel" id="reviewsLibraryPanel" hidden>
+        <div class="review-library-add">
+          <input class="review-library-input" id="reviewCardInput" type="text" maxlength="60" placeholder="写下想让TA评价的字卡…" autocomplete="off" aria-label="评价字卡">
+          <button class="review-library-add-btn" id="addReviewCardBtn" type="button">加入</button>
+        </div>
+        <p class="review-library-hint">例如「今天的穿搭」「我的厨艺」。加入后，对方会随机挑一张评价，也可以点「让TA评价」。</p>
+        <div class="reviews-list" id="reviewCardsList"></div>
+      </div>
+    </div>
+  </section>
+
   <section class="view music-view" id="musicView" hidden>
     <header class="moments-topbar">
       <button class="back-btn" id="musicBack" type="button" aria-label="返回聊天">
@@ -2850,6 +3036,9 @@ button.card-group-heading:hover{background:#FBF7F0}
     <div class="call-scrim" aria-hidden="true"></div>
     <div class="call-stage">
       <div class="call-topline">
+        <button class="call-minimize" id="callMinimizeBtn" type="button" aria-label="缩小通话">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
         <span class="call-kind" id="callKind">语音通话</span>
         <span class="call-timer" id="callTimer" hidden>00:00</span>
       </div>
@@ -2905,6 +3094,20 @@ button.card-group-heading:hover{background:#FBF7F0}
     </div>
   </div>
 
+  <div class="call-float" id="callFloat" hidden>
+    <button class="call-float-main" id="callFloatRestore" type="button" aria-label="回到通话">
+      <img class="call-float-avatar" id="callFloatAvatar" alt="">
+      <span class="call-float-copy">
+        <strong id="callFloatName">小满</strong>
+        <span id="callFloatStatus">语音通话中 · 00:00</span>
+      </span>
+      <span class="call-float-back">回到通话</span>
+    </button>
+    <button class="call-float-end" id="callFloatEnd" type="button" aria-label="挂断通话">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14.5c4-4.5 12-4.5 16 0l-1.8 2.4a2 2 0 0 1-2.3.6l-1.7-.8a2 2 0 0 1-1.1-1.9v-1a12.7 12.7 0 0 0-4.2 0v1a2 2 0 0 1-1.1 1.9l-1.7.8a2 2 0 0 1-2.3-.6Z"/></svg>
+    </button>
+  </div>
+
   <div class="msg-menu" id="msgMenu" hidden role="menu">
     <button type="button" id="quoteMessageBtn" role="menuitem">引用回复</button>
   </div>
@@ -2933,6 +3136,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     replySettings: 'zika.v3.replySettings',
     stickers: 'zika.v3.stickers',
     contact: 'zika.v3.contact',
+    identity: 'zika.v3.identity',
     anniversary: 'zika.v3.anniversary',
     promises: 'zika.v3.promises',
     dailyLove: 'zika.v3.dailyLove',
@@ -2952,6 +3156,9 @@ button.card-group-heading:hover{background:#FBF7F0}
     questions: 'zika.v3.questions',
     questionNextAt: 'zika.v3.question.nextAt',
     customQuestions: 'zika.v3.customQuestions',
+    reviewCards: 'zika.v3.reviewCards',
+    reviews: 'zika.v3.reviews',
+    reviewNextAt: 'zika.v3.review.nextAt',
     quizBest: 'zika.v3.quiz.best',
     momentSignature: 'zika.v4.moments.signature',
     letters: 'zika.v5.mail.letters',
@@ -3006,6 +3213,16 @@ button.card-group-heading:hover{background:#FBF7F0}
     '如果给现在的我们写一句备注，你会写什么？',
     '你希望我在你难过的时候，多做哪一件事？',
     '有没有什么话，你一直想听我说？'
+  ];
+  const REVIEW_LINES = [
+    '这个评价我藏不住偏爱，直接给高分。',
+    '细节很加分，能看出你放进去的心思。',
+    '不是完美，但很像你，所以分数偏高。',
+    '我会记住这个，分数只是顺便。',
+    '认真看过了，比我想象中更戳我。',
+    '如果满分是 10 分，我留 1 分给下一次。',
+    '这条我打得很偏心，但我不打算改。',
+    '完成度很高，值得被好好看见。'
   ];
   const CHAT_THEME_PRESETS = [
     { name: '暖橘', accent: '#C56B4A', background: '#F7F1E8', partner: '#FFFDF8' },
@@ -3245,6 +3462,41 @@ button.card-group-heading:hover{background:#FBF7F0}
   }
 
   const DEFAULT_AVATAR = svgToDataUri(AVATAR_SVG);
+
+  function makeIdentityAvatar(bg, skin, hair, accent, motif) {
+    const motifs = {
+      leaf: `<path d="M35 9c4-2 7 0 7 4-4 2-7 0-7-4Z" fill="${accent}" stroke="${INK}" stroke-width="1.1" stroke-linejoin="round"/><path d="M35 16c1-3 2-4 4-6" fill="none" stroke="${INK}" stroke-width="1.2" stroke-linecap="round"/>`,
+      drop: `<path d="M39 7c3 4 4 6 4 8.5a4.5 4.5 0 0 1-9 0C34 13 36 11 39 7Z" fill="${accent}" stroke="${INK}" stroke-width="1.1" stroke-linejoin="round"/>`,
+      flower: `<g fill="${accent}" stroke="${INK}" stroke-width=".9"><circle cx="39" cy="8" r="2.6"/><circle cx="34" cy="11" r="2.6"/><circle cx="44" cy="11" r="2.6"/><circle cx="36" cy="16" r="2.6"/><circle cx="42" cy="16" r="2.6"/></g><circle cx="39" cy="12" r="2" fill="#FFF7E8" stroke="${INK}" stroke-width=".9"/>`,
+      star: `<path d="M39 6l1.8 4.8L46 12l-5.2 1.2L39 18l-1.8-4.8L32 12l5.2-1.2Z" fill="${accent}" stroke="${INK}" stroke-width="1" stroke-linejoin="round"/>`,
+      moon: `<path d="M42 7a7 7 0 1 0 4 11 6 6 0 0 1-4-11Z" fill="${accent}" stroke="${INK}" stroke-width="1.1" stroke-linejoin="round"/>`,
+      sprout: `<path d="M39 18V9" stroke="${INK}" stroke-width="1.4" stroke-linecap="round"/><path d="M39 12c-4 0-6-2-6-5 4-1 6 1 6 5Z" fill="${accent}" stroke="${INK}" stroke-width="1" stroke-linejoin="round"/><path d="M39 15c4 0 6-2 6-5-4-1-6 1-6 5Z" fill="${accent}" stroke="${INK}" stroke-width="1" stroke-linejoin="round"/>`,
+      peach: `<circle cx="39" cy="13" r="6" fill="${accent}" stroke="${INK}" stroke-width="1.1"/><path d="M39 7c1-3 3-4 5-4 0 3-2 4-5 4Z" fill="#7FA487" stroke="${INK}" stroke-width="1" stroke-linejoin="round"/><path d="M36 11c1 1 2 1 3 0" fill="none" stroke="${INK}" stroke-width=".9" stroke-linecap="round"/>`
+    };
+    return svgToDataUri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+      <rect width="48" height="48" rx="12" fill="${bg}"/>
+      <circle cx="7" cy="7" r="12" fill="#FFFFFF" opacity=".18"/>
+      <path d="M10.5 30c0-9.4 5.8-16.2 13.5-16.2S38 20.6 38 30c0 8-5.7 13-13.7 13S10.5 38 10.5 30Z" fill="${skin}" stroke="${INK}" stroke-width="2.1" stroke-linejoin="round"/>
+      <path d="M10.8 27c1-8.2 6.2-14 13.2-14 7.2 0 12.3 5.3 13.2 13.2-2.2-4.2-6.3-7-11.6-7-5.6 0-10 3-12 8.6-.7 1.2-1.7 1.4-2.8.2Z" fill="${hair}"/>
+      <path d="M18.8 28.5c1.2-1.7 3.4-1.7 4.6 0" fill="none" stroke="${INK}" stroke-width="1.7" stroke-linecap="round"/>
+      <path d="M26.6 28.5c1.2-1.7 3.4-1.7 4.6 0" fill="none" stroke="${INK}" stroke-width="1.7" stroke-linecap="round"/>
+      <path d="M22 34c1.6 1.7 4.1 1.7 5.7 0" fill="none" stroke="${INK}" stroke-width="1.5" stroke-linecap="round"/>
+      <ellipse cx="15.2" cy="32.4" rx="2.7" ry="1.6" fill="#E89587" opacity=".55"/>
+      <ellipse cx="34.7" cy="32.4" rx="2.4" ry="1.5" fill="#E89587" opacity=".45"/>
+      ${motifs[motif] || ''}
+    </svg>`);
+  }
+
+  const IDENTITY_PRESETS = [
+    { id: 'xiaoman', name: '小满', avatar: DEFAULT_AVATAR },
+    { id: 'ache', name: '阿澈', avatar: makeIdentityAvatar('#DCEBEF', '#F0CDB0', '#3F4D57', '#6F9FB5', 'drop') },
+    { id: 'nanzhi', name: '南栀', avatar: makeIdentityAvatar('#E5EFE2', '#F2D2B6', '#5C4636', '#7FA487', 'flower') },
+    { id: 'xiaoyu', name: '小屿', avatar: makeIdentityAvatar('#F0E7D8', '#EBC7A7', '#4A392C', '#C99A63', 'star') },
+    { id: 'wanwan', name: '晚晚', avatar: makeIdentityAvatar('#EAE2F1', '#F1D0BA', '#4A3D58', '#8C7AA8', 'moon') },
+    { id: 'mumu', name: '木木', avatar: makeIdentityAvatar('#E7EDDE', '#E9C5A2', '#3E4936', '#7A9A68', 'sprout') },
+    { id: 'xingye', name: '星野', avatar: makeIdentityAvatar('#DFE3F2', '#EFCEB5', '#343B54', '#7D89C2', 'star') },
+    { id: 'taotao', name: '桃桃', avatar: makeIdentityAvatar('#F6E3E4', '#F3CCB3', '#5C423C', '#D98E95', 'peach') }
+  ];
   const ICON = {
     close: '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg>',
     heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 5.6a5 5 0 0 0-7.1 0L12 6.9l-1.3-1.3a5 5 0 0 0-7.1 7.1L12 21l8.4-8.3a5 5 0 0 0 0-7.1Z"/></svg>',
@@ -3277,6 +3529,12 @@ button.card-group-heading:hover{background:#FBF7F0}
     replySettings: defaultReplySettings(),
     stickers: [],
     contact: { name: '小满', avatar: DEFAULT_AVATAR },
+    identity: {
+      enabled: true,
+      currentId: 'xiaoman',
+      nextAt: 0,
+      custom: { name: '小满', avatar: DEFAULT_AVATAR }
+    },
     anniversary: '',
     promises: [],
     dailyLove: { date: '', index: 0 },
@@ -3299,6 +3557,11 @@ button.card-group-heading:hover{background:#FBF7F0}
     questionNextAt: 0,
     answeringQuestionId: null,
     questionsTab: 'records',
+    reviewCards: [],
+    reviews: [],
+    reviewNextAt: 0,
+    reviewsTab: 'records',
+    callMinimized: false,
     quizBest: 0,
     quiz: null,
     moments: [],
@@ -3367,6 +3630,13 @@ button.card-group-heading:hover{background:#FBF7F0}
     callTimer: $('#callTimer'),
     callAvatar: $('#callAvatar'),
     callName: $('#callName'),
+    callMinimizeBtn: $('#callMinimizeBtn'),
+    callFloat: $('#callFloat'),
+    callFloatRestore: $('#callFloatRestore'),
+    callFloatAvatar: $('#callFloatAvatar'),
+    callFloatName: $('#callFloatName'),
+    callFloatStatus: $('#callFloatStatus'),
+    callFloatEnd: $('#callFloatEnd'),
     callStatus: $('#callStatus'),
     callWave: $('#callWave'),
     callLocal: $('#callLocal'),
@@ -3397,6 +3667,18 @@ button.card-group-heading:hover{background:#FBF7F0}
     questionsCount: $('#questionsCount'),
     questionsScroll: $('#questionsScroll'),
     questionsList: $('#questionsList'),
+    reviewsView: $('#reviewsView'),
+    reviewsBack: $('#reviewsBack'),
+    reviewsCount: $('#reviewsCount'),
+    reviewsScroll: $('#reviewsScroll'),
+    reviewRecordsTab: $('#reviewRecordsTab'),
+    reviewLibraryTab: $('#reviewLibraryTab'),
+    reviewsRecordsPanel: $('#reviewsRecordsPanel'),
+    reviewsLibraryPanel: $('#reviewsLibraryPanel'),
+    reviewCardInput: $('#reviewCardInput'),
+    addReviewCardBtn: $('#addReviewCardBtn'),
+    reviewCardsList: $('#reviewCardsList'),
+    reviewsList: $('#reviewsList'),
     questionRecordsTab: $('#questionRecordsTab'),
     questionLibraryTab: $('#questionLibraryTab'),
     questionsRecordsPanel: $('#questionsRecordsPanel'),
@@ -3730,6 +4012,63 @@ button.card-group-heading:hover{background:#FBF7F0}
 
   function persistContact() {
     return safeSet(KEYS.contact, JSON.stringify(state.contact));
+  }
+
+  function normalizeIdentityPair(value, fallbackName = '小满', fallbackAvatar = DEFAULT_AVATAR) {
+    const name = value && typeof value.name === 'string' ? value.name.trim().slice(0, 12) : '';
+    const avatar = value && typeof value.avatar === 'string' && value.avatar.startsWith('data:image/')
+      ? value.avatar
+      : fallbackAvatar;
+    return { name: name || fallbackName, avatar };
+  }
+
+  function loadIdentity() {
+    const raw = safeGet(KEYS.identity);
+    if (raw !== null) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === 'object') {
+          if (typeof parsed.enabled === 'boolean') state.identity.enabled = parsed.enabled;
+          if (typeof parsed.currentId === 'string') state.identity.currentId = parsed.currentId;
+          if (Number.isFinite(parsed.nextAt) && parsed.nextAt > 0) state.identity.nextAt = parsed.nextAt;
+          if (parsed.custom) state.identity.custom = normalizeIdentityPair(parsed.custom, state.contact.name, state.contact.avatar);
+        }
+      } catch (_) {}
+    }
+    if (!state.identity.custom || !state.identity.custom.name) {
+      state.identity.custom = { name: state.contact.name, avatar: state.contact.avatar };
+    }
+    syncIdentityWithContact();
+  }
+
+  function persistIdentity() {
+    return safeSet(KEYS.identity, JSON.stringify(state.identity));
+  }
+
+  function syncIdentityWithContact() {
+    const contact = state.contact;
+    const preset = IDENTITY_PRESETS.find(pair => pair.name === contact.name && pair.avatar === contact.avatar);
+    if (preset) {
+      state.identity.currentId = preset.id;
+      return;
+    }
+    state.identity.custom = { name: contact.name, avatar: contact.avatar };
+    state.identity.currentId = 'custom';
+  }
+
+  function identityPool() {
+    const pool = [
+      { id: 'custom', name: state.identity.custom.name, avatar: state.identity.custom.avatar, isCustom: true },
+      ...IDENTITY_PRESETS
+    ];
+    const seen = new Set();
+    return pool.filter(pair => {
+      if (!pair.name || !pair.avatar) return false;
+      const key = pair.name + '\u0000' + pair.avatar;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
   }
 
   function parseDateOnly(value) {
@@ -4192,6 +4531,9 @@ button.card-group-heading:hover{background:#FBF7F0}
       case 'question':
         excerpt = `问题：${message.question || ''}`;
         break;
+      case 'review':
+        excerpt = `评价了：${message.item || ''}`;
+        break;
       case 'music':
         excerpt = message.music ? `🎵 ${message.music.name}` : '分享了一首歌';
         break;
@@ -4327,6 +4669,21 @@ button.card-group-heading:hover{background:#FBF7F0}
         at: message.at
       };
     }
+    if (message.type === 'review') {
+      const item = typeof message.item === 'string' ? message.item.trim().slice(0, 60) : '';
+      const rating = Number(message.rating);
+      if (!item || !Number.isFinite(rating)) return null;
+      return {
+        id: typeof message.id === 'string' ? message.id : uid(),
+        from: 'them',
+        type: 'review',
+        reviewId: typeof message.reviewId === 'string' ? message.reviewId : '',
+        item,
+        rating: Math.min(10, Math.max(0, rating)),
+        comment: typeof message.comment === 'string' ? message.comment.trim().slice(0, 160) : '',
+        at: message.at
+      };
+    }
     if (message.type === 'call') {
       const direction = message.direction === 'outgoing' ? 'outgoing' : 'incoming';
       const media = message.media === 'video' ? 'video' : 'voice';
@@ -4453,6 +4810,8 @@ button.card-group-heading:hover{background:#FBF7F0}
     if (Number.isFinite(giftNext) && giftNext > 0) state.giftNextAt = giftNext;
     const questionNext = Number(safeGet(KEYS.questionNextAt));
     if (Number.isFinite(questionNext) && questionNext > 0) state.questionNextAt = questionNext;
+    const reviewNext = Number(safeGet(KEYS.reviewNextAt));
+    if (Number.isFinite(reviewNext) && reviewNext > 0) state.reviewNextAt = reviewNext;
   }
 
   function loadGifts() {
@@ -4528,6 +4887,58 @@ button.card-group-heading:hover{background:#FBF7F0}
 
   function persistCustomQuestions() {
     return safeSet(KEYS.customQuestions, JSON.stringify(state.customQuestions.slice(0, 100)));
+  }
+
+  function loadReviewCards() {
+    const raw = safeGet(KEYS.reviewCards);
+    if (raw === null) return;
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) throw new Error('bad review cards');
+      state.reviewCards = parsed
+        .filter(item => item && typeof item.text === 'string' && item.text.trim())
+        .slice(0, 100)
+        .map(item => ({
+          id: typeof item.id === 'string' ? item.id : 'review-card-' + uid(),
+          text: item.text.trim().slice(0, 60),
+          createdAt: Number.isFinite(item.createdAt) ? item.createdAt : Date.now()
+        }));
+    } catch (_) {
+      state.reviewCards = [];
+    }
+  }
+
+  function persistReviewCards() {
+    return safeSet(KEYS.reviewCards, JSON.stringify(state.reviewCards.slice(0, 100)));
+  }
+
+  function loadReviews() {
+    const raw = safeGet(KEYS.reviews);
+    if (raw === null) return;
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) throw new Error('bad reviews');
+      state.reviews = parsed
+        .filter(item => item && typeof item.item === 'string' && Number.isFinite(item.at))
+        .slice(0, 100)
+        .map(item => ({
+          id: typeof item.id === 'string' ? item.id : 'review-' + uid(),
+          item: item.item.trim().slice(0, 60),
+          rating: Number.isFinite(item.rating) ? Math.min(10, Math.max(0, item.rating)) : 8,
+          comment: typeof item.comment === 'string' ? item.comment.trim().slice(0, 160) : '',
+          at: item.at
+        }));
+    } catch (_) {
+      state.reviews = [];
+    }
+  }
+
+  function persistReviews() {
+    return safeSet(KEYS.reviews, JSON.stringify(state.reviews.slice(0, 100)));
+  }
+
+  function persistReviewNextAt() {
+    return safeSet(KEYS.reviewNextAt, String(state.reviewNextAt || 0));
   }
 
   function persistGiftNextAt() {
@@ -5242,6 +5653,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     els.quizView.hidden = true;
     els.giftView.hidden = true;
     els.questionsView.hidden = true;
+    els.reviewsView.hidden = true;
     els.mailView.hidden = false;
     checkMailDelivery();
     markMailRead();
@@ -5884,6 +6296,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     els.quizView.hidden = true;
     els.giftView.hidden = true;
     els.questionsView.hidden = true;
+    els.reviewsView.hidden = true;
     els.musicView.hidden = false;
     renderMusicView();
     if (els.musicScroll) els.musicScroll.scrollTop = 0;
@@ -6374,7 +6787,9 @@ button.card-group-heading:hover{background:#FBF7F0}
     els.quizView.hidden = true;
     els.giftView.hidden = true;
     els.questionsView.hidden = true;
+    els.reviewsView.hidden = true;
     els.questionsView.hidden = true;
+    els.reviewsView.hidden = true;
     els.giftView.hidden = false;
     renderGiftView();
     if (els.giftScroll) els.giftScroll.scrollTop = 0;
@@ -6506,6 +6921,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     els.quizView.hidden = true;
     els.giftView.hidden = true;
     els.questionsView.hidden = true;
+    els.reviewsView.hidden = true;
     els.giftView.hidden = true;
     els.questionsView.hidden = false;
     renderQuestionsView();
@@ -6773,6 +7189,228 @@ button.card-group-heading:hover{background:#FBF7F0}
   }
 
   /* ————————————————————————————————
+     Partner reviews
+  ———————————————————————————————— */
+  function openReviewsView() {
+    closeMenu();
+    hideMessageMenu();
+    state.view = 'reviews';
+    els.chatView.hidden = true;
+    els.momentsView.hidden = true;
+    els.mailView.hidden = true;
+    els.musicView.hidden = true;
+    els.quizView.hidden = true;
+    els.giftView.hidden = true;
+    els.questionsView.hidden = true;
+    els.reviewsView.hidden = true;
+    els.reviewsView.hidden = false;
+    renderReviewsView();
+    if (els.reviewsScroll) els.reviewsScroll.scrollTop = 0;
+    updateDocumentTitle();
+  }
+
+  function renderReviewsView() {
+    if (!els.reviewsList) return;
+    const library = state.reviewsTab === 'library';
+    if (els.reviewsCount) els.reviewsCount.textContent = library ? `${state.reviewCards.length} 张` : `${state.reviews.length} 个`;
+    if (els.reviewRecordsTab) {
+      els.reviewRecordsTab.classList.toggle('active', !library);
+      els.reviewRecordsTab.setAttribute('aria-selected', String(!library));
+    }
+    if (els.reviewLibraryTab) {
+      els.reviewLibraryTab.classList.toggle('active', library);
+      els.reviewLibraryTab.setAttribute('aria-selected', String(library));
+    }
+    if (els.reviewsRecordsPanel) els.reviewsRecordsPanel.hidden = library;
+    if (els.reviewsLibraryPanel) els.reviewsLibraryPanel.hidden = !library;
+    if (library) renderReviewLibrary();
+    else renderReviewRecords();
+  }
+
+  function setReviewTab(tab) {
+    state.reviewsTab = tab === 'library' ? 'library' : 'records';
+    renderReviewsView();
+    if (els.reviewsScroll) els.reviewsScroll.scrollTop = 0;
+  }
+
+  function renderReviewRecords() {
+    els.reviewsList.innerHTML = '';
+    if (!state.reviews.length) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-state';
+      const strong = document.createElement('strong');
+      strong.textContent = '还没有评价';
+      const copy = document.createElement('span');
+      copy.textContent = `${contactName()}会从你的评价库里挑字卡评价。`;
+      empty.append(strong, copy);
+      els.reviewsList.appendChild(empty);
+      return;
+    }
+    state.reviews.forEach(record => {
+      const item = document.createElement('article');
+      item.className = 'review-record';
+      const head = document.createElement('div');
+      head.className = 'review-record-head';
+      const date = document.createElement('span');
+      date.className = 'review-record-date';
+      date.textContent = dayLabel(record.at);
+      const score = document.createElement('div');
+      score.className = 'review-record-rating';
+      const strong = document.createElement('strong');
+      strong.textContent = Number(record.rating).toFixed(1);
+      const suffix = document.createElement('span');
+      suffix.textContent = ' / 10';
+      score.append(strong, suffix);
+      head.append(date, score);
+      const text = document.createElement('p');
+      text.className = 'review-record-item';
+      text.textContent = record.item;
+      const comment = document.createElement('p');
+      comment.className = 'review-record-comment';
+      comment.textContent = record.comment || '这次先不写理由，分数已经说明了一切。';
+      item.append(head, text, comment);
+      els.reviewsList.appendChild(item);
+    });
+  }
+
+  function renderReviewLibrary() {
+    if (!els.reviewCardsList) return;
+    if (els.reviewsCount) els.reviewsCount.textContent = `${state.reviewCards.length} 张`;
+    els.reviewCardsList.innerHTML = '';
+    if (!state.reviewCards.length) {
+      const empty = document.createElement('div');
+      empty.className = 'review-library-empty';
+      empty.textContent = '评价库还是空的。加几张想让TA评价的字卡，比如「今天的穿搭」。';
+      els.reviewCardsList.appendChild(empty);
+      return;
+    }
+    state.reviewCards.forEach(card => {
+      const row = document.createElement('article');
+      row.className = 'review-card-item';
+      const text = document.createElement('p');
+      text.className = 'review-card-text';
+      text.textContent = card.text;
+      const actions = document.createElement('div');
+      actions.className = 'review-card-actions';
+      const ask = document.createElement('button');
+      ask.type = 'button';
+      ask.className = 'review-ask-btn';
+      ask.dataset.reviewCardId = card.id;
+      ask.textContent = '让TA评价';
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'review-del-btn';
+      remove.dataset.deleteReviewCard = card.id;
+      remove.textContent = '删除';
+      actions.append(ask, remove);
+      row.append(text, actions);
+      els.reviewCardsList.appendChild(row);
+    });
+  }
+
+  function addReviewCard() {
+    if (!els.reviewCardInput) return;
+    const text = els.reviewCardInput.value.trim().replace(/\s+/g, ' ').slice(0, 60);
+    if (!text) return;
+    if (state.reviewCards.some(card => card.text === text)) {
+      showToast('评价库里已经有这张字卡了');
+      return;
+    }
+    state.reviewCards.unshift({
+      id: 'review-card-' + uid(),
+      text,
+      createdAt: Date.now()
+    });
+    state.reviewCards = state.reviewCards.slice(0, 100);
+    persistReviewCards();
+    els.reviewCardInput.value = '';
+    if (state.reviewsTab === 'library') renderReviewLibrary();
+    else renderReviewsView();
+    showToast('已加入评价库');
+    haptic();
+    els.reviewCardInput.focus({ preventScroll: true });
+  }
+
+  function deleteReviewCard(id) {
+    const index = state.reviewCards.findIndex(card => card.id === id);
+    if (index < 0) return;
+    state.reviewCards.splice(index, 1);
+    persistReviewCards();
+    renderReviewLibrary();
+    showToast('已从评价库删除');
+  }
+
+  function generateReview() {
+    const rating = Math.round((7.2 + Math.random() * 2.7) * 10) / 10;
+    return { rating, comment: randomOf(REVIEW_LINES) };
+  }
+
+  function evaluateReviewCard(cardId, manual = true) {
+    const card = state.reviewCards.find(item => item.id === cardId);
+    if (!card) return;
+    const at = Date.now();
+    const generated = generateReview();
+    const record = {
+      id: 'review-' + uid(),
+      item: card.text,
+      rating: generated.rating,
+      comment: generated.comment,
+      at
+    };
+    state.reviews.unshift(record);
+    state.reviews = state.reviews.slice(0, 100);
+    persistReviews();
+    addMessage({
+      id: uid(),
+      from: 'them',
+      type: 'review',
+      reviewId: record.id,
+      item: record.item,
+      rating: record.rating,
+      comment: record.comment,
+      at
+    });
+    scheduleNextReview(at);
+    if (manual) {
+      state.reviewsTab = 'records';
+      if (state.view === 'reviews') renderReviewsView();
+      showToast(`TA评价了「${record.item}」`);
+    } else if (state.view === 'reviews') {
+      renderReviewsView();
+    } else {
+      showToast(`${contactName()}评价了「${record.item}」`, '查看', openReviewsView);
+    }
+    haptic();
+  }
+
+  function scheduleNextReview(from = Date.now()) {
+    state.reviewNextAt = from + 60 * 60 * 1000 + Math.random() * 23 * 60 * 60 * 1000;
+    persistReviewNextAt();
+  }
+
+  function checkReviewSchedule() {
+    if (!state.reviewNextAt) {
+      scheduleNextReview();
+      return;
+    }
+    if (Date.now() < state.reviewNextAt) return;
+    if (!state.reviewCards.length) {
+      scheduleNextReview(Date.now());
+      return;
+    }
+    const recent = new Set(state.reviews.slice(0, 5).map(item => item.item));
+    const fresh = state.reviewCards.filter(card => !recent.has(card.text));
+    const card = randomOf(fresh.length ? fresh : state.reviewCards);
+    evaluateReviewCard(card.id, false);
+  }
+
+  function initReviews() {
+    if (!state.reviewNextAt) scheduleNextReview();
+    setTimeout(checkReviewSchedule, 2900);
+    setInterval(checkReviewSchedule, 60000);
+  }
+
+  /* ————————————————————————————————
      Chat theme
   ———————————————————————————————— */
   function hexToRgb(hex) {
@@ -7009,6 +7647,8 @@ button.card-group-heading:hover{background:#FBF7F0}
       logged: false
     };
     activeCall = call;
+    state.callMinimized = false;
+    if (els.callFloat) els.callFloat.hidden = true;
     els.callLayer.hidden = false;
     renderCallUI();
     requestAnimationFrame(() => els.callLayer.classList.add('show'));
@@ -7054,7 +7694,11 @@ button.card-group-heading:hover{background:#FBF7F0}
   function updateCallTimer() {
     if (!activeCall || !activeCall.connectedAt) return;
     const seconds = Math.max(0, Math.floor((Date.now() - activeCall.connectedAt) / 1000));
-    if (els.callTimer) els.callTimer.textContent = formatCallDuration(seconds);
+    const duration = formatCallDuration(seconds);
+    if (els.callTimer) els.callTimer.textContent = duration;
+    if (state.callMinimized && els.callFloatStatus && activeCall.phase === 'connected') {
+      els.callFloatStatus.textContent = `${activeCall.media === 'video' ? '视频' : '语音'}通话中 · ${duration}`;
+    }
   }
 
   function endCall(status, label) {
@@ -7076,7 +7720,9 @@ button.card-group-heading:hover{background:#FBF7F0}
     setTimeout(() => {
       if (activeCall !== call) return;
       activeCall = null;
+      state.callMinimized = false;
       els.callLayer.hidden = true;
+      if (els.callFloat) els.callFloat.hidden = true;
       els.callLayer.classList.remove('show', 'video', 'connected', 'ending', 'ringing');
       if (state.view === 'chat') scrollBottom('smooth');
     }, 1150);
@@ -7101,6 +7747,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     if (!els.callLayer) return;
     if (!activeCall) {
       els.callLayer.hidden = true;
+      if (els.callFloat) els.callFloat.hidden = true;
       return;
     }
     const call = activeCall;
@@ -7108,7 +7755,6 @@ button.card-group-heading:hover{background:#FBF7F0}
     const ending = call.phase === 'ending';
     const incomingRinging = call.direction === 'incoming' && call.phase === 'ringing';
     const outgoingRinging = call.direction === 'outgoing' && call.phase === 'outgoing';
-    els.callLayer.hidden = false;
     els.callLayer.classList.toggle('video', call.media === 'video');
     els.callLayer.classList.toggle('connected', connected || (ending && Boolean(call.connectedAt)));
     els.callLayer.classList.toggle('ringing', incomingRinging || outgoingRinging);
@@ -7152,6 +7798,57 @@ button.card-group-heading:hover{background:#FBF7F0}
       const localLabel = els.callLocal ? els.callLocal.querySelector('.call-local-label') : null;
       if (localLabel) localLabel.textContent = call.cameraOn ? '我' : '摄像头已关';
     }
+    if (state.callMinimized) {
+      els.callLayer.hidden = true;
+      els.callLayer.classList.remove('show');
+      if (els.callFloat) {
+        els.callFloat.hidden = false;
+        renderCallFloat(call, connected, ending, incomingRinging, outgoingRinging);
+      }
+    } else {
+      els.callLayer.hidden = false;
+      els.callLayer.classList.add('show');
+      if (els.callFloat) els.callFloat.hidden = true;
+    }
+  }
+
+  function renderCallFloat(call, connected, ending, incomingRinging, outgoingRinging) {
+    if (!els.callFloat) return;
+    if (els.callFloatAvatar) els.callFloatAvatar.src = state.contact.avatar || DEFAULT_AVATAR;
+    if (els.callFloatName) els.callFloatName.textContent = contactName();
+    if (els.callFloatStatus) {
+      let status;
+      if (ending) status = call.endedLabel || '通话结束';
+      else if (connected) status = `${call.media === 'video' ? '视频' : '语音'}通话中 · ${formatCallDuration((Date.now() - call.connectedAt) / 1000)}`;
+      else if (incomingRinging) status = `邀请你${call.media === 'video' ? '视频' : '语音'}通话…`;
+      else status = `正在呼叫${contactName()}…`;
+      els.callFloatStatus.textContent = status;
+    }
+    if (els.callFloatEnd) {
+      els.callFloatEnd.setAttribute('aria-label', call.phase === 'connected' ? '挂断通话' : '取消通话');
+    }
+    els.callFloat.classList.toggle('ending', ending);
+  }
+
+  function minimizeCall() {
+    if (!activeCall || activeCall.phase === 'ending') return;
+    state.callMinimized = true;
+    renderCallUI();
+    haptic();
+  }
+
+  function restoreCall() {
+    if (!activeCall) return;
+    state.callMinimized = false;
+    renderCallUI();
+    haptic();
+  }
+
+  function endCallFromFloat() {
+    if (!activeCall || activeCall.phase === 'ending') return;
+    if (activeCall.phase === 'connected') endCall('answered', '通话结束');
+    else if (activeCall.direction === 'incoming') endCall('declined', '已拒绝');
+    else endCall('cancelled', '已取消');
   }
 
   function renderCallSheet() {
@@ -7232,6 +7929,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     else if (state.view === 'quiz') document.title = `心动问答 · ${contactName()}`;
     else if (state.view === 'gift') document.title = `礼物 · ${contactName()}`;
     else if (state.view === 'questions') document.title = `问答 · ${contactName()}`;
+    else if (state.view === 'reviews') document.title = `评价 · ${contactName()}`;
     else document.title = `${contactName()} · 字卡交流`;
   }
 
@@ -7465,6 +8163,28 @@ button.card-group-heading:hover{background:#FBF7F0}
         copy.appendChild(note);
       }
       bubble.append(emoji, copy);
+      body.appendChild(bubble);
+    } else if (message.type === 'review') {
+      const bubble = document.createElement('div');
+      bubble.className = 'review-bubble';
+      const kicker = document.createElement('div');
+      kicker.className = 'review-kicker';
+      const label = document.createElement('span');
+      label.textContent = `${contactName()}的评价`;
+      const score = document.createElement('span');
+      score.className = 'review-score';
+      score.textContent = Number(message.rating).toFixed(1);
+      const suffix = document.createElement('span');
+      suffix.textContent = ' / 10';
+      score.appendChild(suffix);
+      kicker.append(label, score);
+      const item = document.createElement('p');
+      item.className = 'review-item';
+      item.textContent = message.item;
+      const comment = document.createElement('p');
+      comment.className = 'review-comment';
+      comment.textContent = message.comment || '这次先不写理由，分数已经说明了一切。';
+      bubble.append(kicker, item, comment);
       body.appendChild(bubble);
     } else if (message.type === 'question') {
       const bubble = document.createElement('div');
@@ -8161,6 +8881,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     else if (mode === 'batchCards') renderBatchCardsSheet();
     else if (mode === 'theme') renderChatThemeSheet();
     else if (mode === 'questionAnswer') renderQuestionAnswerSheet();
+    else if (mode === 'identity') renderIdentitySheet();
     else if (mode === 'anniversary') renderAnniversarySheet();
     else if (mode === 'promises') renderPromisesSheet();
     else if (mode === 'dailyLove') renderDailyLoveSheet();
@@ -8723,6 +9444,9 @@ button.card-group-heading:hover{background:#FBF7F0}
         <li>「…」→「礼物」可以主动送TA礼物；对方也会在 1–24 小时内随机送一份，礼物记录会保留。</li>
         <li>「…」→「问答」会保存TA随机问你的问题；可以在聊天卡片或问答页回答，也能修改回答。</li>
         <li>「问答」→「问题库」可以自己添加问题；有自定义问题后，TA会优先从你的问题库里随机提问，也可以点「让TA问」。</li>
+        <li>「…」→「随机身份」会让姓名和头像每 1–24 小时随机换一组；也可以点「换一个」立刻更换。自己设置的资料会作为「我的设置」保留。</li>
+        <li>通话中点左上角向下箭头可以缩小成悬浮条；点悬浮条回到通话，右侧红色按钮挂断。</li>
+        <li>「…」→「评价」→「评价库」可以添加想让TA评价的字卡；对方会随机挑一张打分和写评价，也可以点「让TA评价」。</li>
         <li>点底部的「出题」可以问一道带选项的问题，并设置对方选一个或多个回答。</li>
         <li>对方偶尔会把你发的消息或自己拼的字卡加进「对方加的」分组。</li>
         <li>「…」→「我们的日子」设置纪念日，聊天页会显示在一起第几天。</li>
@@ -8833,9 +9557,177 @@ button.card-group-heading:hover{background:#FBF7F0}
     }
     state.contact = { name, avatar: state.contactDraft.avatar || DEFAULT_AVATAR };
     persistContact();
+    syncIdentityWithContact();
+    if (state.identity.enabled) scheduleNextIdentity();
+    else state.identity.nextAt = 0;
+    persistIdentity();
     applyContactUI();
+    refreshIdentitySurfaces();
     closeSheet();
     showToast('联系人已更新');
+  }
+
+  /* ————————————————————————————————
+     Random identity
+  ———————————————————————————————— */
+  function scheduleNextIdentity(from = Date.now()) {
+    state.identity.nextAt = from + 60 * 60 * 1000 + Math.random() * 23 * 60 * 60 * 1000;
+    persistIdentity();
+  }
+
+  function identityNextLabel() {
+    if (!state.identity.enabled) return '自动随机更换已关闭';
+    if (!state.identity.nextAt) return '开启后会在 1–24 小时内随机更换';
+    const diff = state.identity.nextAt - Date.now();
+    if (diff <= 0) return '下次打开时会更换';
+    const minutes = Math.max(1, Math.ceil(diff / 60000));
+    const hours = Math.floor(minutes / 60);
+    const rest = minutes % 60;
+    if (hours > 0) return `下一次随机更换：约 ${hours} 小时${rest ? ` ${rest} 分` : ''}后`;
+    return `下一次随机更换：约 ${rest} 分钟后`;
+  }
+
+  function refreshIdentitySurfaces() {
+    if (state.sheetMode === 'identity') renderIdentitySheet();
+    if (state.view === 'chat') {
+      const chat = els.chat;
+      const nearBottom = chat.scrollHeight - chat.scrollTop - chat.clientHeight < 90;
+      const top = chat.scrollTop;
+      renderChat();
+      chat.scrollTop = nearBottom ? chat.scrollHeight : top;
+    } else if (state.view === 'moments') {
+      renderMoments();
+    } else if (state.view === 'mail') {
+      renderMailbox();
+    } else if (state.view === 'music') {
+      renderMusicView();
+    } else if (state.view === 'quiz') {
+      renderQuiz();
+    } else if (state.view === 'gift') {
+      renderGiftView();
+    } else if (state.view === 'questions') {
+      renderQuestionsView();
+    }
+    if (activeCall) renderCallUI();
+  }
+
+  function applyIdentityPair(pair, options = {}) {
+    if (!pair) return;
+    const oldName = contactName();
+    state.contact = { name: pair.name, avatar: pair.avatar };
+    state.identity.currentId = pair.id;
+    persistContact();
+    if (state.identity.enabled) scheduleNextIdentity();
+    else state.identity.nextAt = 0;
+    persistIdentity();
+    applyContactUI();
+    refreshIdentitySurfaces();
+    if (options.toast) {
+      showToast(options.source === 'auto' ? `${oldName}换了一个新身份：${pair.name}` : `已换成「${pair.name}」`);
+    }
+    haptic();
+  }
+
+  function switchIdentityTo(id, manual = true) {
+    const pool = identityPool();
+    const pair = pool.find(item => item.id === id);
+    if (!pair) return;
+    if (pair.name === state.contact.name && pair.avatar === state.contact.avatar) {
+      if (manual) showToast(`现在就是「${pair.name}」`);
+      return;
+    }
+    applyIdentityPair(pair, { source: manual ? 'manual' : 'auto', toast: true });
+  }
+
+  function switchIdentityRandom(source = 'manual') {
+    const pool = identityPool();
+    const currentKey = state.contact.name + '\u0000' + state.contact.avatar;
+    const options = pool.filter(pair => pair.name + '\u0000' + pair.avatar !== currentKey);
+    const pair = randomOf(options.length ? options : pool);
+    if (!pair) return;
+    applyIdentityPair(pair, { source, toast: true });
+  }
+
+  function checkIdentitySchedule() {
+    if (!state.identity.enabled) return;
+    if (state.sheetMode === 'contact') {
+      state.identity.nextAt = Date.now() + 10 * 60 * 1000;
+      persistIdentity();
+      return;
+    }
+    if (!state.identity.nextAt) {
+      scheduleNextIdentity();
+      return;
+    }
+    if (Date.now() < state.identity.nextAt) return;
+    switchIdentityRandom('auto');
+  }
+
+  function initIdentity() {
+    if (state.identity.enabled && !state.identity.nextAt) scheduleNextIdentity();
+    setTimeout(checkIdentitySchedule, 2600);
+    setInterval(checkIdentitySchedule, 60000);
+  }
+
+  function renderIdentitySheet() {
+    const current = state.contact;
+    const pool = identityPool();
+    const cards = pool.map(pair => {
+      const active = pair.name === current.name && pair.avatar === current.avatar;
+      return `
+        <button class="identity-card${active ? ' active' : ''}${pair.isCustom ? ' custom' : ''}" type="button" data-identity-id="${pair.id}">
+          <img src="${pair.avatar}" alt="${escapeHtml(pair.name)}">
+          <span>${escapeHtml(pair.name)}</span>
+          <small>${pair.isCustom ? '我的设置' : '预设'}</small>
+        </button>
+      `;
+    }).join('');
+    els.sheetTitle.textContent = '随机身份';
+    els.sheetBody.innerHTML = `
+      <div class="identity-current">
+        <img class="identity-current-avatar" id="identityCurrentAvatar" src="${current.avatar}" alt="${escapeHtml(current.name)}">
+        <div class="identity-current-copy">
+          <span>现在的身份</span>
+          <strong>${escapeHtml(current.name)}</strong>
+          <p id="identityNextHint">${identityNextLabel()}</p>
+        </div>
+        <button class="identity-shuffle" id="identityShuffle" type="button">换一个</button>
+      </div>
+      <div class="identity-toggle-row">
+        <div>
+          <strong>自动随机更换</strong>
+          <span>每 1–24 小时从身份库随机换一组姓名和头像</span>
+        </div>
+        <button class="setting-switch${state.identity.enabled ? ' on' : ''}" id="identitySwitch" type="button" role="switch" aria-checked="${state.identity.enabled}" aria-label="自动随机更换身份"><span></span></button>
+      </div>
+      <p class="identity-hint">点下面任意一个身份可以立刻换上。想用自己的姓名和头像，先去「编辑联系人」保存，会自动成为「我的设置」。</p>
+      <div class="identity-grid" id="identityGrid">${cards}</div>
+    `;
+    els.sheetActions.innerHTML = '<button class="btn primary" type="button" data-sheet-action="close">完成</button>';
+    const switchBtn = $('#identitySwitch');
+    if (switchBtn) {
+      switchBtn.addEventListener('click', () => {
+        state.identity.enabled = !state.identity.enabled;
+        if (state.identity.enabled) scheduleNextIdentity();
+        else state.identity.nextAt = 0;
+        persistIdentity();
+        renderIdentitySheet();
+        showToast(state.identity.enabled ? '已开启随机身份' : '已关闭随机身份');
+      });
+    }
+    const shuffle = $('#identityShuffle');
+    if (shuffle) {
+      shuffle.addEventListener('click', () => {
+        switchIdentityRandom('manual');
+      });
+    }
+    const grid = $('#identityGrid');
+    if (grid) {
+      grid.addEventListener('click', event => {
+        const card = event.target.closest('[data-identity-id]');
+        if (card) switchIdentityTo(card.dataset.identityId, true);
+      });
+    }
   }
 
   function renderMomentCompose() {
@@ -8955,6 +9847,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     els.quizView.hidden = true;
     els.giftView.hidden = true;
     els.questionsView.hidden = true;
+    els.reviewsView.hidden = true;
     els.momentsView.hidden = false;
     renderMoments();
     els.momentsScroll.scrollTop = 0;
@@ -8969,6 +9862,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     els.quizView.hidden = true;
     els.giftView.hidden = true;
     els.questionsView.hidden = true;
+    els.reviewsView.hidden = true;
     els.chatView.hidden = false;
     updateDocumentTitle();
     scrollBottom('auto');
@@ -10125,6 +11019,25 @@ button.card-group-heading:hover{background:#FBF7F0}
       const remove = event.target.closest('[data-delete-custom-question]');
       if (remove) deleteCustomQuestion(remove.dataset.deleteCustomQuestion);
     });
+    els.reviewsBack.addEventListener('click', openChat);
+    els.reviewRecordsTab.addEventListener('click', () => setReviewTab('records'));
+    els.reviewLibraryTab.addEventListener('click', () => setReviewTab('library'));
+    els.addReviewCardBtn.addEventListener('click', addReviewCard);
+    els.reviewCardInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter' && !event.isComposing) {
+        event.preventDefault();
+        addReviewCard();
+      }
+    });
+    els.reviewCardsList.addEventListener('click', event => {
+      const ask = event.target.closest('[data-review-card-id]');
+      if (ask) {
+        evaluateReviewCard(ask.dataset.reviewCardId, true);
+        return;
+      }
+      const remove = event.target.closest('[data-delete-review-card]');
+      if (remove) deleteReviewCard(remove.dataset.deleteReviewCard);
+    });
     els.giftCatalog.addEventListener('click', event => {
       const button = event.target.closest('[data-gift-id]');
       if (button) sendGiftToPartner(button.dataset.giftId);
@@ -10162,6 +11075,9 @@ button.card-group-heading:hover{background:#FBF7F0}
       }
     });
     els.callAcceptBtn.addEventListener('click', connectCall);
+    els.callMinimizeBtn.addEventListener('click', minimizeCall);
+    els.callFloatRestore.addEventListener('click', restoreCall);
+    els.callFloatEnd.addEventListener('click', endCallFromFloat);
     els.callCancelBtn.addEventListener('click', () => {
       if (activeCall && activeCall.direction === 'outgoing' && activeCall.phase === 'outgoing') {
         endCall('cancelled', '已取消');
@@ -10196,10 +11112,12 @@ button.card-group-heading:hover{background:#FBF7F0}
       closeMenu();
       const action = button.dataset.menu;
       if (action === 'contact') openSheet('contact');
+      else if (action === 'identity') openSheet('identity');
       else if (action === 'anniversary') openSheet('anniversary');
       else if (action === 'promises') openSheet('promises');
       else if (action === 'gifts') openGiftView();
       else if (action === 'questions') openQuestionsView();
+      else if (action === 'reviews') openReviewsView();
       else if (action === 'dailyLove') openSheet('dailyLove');
       else if (action === 'quiz') openQuiz();
       else if (action === 'music') openMusicView();
@@ -10494,6 +11412,8 @@ button.card-group-heading:hover{background:#FBF7F0}
         checkProactive();
         checkGiftSchedule();
         checkQuestionSchedule();
+        checkReviewSchedule();
+        checkIdentitySchedule();
       }
     });
 
@@ -10504,6 +11424,8 @@ button.card-group-heading:hover{background:#FBF7F0}
       checkProactive();
       checkGiftSchedule();
       checkQuestionSchedule();
+      checkReviewSchedule();
+      checkIdentitySchedule();
     });
 
     window.addEventListener('resize', () => {
@@ -10528,9 +11450,13 @@ button.card-group-heading:hover{background:#FBF7F0}
       persistQuizBest();
       persistCollapsedCardGroups();
       persistChatTheme();
+      persistIdentity();
       persistGifts();
       persistQuestions();
       persistCustomQuestions();
+      persistReviewCards();
+      persistReviews();
+      persistReviewNextAt();
       persistGiftNextAt();
       persistQuestionNextAt();
       persistMoments();
@@ -10546,6 +11472,7 @@ button.card-group-heading:hover{background:#FBF7F0}
   ———————————————————————————————— */
   function init() {
     loadContact();
+    loadIdentity();
     loadAnniversary();
     loadPromises();
     loadDailyLove();
@@ -10570,6 +11497,8 @@ button.card-group-heading:hover{background:#FBF7F0}
     loadGifts();
     loadQuestions();
     loadCustomQuestions();
+    loadReviewCards();
+    loadReviews();
     loadQuizBest();
     state.momentSignature = safeGet(KEYS.momentSignature) || '';
     if (!state.momentSignature) {
@@ -10594,8 +11523,10 @@ button.card-group-heading:hover{background:#FBF7F0}
     initCalls();
     initRandomEvents();
     initProactive();
+    initIdentity();
     initGifts();
     initQuestions();
+    initReviews();
     scrollBottom('auto');
     if (cardsDeduped > 0) {
       const removed = cardsDeduped;
