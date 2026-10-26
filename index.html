@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#F6F3EE">
 <meta name="description" content="一个字卡聊天网页：我直接打字，对方从字卡里挑一张或拼 1–3 张回复，也可以使用我准备的表情包。">
 <title>字卡交流</title>
@@ -24,7 +24,12 @@
   --ease:cubic-bezier(.2,.8,.2,1);
 }
 *{box-sizing:border-box}
-html,body{height:100%}
+html,body{
+  height:100%;
+  touch-action:manipulation;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
 body{
   margin:0;
   display:flex;
@@ -37,7 +42,11 @@ body{
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
-button,input,textarea{font:inherit;color:inherit}
+button,input,textarea,select{font:inherit;color:inherit;touch-action:manipulation}
+/* iOS Safari 会在输入框字号小于 16px 时自动放大页面；移动端统一到 16px，避免聚焦缩放。 */
+@supports (-webkit-touch-callout: none) {
+  input,textarea,select{font-size:16px!important}
+}
 button{border:0;background:none;padding:0;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 img{display:block;max-width:100%}
@@ -77,9 +86,18 @@ img{display:block;max-width:100%}
   display:flex;
   align-items:center;
   gap:7px;
-  background:var(--surface);
-  border-bottom:1px solid var(--line);
+  background:var(--nav-bg,var(--surface));
+  border-bottom:1px solid var(--nav-line,var(--line));
 }
+.topbar .contact-name,.moments-topbar .moments-title{color:var(--nav-ink,var(--ink))}
+.topbar .contact-sub{color:var(--nav-muted,var(--muted))}
+.topbar .edit-pencil{color:var(--nav-muted,var(--muted))}
+.topbar .more-btn,.topbar .mail-btn,.topbar .call-btn,.topbar .pat-btn,.moments-topbar .back-btn{color:var(--nav-muted,var(--muted))}
+.topbar .contact-btn:hover,.topbar .more-btn:hover,.topbar .mail-btn:hover,.topbar .call-btn:hover,.topbar .pat-btn:hover,.moments-topbar .back-btn:hover{background:var(--nav-hover,var(--surface-alt))}
+.topbar .moments-btn{background:var(--nav-chip,var(--surface));border-color:var(--nav-line,var(--line));color:var(--nav-muted,var(--muted))}
+.topbar .moments-btn svg{color:var(--nav-muted,var(--muted))}
+.topbar .moments-btn:hover{background:var(--nav-hover,var(--surface-alt))}
+.topbar .mail-badge{border-color:var(--nav-bg,var(--surface))}
 .contact-btn{
   flex:1;
   min-width:0;
@@ -138,7 +156,8 @@ img{display:block;max-width:100%}
 .moments-btn svg{width:14px;height:14px;color:#8C7F71}
 .more-btn,
 .mail-btn,
-.call-btn{
+.call-btn,
+.pat-btn{
   width:32px;
   height:32px;
   display:grid;
@@ -148,10 +167,12 @@ img{display:block;max-width:100%}
 }
 .more-btn:hover,
 .mail-btn:hover,
-.call-btn:hover{background:var(--surface-alt)}
+.call-btn:hover,
+.pat-btn:hover{background:var(--surface-alt)}
 .more-btn svg,
 .mail-btn svg,
-.call-btn svg{width:17px;height:17px}
+.call-btn svg,
+.pat-btn svg{width:17px;height:17px}
 .mail-btn{position:relative}
 .mail-badge{
   position:absolute;
@@ -445,6 +466,65 @@ img{display:block;max-width:100%}
   overflow-wrap:anywhere;
   word-break:break-word;
 }
+.note-bubble{
+  max-width:100%;
+  padding:9px 13px;
+  border:1px solid var(--line);
+  border-radius:16px 16px 16px 4px;
+  background:var(--surface);
+  color:var(--ink);
+  font-size:12px;
+  line-height:1.6;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+.chat-view .note-bubble{background:var(--chat-partner,var(--surface))}
+.pat-row,.mood-row{display:flex;justify-content:center;padding:2px 0}
+.pat-notice,.mood-notice{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  max-width:88%;
+  padding:5px 10px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:var(--surface-alt);
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.45;
+  text-align:center;
+  animation:patNoticeIn .28s var(--ease) both;
+}
+.pat-notice .pat-hand{font-size:12px;line-height:1;display:inline-block;animation:patWave .55s ease both}
+.mood-notice{border-color:transparent;background:var(--accent-soft);color:var(--accent-dark);font-weight:550}
+@keyframes patNoticeIn{from{opacity:0;transform:translateY(3px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes patWave{0%,100%{transform:rotate(0)}30%{transform:rotate(18deg)}60%{transform:rotate(-10deg)}}
+.avatar img.pat-shake{animation:patAvatarShake .45s ease}
+@keyframes patAvatarShake{0%,100%{transform:rotate(0)}25%{transform:rotate(-7deg) scale(1.04)}55%{transform:rotate(7deg) scale(1.04)}80%{transform:rotate(-3deg)}}
+.mood-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:4px 0 14px}
+.mood-choice{
+  min-height:76px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:8px 2px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--surface);
+  color:#6E6053;
+  font-size:8.5px;
+}
+.mood-choice .mood-emoji{font-size:24px;line-height:1}
+.mood-choice:hover{border-color:#D8C2B1;background:#FFFCF7}
+.mood-choice.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;background:#FFF9F4}
+.mood-current-line{margin:0 0 12px;padding:9px 10px;border-radius:8px;background:var(--surface-alt);color:#6E6053;font-size:9.5px;line-height:1.5}
+.mood-history-title{margin:12px 0 6px;color:#6A5B4D;font-size:9.5px;font-weight:600}
+.mood-history{display:flex;flex-direction:column;gap:5px}
+.mood-history-item{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:7px;background:var(--surface-alt);color:#7A6B5E;font-size:9px}
+.mood-history-item .mood-history-date{margin-left:auto;color:var(--faint);font-size:8px}
 .sticker-bubble{
   width:112px;
   height:112px;
@@ -511,8 +591,8 @@ img{display:block;max-width:100%}
   flex-direction:column;
   gap:7px;
   padding:7px 12px calc(10px + env(safe-area-inset-bottom,0px));
-  background:var(--surface);
-  border-top:1px solid var(--line);
+  background:var(--composer-bg,var(--surface));
+  border-top:1px solid var(--composer-line,var(--line));
 }
 .tools{display:flex;align-items:center;gap:6px;padding:0 1px}
 .tool-btn{
@@ -681,6 +761,22 @@ img{display:block;max-width:100%}
 .send-btn.enabled:hover{background:var(--accent-dark)}
 .send-btn:active{transform:scale(.96)}
 .send-btn:disabled{cursor:default;opacity:.75}
+.composer .tool-btn{background:var(--composer-chip,var(--surface-alt));color:var(--composer-muted,#6E6358)}
+.composer .tool-btn:hover{background:var(--composer-hover,#EDE7DE);color:var(--composer-ink,#65584C)}
+.composer .tool-btn svg{color:var(--composer-muted,#94867A)}
+.composer .tool-count{color:var(--composer-muted,#A19588)}
+.composer .tool-note{color:var(--composer-muted,var(--faint))}
+.composer .chat-photo-btn{background:var(--composer-chip,var(--surface-alt));color:var(--composer-muted,#8B7D6F)}
+.composer .chat-photo-btn:hover{background:var(--composer-hover,#EDE7DE);color:var(--composer-ink,#65584C)}
+.composer .input-wrap{background:var(--composer-input,#F7F4EF);border-color:var(--composer-line,var(--line))}
+.composer .input-wrap:focus-within{background:var(--composer-input-focus,var(--surface));border-color:var(--accent)}
+.composer .input-wrap input{color:var(--composer-ink,var(--ink))}
+.composer .input-wrap input::placeholder{color:var(--composer-placeholder,#A79A8D)}
+.composer .send-btn:disabled{background:var(--composer-chip,#E1D9CF);color:var(--composer-muted,#8E8276)}
+.composer .quote-bar{background:var(--composer-chip,#F7F1E8)}
+.composer .quote-bar-text{color:var(--composer-muted,#857568)}
+.composer .quote-bar-close{color:var(--composer-muted,#A09386)}
+.composer .quote-bar-close:hover{background:var(--composer-hover,var(--surface-alt));color:var(--composer-ink,#695D52)}
 
 /* ——— Moments ——— */
 .moments-topbar{
@@ -690,8 +786,8 @@ img{display:block;max-width:100%}
   align-items:center;
   gap:6px;
   padding:env(safe-area-inset-top,0px) 12px 0;
-  background:var(--surface);
-  border-bottom:1px solid var(--line);
+  background:var(--nav-bg,var(--surface));
+  border-bottom:1px solid var(--nav-line,var(--line));
   flex:none;
 }
 .back-btn{
@@ -956,7 +1052,7 @@ img{display:block;max-width:100%}
 .mail-empty strong{display:block;margin-bottom:5px;color:#61564B;font-size:13px;font-weight:600}
 
 /* ——— Gifts & questions ——— */
-.gift-top-count,.questions-top-count{margin-left:auto;color:var(--muted);font-size:9px;padding-right:2px}
+.gift-top-count,.questions-top-count{margin-left:auto;color:var(--nav-muted,var(--muted));font-size:9px;padding-right:2px}
 .gift-scroll{
   flex:1;
   min-height:0;
@@ -1026,7 +1122,7 @@ img{display:block;max-width:100%}
 .gift-kicker{color:var(--accent-dark);font-size:8px;letter-spacing:.2px}
 .gift-name{color:#514439;font-size:11px;font-weight:600;line-height:1.35}
 .gift-note{margin:0;color:var(--muted);font-size:9px;line-height:1.5}
-.reviews-top-count{margin-left:auto;color:var(--muted);font-size:9px;padding-right:2px}
+.reviews-top-count{margin-left:auto;color:var(--nav-muted,var(--muted));font-size:9px;padding-right:2px}
 .reviews-scroll{
   flex:1;
   min-height:0;
@@ -1294,7 +1390,7 @@ img{display:block;max-width:100%}
 .quiz-reward{margin:12px 0 0;color:#9A8777;font-size:9px;line-height:1.5}
 
 /* ——— Music ——— */
-.music-top-count{margin-left:auto;color:var(--muted);font-size:9px;padding-right:2px}
+.music-top-count{margin-left:auto;color:var(--nav-muted,var(--muted));font-size:9px;padding-right:2px}
 .music-scroll{
   flex:1;
   min-height:0;
@@ -1917,6 +2013,17 @@ button.card-group-heading:hover{background:#FBF7F0}
 .identity-current-copy span{color:var(--faint);font-size:8px}
 .identity-current-copy strong{color:#4F4136;font-size:14px;font-weight:650;line-height:1.3}
 .identity-current-copy p{margin:1px 0 0;color:var(--muted);font-size:8.5px;line-height:1.4}
+.identity-current-actions{display:flex;align-items:center;gap:5px;flex:none}
+.identity-edit-current{
+  height:29px;
+  padding:0 8px;
+  border-radius:7px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  color:#857667;
+  font-size:9px;
+}
+.identity-edit-current:hover{background:var(--surface-alt)}
 .identity-shuffle{
   flex:none;
   height:29px;
@@ -1934,7 +2041,9 @@ button.card-group-heading:hover{background:#FBF7F0}
 .identity-toggle-row span{color:var(--muted);font-size:8.5px;line-height:1.45}
 .identity-hint{margin:10px 0 9px;color:var(--faint);font-size:8.5px;line-height:1.55}
 .identity-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.identity-card-wrap{position:relative;min-width:0}
 .identity-card{
+  width:100%;
   min-height:77px;
   display:flex;
   flex-direction:column;
@@ -1954,6 +2063,22 @@ button.card-group-heading:hover{background:#FBF7F0}
 .identity-card:hover{border-color:#D8C2B1;background:#FFFCF7}
 .identity-card.active{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset;background:#FFF9F4}
 .identity-card.active small{color:var(--accent-dark)}
+.identity-card-edit{
+  position:absolute;
+  top:3px;
+  right:3px;
+  z-index:2;
+  width:20px;
+  height:20px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:rgba(255,253,248,.92);
+  color:#9A8B7C;
+}
+.identity-card-edit:hover{background:#fff;color:#5E5044;border-color:#D5C1B0}
+.identity-card-edit svg{width:10px;height:10px}
 .batch-textarea{
   width:100%;
   min-height:150px;
@@ -2668,6 +2793,11 @@ button.card-group-heading:hover{background:#FBF7F0}
           </svg>
           朋友圈
         </button>
+        <button class="pat-btn" id="patBtn" type="button" aria-label="拍一拍" title="拍一拍">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 12V6.8a1.4 1.4 0 0 1 2.8 0v4.1M10.8 10.9V5.6a1.4 1.4 0 0 1 2.8 0v5.3M13.6 10.9V6.6a1.4 1.4 0 0 1 2.8 0v5.6M16.4 11.2V8.2a1.4 1.4 0 0 1 2.8 0v5.4c0 3.8-2.4 6.4-6 6.4-2.2 0-3.8-1.1-5-3l-2.3-3.6a1.5 1.5 0 0 1 2.5-1.6L10 14"/>
+          </svg>
+        </button>
         <button class="call-btn" id="callBtn" type="button" aria-label="通话" title="通话">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M6.6 4.5 9 3.8l2.2 5-2 1.6a14.6 14.6 0 0 0 4.4 4.4l1.6-2 5 2.2-.7 2.4c-.4 1.4-1.7 2.2-3.1 1.9C10.6 17.7 6.3 13.4 4.7 7.6c-.3-1.4.5-2.7 1.9-3.1Z"/>
@@ -2689,6 +2819,7 @@ button.card-group-heading:hover{background:#FBF7F0}
       <div class="menu" id="menu" hidden>
         <button type="button" data-menu="contact">编辑联系人</button>
         <button type="button" data-menu="identity">随机身份</button>
+        <button type="button" data-menu="mood">今日心情</button>
         <button type="button" data-menu="anniversary">我们的日子</button>
         <button type="button" data-menu="promises">小约定</button>
         <button type="button" data-menu="gifts">礼物</button>
@@ -3117,6 +3248,7 @@ button.card-group-heading:hover{background:#FBF7F0}
 
 <input id="stickerInput" type="file" accept="image/*" multiple hidden>
 <input id="avatarInput" type="file" accept="image/*" hidden>
+<input id="identityAvatarInput" type="file" accept="image/*" hidden>
 <input id="momentImageInput" type="file" accept="image/*" hidden>
 <input id="chatImageInput" type="file" accept="image/*" hidden>
 <input id="chatBgInput" type="file" accept="image/*" hidden>
@@ -3159,6 +3291,9 @@ button.card-group-heading:hover{background:#FBF7F0}
     reviewCards: 'zika.v3.reviewCards',
     reviews: 'zika.v3.reviews',
     reviewNextAt: 'zika.v3.review.nextAt',
+    patNextAt: 'zika.v3.pat.nextAt',
+    mood: 'zika.v3.mood',
+    moodHistory: 'zika.v3.moodHistory',
     quizBest: 'zika.v3.quiz.best',
     momentSignature: 'zika.v4.moments.signature',
     letters: 'zika.v5.mail.letters',
@@ -3214,6 +3349,13 @@ button.card-group-heading:hover{background:#FBF7F0}
     '你希望我在你难过的时候，多做哪一件事？',
     '有没有什么话，你一直想听我说？'
   ];
+  const MOODS = [
+    { key: 'happy', emoji: '😊', label: '开心', reply: '看到你开心，我也跟着开心。今天要把这份好心情多留一会儿。' },
+    { key: 'calm', emoji: '😌', label: '平静', reply: '那就慢慢过，今天不赶时间。我在这里陪你。' },
+    { key: 'tired', emoji: '😮‍💨', label: '有点累', reply: '辛苦了。先把肩膀放松，我陪你歇一会儿。' },
+    { key: 'missing', emoji: '🌙', label: '想你了', reply: '我也刚好在想你。今天有没有好好吃饭？' },
+    { key: 'low', emoji: '🌧️', label: '有点低落', reply: '不用急着好起来，我陪你待着。想说什么都可以。' }
+  ];
   const REVIEW_LINES = [
     '这个评价我藏不住偏爱，直接给高分。',
     '细节很加分，能看出你放进去的心思。',
@@ -3225,10 +3367,10 @@ button.card-group-heading:hover{background:#FBF7F0}
     '完成度很高，值得被好好看见。'
   ];
   const CHAT_THEME_PRESETS = [
-    { name: '暖橘', accent: '#C56B4A', background: '#F7F1E8', partner: '#FFFDF8' },
-    { name: '雾紫', accent: '#8A6F91', background: '#F3EEF4', partner: '#FFFBFF' },
-    { name: '鼠尾草', accent: '#6E8B78', background: '#EEF2EB', partner: '#FFFDF8' },
-    { name: '海盐蓝', accent: '#6E86A1', background: '#EDF2F6', partner: '#FFFDF8' }
+    { name: '暖橘', accent: '#C56B4A', background: '#F7F1E8', partner: '#FFFDF8', nav: '#FFFDF8', composer: '#FFFDF8' },
+    { name: '雾紫', accent: '#8A6F91', background: '#F3EEF4', partner: '#FFFBFF', nav: '#F8F3F9', composer: '#FAF7FB' },
+    { name: '鼠尾草', accent: '#6E8B78', background: '#EEF2EB', partner: '#FFFDF8', nav: '#F4F8F1', composer: '#F7FAF4' },
+    { name: '海盐蓝', accent: '#6E86A1', background: '#EDF2F6', partner: '#FFFDF8', nav: '#F1F6F9', composer: '#F5F8FA' }
   ];
   const COUPLE_QUIZ = [
     { question: '周末最想和我一起做什么？', options: ['去散步吹风', '窝在家看剧', '找家小店吃饭', '什么都不做，靠在一起'] },
@@ -3533,8 +3675,12 @@ button.card-group-heading:hover{background:#FBF7F0}
       enabled: true,
       currentId: 'xiaoman',
       nextAt: 0,
-      custom: { name: '小满', avatar: DEFAULT_AVATAR }
+      custom: { name: '小满', avatar: DEFAULT_AVATAR },
+      customized: false,
+      presetOverrides: {}
     },
+    editingIdentityId: null,
+    identityDraft: null,
     anniversary: '',
     promises: [],
     dailyLove: { date: '', index: 0 },
@@ -3549,7 +3695,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     quoteNextAt: 0,
     proactiveNextAt: 0,
     collapsedCardGroups: new Set(),
-    chatTheme: { accent: '#C56B4A', background: '#F7F1E8', partner: '#FFFDF8', backgroundImage: '' },
+    chatTheme: { accent: '#C56B4A', background: '#F7F1E8', partner: '#FFFDF8', nav: '#FFFDF8', composer: '#FFFDF8', backgroundImage: '' },
     gifts: [],
     giftNextAt: 0,
     questions: [],
@@ -3561,6 +3707,9 @@ button.card-group-heading:hover{background:#FBF7F0}
     reviews: [],
     reviewNextAt: 0,
     reviewsTab: 'records',
+    patNextAt: 0,
+    mood: null,
+    moodHistory: [],
     callMinimized: false,
     quizBest: 0,
     quiz: null,
@@ -3597,6 +3746,7 @@ button.card-group-heading:hover{background:#FBF7F0}
   let musicAudio = null;
   let activeMusicController = null;
   let activeCall = null;
+  let lastManualPatAt = 0;
   let callTickTimer = null;
   let chatImageBusy = false;
   const momentReplyTimers = new Map();
@@ -3624,6 +3774,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     shareMusicNow: $('#shareMusicNow'),
     musicShareStatus: $('#musicShareStatus'),
     callBtn: $('#callBtn'),
+    patBtn: $('#patBtn'),
     callLayer: $('#callLayer'),
     callWallpaper: $('#callWallpaper'),
     callKind: $('#callKind'),
@@ -3756,6 +3907,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     toast: $('#toast'),
     stickerInput: $('#stickerInput'),
     avatarInput: $('#avatarInput'),
+    identityAvatarInput: $('#identityAvatarInput'),
     momentImageInput: $('#momentImageInput'),
     chatImageBtn: $('#chatImageBtn'),
     chatImageInput: $('#chatImageInput'),
@@ -4032,6 +4184,24 @@ button.card-group-heading:hover{background:#FBF7F0}
           if (typeof parsed.currentId === 'string') state.identity.currentId = parsed.currentId;
           if (Number.isFinite(parsed.nextAt) && parsed.nextAt > 0) state.identity.nextAt = parsed.nextAt;
           if (parsed.custom) state.identity.custom = normalizeIdentityPair(parsed.custom, state.contact.name, state.contact.avatar);
+          state.identity.customized = parsed.customized === true;
+          if (!state.identity.customized && parsed.custom) {
+            const custom = state.identity.custom;
+            state.identity.customized = !IDENTITY_PRESETS.some(preset => preset.name === custom.name && preset.avatar === custom.avatar);
+          }
+          if (parsed.presetOverrides && typeof parsed.presetOverrides === 'object') {
+            const overrides = {};
+            IDENTITY_PRESETS.forEach(preset => {
+              const value = parsed.presetOverrides[preset.id];
+              if (!value || typeof value.name !== 'string' || !value.name.trim()) return;
+              if (typeof value.avatar !== 'string' || !value.avatar.startsWith('data:image/')) return;
+              overrides[preset.id] = {
+                name: value.name.trim().slice(0, 12),
+                avatar: value.avatar
+              };
+            });
+            state.identity.presetOverrides = overrides;
+          }
         }
       } catch (_) {}
     }
@@ -4045,22 +4215,30 @@ button.card-group-heading:hover{background:#FBF7F0}
     return safeSet(KEYS.identity, JSON.stringify(state.identity));
   }
 
+  function identityPresets() {
+    return IDENTITY_PRESETS.map(preset => {
+      const override = state.identity.presetOverrides && state.identity.presetOverrides[preset.id];
+      return override ? { ...preset, name: override.name, avatar: override.avatar } : preset;
+    });
+  }
+
   function syncIdentityWithContact() {
     const contact = state.contact;
-    const preset = IDENTITY_PRESETS.find(pair => pair.name === contact.name && pair.avatar === contact.avatar);
+    const preset = identityPresets().find(pair => pair.name === contact.name && pair.avatar === contact.avatar);
     if (preset) {
       state.identity.currentId = preset.id;
       return;
     }
     state.identity.custom = { name: contact.name, avatar: contact.avatar };
+    state.identity.customized = true;
     state.identity.currentId = 'custom';
   }
 
   function identityPool() {
-    const pool = [
-      { id: 'custom', name: state.identity.custom.name, avatar: state.identity.custom.avatar, isCustom: true },
-      ...IDENTITY_PRESETS
-    ];
+    const pool = [...identityPresets()];
+    if (state.identity.customized) {
+      pool.push({ id: 'custom', name: state.identity.custom.name, avatar: state.identity.custom.avatar, isCustom: true });
+    }
     const seen = new Set();
     return pool.filter(pair => {
       if (!pair.name || !pair.avatar) return false;
@@ -4307,6 +4485,8 @@ button.card-group-heading:hover{background:#FBF7F0}
         accent: normalizeThemeColor(parsed.accent, '#C56B4A'),
         background: normalizeThemeColor(parsed.background, '#F7F1E8'),
         partner: normalizeThemeColor(parsed.partner, '#FFFDF8'),
+        nav: normalizeThemeColor(parsed.nav, '#FFFDF8'),
+        composer: normalizeThemeColor(parsed.composer, '#FFFDF8'),
         backgroundImage: typeof parsed.backgroundImage === 'string' && parsed.backgroundImage.startsWith('data:image/')
           ? parsed.backgroundImage
           : ''
@@ -4534,6 +4714,9 @@ button.card-group-heading:hover{background:#FBF7F0}
       case 'review':
         excerpt = `评价了：${message.item || ''}`;
         break;
+      case 'note':
+        excerpt = message.text || '说了一句话';
+        break;
       case 'music':
         excerpt = message.music ? `🎵 ${message.music.name}` : '分享了一首歌';
         break;
@@ -4641,6 +4824,29 @@ button.card-group-heading:hover{background:#FBF7F0}
         at: message.at
       };
     }
+    if (message.type === 'pat') {
+      if (message.from !== 'me' && message.from !== 'them') return null;
+      return {
+        id: typeof message.id === 'string' ? message.id : uid(),
+        from: message.from,
+        type: 'pat',
+        at: message.at
+      };
+    }
+    if (message.type === 'mood') {
+      if (message.from !== 'me') return null;
+      const mood = MOODS.find(item => item.key === message.moodKey);
+      if (!mood) return null;
+      return {
+        id: typeof message.id === 'string' ? message.id : uid(),
+        from: 'me',
+        type: 'mood',
+        moodKey: mood.key,
+        emoji: mood.emoji,
+        label: mood.label,
+        at: message.at
+      };
+    }
     if (message.type === 'sticker') {
       if (message.from !== 'me' && message.from !== 'them') return null;
       if (typeof message.src !== 'string' || !message.src.startsWith('data:image/')) return null;
@@ -4656,6 +4862,18 @@ button.card-group-heading:hover{background:#FBF7F0}
       };
     }
     if (message.from !== 'them') return null;
+    if (message.type === 'note') {
+      const text = typeof message.text === 'string' ? message.text.trim().slice(0, 300) : '';
+      if (!text) return null;
+      return {
+        id: typeof message.id === 'string' ? message.id : uid(),
+        from: 'them',
+        type: 'note',
+        text,
+        replyTo: normalizeQuote(message.replyTo),
+        at: message.at
+      };
+    }
     if (message.type === 'question') {
       const question = typeof message.question === 'string' ? message.question.trim().slice(0, 120) : '';
       if (!question) return null;
@@ -4812,6 +5030,8 @@ button.card-group-heading:hover{background:#FBF7F0}
     if (Number.isFinite(questionNext) && questionNext > 0) state.questionNextAt = questionNext;
     const reviewNext = Number(safeGet(KEYS.reviewNextAt));
     if (Number.isFinite(reviewNext) && reviewNext > 0) state.reviewNextAt = reviewNext;
+    const patNext = Number(safeGet(KEYS.patNextAt));
+    if (Number.isFinite(patNext) && patNext > 0) state.patNextAt = patNext;
   }
 
   function loadGifts() {
@@ -4939,6 +5159,61 @@ button.card-group-heading:hover{background:#FBF7F0}
 
   function persistReviewNextAt() {
     return safeSet(KEYS.reviewNextAt, String(state.reviewNextAt || 0));
+  }
+
+  function todayKey(date = new Date()) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  function normalizeMood(value) {
+    if (!value || typeof value !== 'object') return null;
+    const mood = MOODS.find(item => item.key === value.key);
+    if (!mood) return null;
+    return {
+      key: mood.key,
+      emoji: mood.emoji,
+      label: mood.label,
+      date: typeof value.date === 'string' ? value.date : todayKey(),
+      at: Number.isFinite(value.at) ? value.at : Date.now()
+    };
+  }
+
+  function loadMood() {
+    const rawMood = safeGet(KEYS.mood);
+    if (rawMood !== null) {
+      try {
+        state.mood = normalizeMood(JSON.parse(rawMood));
+      } catch (_) {
+        state.mood = null;
+      }
+    }
+    const rawHistory = safeGet(KEYS.moodHistory);
+    if (rawHistory !== null) {
+      try {
+        const parsed = JSON.parse(rawHistory);
+        state.moodHistory = Array.isArray(parsed)
+          ? parsed.map(normalizeMood).filter(Boolean).slice(0, 30)
+          : [];
+      } catch (_) {
+        state.moodHistory = [];
+      }
+    }
+  }
+
+  function persistMood() {
+    if (state.mood) safeSet(KEYS.mood, JSON.stringify(state.mood));
+    else {
+      try { localStorage.removeItem(KEYS.mood); } catch (_) {}
+    }
+    return safeSet(KEYS.moodHistory, JSON.stringify(state.moodHistory.slice(0, 30)));
+  }
+
+  function currentMood() {
+    if (!state.mood) return null;
+    return state.mood.date === todayKey() ? state.mood : null;
   }
 
   function persistGiftNextAt() {
@@ -7411,6 +7686,163 @@ button.card-group-heading:hover{background:#FBF7F0}
   }
 
   /* ————————————————————————————————
+     Pats & daily mood
+  ———————————————————————————————— */
+  function pulsePatAvatar() {
+    if (!els.headerAvatar) return;
+    els.headerAvatar.classList.remove('pat-shake');
+    void els.headerAvatar.offsetWidth;
+    els.headerAvatar.classList.add('pat-shake');
+    setTimeout(() => els.headerAvatar.classList.remove('pat-shake'), 520);
+  }
+
+  function partnerPat(auto = true) {
+    addMessage({
+      id: uid(),
+      from: 'them',
+      type: 'pat',
+      at: Date.now()
+    });
+    pulsePatAvatar();
+    haptic();
+    if (state.view !== 'chat') {
+      showToast(`${contactName()}拍了拍你`, '查看', openChat);
+    }
+  }
+
+  function patPartner() {
+    if (activeCall) return;
+    const now = Date.now();
+    if (now - lastManualPatAt < 1400) return;
+    lastManualPatAt = now;
+    addMessage({
+      id: uid(),
+      from: 'me',
+      type: 'pat',
+      at: now
+    });
+    pulsePatAvatar();
+    haptic();
+    schedulePartnerPatBack();
+  }
+
+  function schedulePartnerPatBack() {
+    setTimeout(() => {
+      if (activeCall || Math.random() > 0.78) return;
+      partnerPat(false);
+    }, 800 + Math.random() * 700);
+  }
+
+  function scheduleNextPat(from = Date.now()) {
+    state.patNextAt = from + 60 * 60 * 1000 + Math.random() * 5 * 60 * 60 * 1000;
+    safeSet(KEYS.patNextAt, String(state.patNextAt));
+  }
+
+  function checkPatSchedule() {
+    if (!state.patNextAt) {
+      scheduleNextPat();
+      return;
+    }
+    if (Date.now() < state.patNextAt) return;
+    partnerPat(true);
+    scheduleNextPat(Date.now());
+  }
+
+  function initPats() {
+    if (!state.patNextAt) scheduleNextPat();
+    setTimeout(checkPatSchedule, 2400);
+    setInterval(checkPatSchedule, 60000);
+  }
+
+  function openMoodSheet() {
+    openSheet('mood');
+  }
+
+  function moodDateLabel(date) {
+    if (date === todayKey()) return '今天';
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    if (date === todayKey(yesterday)) return '昨天';
+    return date.slice(5).replace('-', '/');
+  }
+
+  function renderMoodSheet() {
+    const current = currentMood();
+    const history = state.moodHistory.slice(0, 7);
+    els.sheetTitle.textContent = '今天的心情';
+    els.sheetBody.innerHTML = `
+      <p class="settings-intro">选一个此刻最接近的心情，${escapeHtml(contactName())}会回你一句话。心情会显示在聊天顶部，第二天自动变成新的一天。</p>
+      <div class="mood-grid" id="moodGrid">
+        ${MOODS.map(mood => `
+          <button class="mood-choice${current && current.key === mood.key ? ' active' : ''}" type="button" data-mood-key="${mood.key}">
+            <span class="mood-emoji" aria-hidden="true">${mood.emoji}</span>
+            <span>${mood.label}</span>
+          </button>
+        `).join('')}
+      </div>
+      ${current ? `<p class="mood-current-line">今天已经记录：${current.emoji} ${current.label} · 想换随时可以换</p>` : '<p class="mood-current-line">今天还没有记录心情。</p>'}
+      ${history.length ? `
+        <p class="mood-history-title">最近的心情</p>
+        <div class="mood-history">
+          ${history.map(item => `
+            <div class="mood-history-item">
+              <span aria-hidden="true">${item.emoji}</span>
+              <span>${escapeHtml(item.label)}</span>
+              <span class="mood-history-date">${moodDateLabel(item.date)}</span>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+    `;
+    els.sheetActions.innerHTML = '<button class="btn" type="button" data-sheet-action="close">关闭</button>';
+    const grid = $('#moodGrid');
+    if (grid) {
+      grid.addEventListener('click', event => {
+        const button = event.target.closest('[data-mood-key]');
+        if (button) setMood(button.dataset.moodKey);
+      });
+    }
+  }
+
+  function setMood(key) {
+    const mood = MOODS.find(item => item.key === key);
+    if (!mood) return;
+    const at = Date.now();
+    state.mood = {
+      key: mood.key,
+      emoji: mood.emoji,
+      label: mood.label,
+      date: todayKey(),
+      at
+    };
+    state.moodHistory.unshift({ ...state.mood });
+    state.moodHistory = state.moodHistory.slice(0, 30);
+    persistMood();
+    addMessage({
+      id: uid(),
+      from: 'me',
+      type: 'mood',
+      moodKey: mood.key,
+      emoji: mood.emoji,
+      label: mood.label,
+      at
+    });
+    applyContactUI();
+    closeSheet();
+    haptic();
+    setTimeout(() => {
+      addMessage({
+        id: uid(),
+        from: 'them',
+        type: 'note',
+        text: mood.reply,
+        at: Date.now()
+      });
+      if (state.view !== 'chat') showToast(`${contactName()}回了你一句话`, '查看', openChat);
+    }, 700 + Math.random() * 500);
+  }
+
+  /* ————————————————————————————————
      Chat theme
   ———————————————————————————————— */
   function hexToRgb(hex) {
@@ -7444,6 +7876,33 @@ button.card-group-heading:hover{background:#FBF7F0}
     els.chatView.style.setProperty('--accent-soft', mixHex(theme.accent, '#FFFFFF', 0.16));
     els.chatView.style.setProperty('--chat-bg', theme.background);
     els.chatView.style.setProperty('--chat-partner', theme.partner);
+    const navRgb = hexToRgb(theme.nav);
+    const navDark = (navRgb.r * 299 + navRgb.g * 587 + navRgb.b * 114) / 1000 < 150;
+    const composerRgb = hexToRgb(theme.composer);
+    const composerDark = (composerRgb.r * 299 + composerRgb.g * 587 + composerRgb.b * 114) / 1000 < 150;
+    const composerInput = composerDark
+      ? mixHex(theme.composer, '#FFFFFF', 0.9)
+      : mixHex(theme.composer, '#000000', 0.96);
+    const composerFocus = composerDark
+      ? mixHex(theme.composer, '#FFFFFF', 0.84)
+      : theme.composer;
+    if (els.app) {
+      els.app.style.setProperty('--nav-bg', theme.nav);
+      els.app.style.setProperty('--nav-ink', navDark ? '#F8F2EA' : '#3D352D');
+      els.app.style.setProperty('--nav-muted', navDark ? 'rgba(250,245,238,.66)' : '#8A7D70');
+      els.app.style.setProperty('--nav-line', navDark ? 'rgba(255,255,255,.13)' : '#ECE4D9');
+      els.app.style.setProperty('--nav-chip', navDark ? 'rgba(255,255,255,.08)' : 'rgba(255,255,255,.55)');
+      els.app.style.setProperty('--nav-hover', navDark ? 'rgba(255,255,255,.08)' : 'rgba(120,100,80,.07)');
+      els.app.style.setProperty('--composer-bg', theme.composer);
+      els.app.style.setProperty('--composer-ink', composerDark ? '#F8F2EA' : '#3D352D');
+      els.app.style.setProperty('--composer-muted', composerDark ? 'rgba(250,245,238,.68)' : '#8A7D70');
+      els.app.style.setProperty('--composer-line', composerDark ? 'rgba(255,255,255,.13)' : '#ECE4D9');
+      els.app.style.setProperty('--composer-chip', composerDark ? 'rgba(255,255,255,.08)' : 'rgba(61,53,45,.055)');
+      els.app.style.setProperty('--composer-hover', composerDark ? 'rgba(255,255,255,.14)' : 'rgba(61,53,45,.09)');
+      els.app.style.setProperty('--composer-input', composerInput);
+      els.app.style.setProperty('--composer-input-focus', composerFocus);
+      els.app.style.setProperty('--composer-placeholder', composerDark ? 'rgba(250,245,238,.46)' : '#A79A8D');
+    }
     els.chatView.style.backgroundColor = theme.background;
     els.chat.style.backgroundColor = theme.background;
     if (theme.backgroundImage) {
@@ -7460,7 +7919,7 @@ button.card-group-heading:hover{background:#FBF7F0}
   function renderChatThemeSheet() {
     const theme = state.chatTheme;
     const presetHtml = CHAT_THEME_PRESETS.map((preset, index) => {
-      const active = theme.accent === preset.accent && theme.background === preset.background && theme.partner === preset.partner;
+      const active = theme.accent === preset.accent && theme.background === preset.background && theme.partner === preset.partner && theme.nav === preset.nav && theme.composer === preset.composer;
       return `
         <button class="theme-preset${active ? ' active' : ''}" type="button" data-theme-preset="${index}">
           <span class="theme-swatch" style="background:linear-gradient(135deg,${preset.accent} 0 50%,${preset.background} 50% 100%)"></span>
@@ -7470,7 +7929,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     }).join('');
     els.sheetTitle.textContent = '聊天主题';
     els.sheetBody.innerHTML = `
-      <p class="settings-intro">只改变聊天页的颜色和气泡。可以选预设，也可以自己调；背景图会尽量压缩到 20KB 内。</p>
+      <p class="settings-intro">只改变聊天页的颜色、气泡、顶部导航栏和底部输入区。可以选预设，也可以自己调；背景图会尽量压缩到 20KB 内。</p>
       <div class="theme-presets">${presetHtml}</div>
       <div class="theme-colors">
         <label class="theme-color-row">
@@ -7484,6 +7943,14 @@ button.card-group-heading:hover{background:#FBF7F0}
         <label class="theme-color-row">
           <span class="theme-color-copy"><strong>对方气泡</strong><span>对方字卡和正在输入的底色</span></span>
           <input type="color" id="themePartner" value="${theme.partner}" aria-label="对方气泡颜色">
+        </label>
+        <label class="theme-color-row">
+          <span class="theme-color-copy"><strong>导航栏</strong><span>所有页面顶部导航栏的底色</span></span>
+          <input type="color" id="themeNav" value="${theme.nav}" aria-label="导航栏颜色">
+        </label>
+        <label class="theme-color-row">
+          <span class="theme-color-copy"><strong>底部栏 / 打字框</strong><span>工具栏、输入框和发送区的底色</span></span>
+          <input type="color" id="themeComposer" value="${theme.composer}" aria-label="底部栏颜色">
         </label>
       </div>
       <div class="setting-block">
@@ -7513,6 +7980,8 @@ button.card-group-heading:hover{background:#FBF7F0}
           accent: preset.accent,
           background: preset.background,
           partner: preset.partner,
+          nav: preset.nav,
+          composer: preset.composer,
           backgroundImage: state.chatTheme.backgroundImage
         };
         persistChatTheme();
@@ -7532,6 +8001,8 @@ button.card-group-heading:hover{background:#FBF7F0}
     bindColor('themeAccent', 'accent');
     bindColor('themeBackground', 'background');
     bindColor('themePartner', 'partner');
+    bindColor('themeNav', 'nav');
+    bindColor('themeComposer', 'composer');
     const choose = $('#themeBgChoose');
     if (choose) {
       choose.addEventListener('click', () => {
@@ -7552,7 +8023,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     const reset = $('#themeReset');
     if (reset) {
       reset.addEventListener('click', () => {
-        state.chatTheme = { accent: '#C56B4A', background: '#F7F1E8', partner: '#FFFDF8', backgroundImage: '' };
+        state.chatTheme = { accent: '#C56B4A', background: '#F7F1E8', partner: '#FFFDF8', nav: '#FFFDF8', composer: '#FFFDF8', backgroundImage: '' };
         persistChatTheme();
         applyChatTheme();
         renderChatThemeSheet();
@@ -7946,7 +8417,9 @@ button.card-group-heading:hover{background:#FBF7F0}
     els.headerAvatar.src = state.contact.avatar;
     els.headerAvatar.alt = name;
     const days = daysTogether();
-    els.contactSub.textContent = days ? `在一起第 ${days} 天` : '从你的字卡里挑话';
+    const baseSub = days ? `在一起第 ${days} 天` : '从你的字卡里挑话';
+    const mood = currentMood();
+    els.contactSub.textContent = mood ? `${mood.emoji} ${mood.label}` : baseSub;
     els.contactBtn.setAttribute('aria-label', '编辑联系人：' + name);
     els.messageInput.placeholder = `打字和${name}聊天…`;
     els.momentsName.textContent = name;
@@ -8094,6 +8567,37 @@ button.card-group-heading:hover{background:#FBF7F0}
     return block;
   }
 
+  function makePatNotice(message) {
+    const row = document.createElement('div');
+    row.className = 'pat-row';
+    const notice = document.createElement('div');
+    notice.className = 'pat-notice';
+    const hand = document.createElement('span');
+    hand.className = 'pat-hand';
+    hand.textContent = '👋';
+    hand.setAttribute('aria-hidden', 'true');
+    const text = document.createElement('span');
+    text.textContent = message.from === 'me' ? `你拍了拍${contactName()}` : `${contactName()}拍了拍你`;
+    notice.append(hand, text);
+    row.appendChild(notice);
+    return row;
+  }
+
+  function makeMoodNotice(message) {
+    const row = document.createElement('div');
+    row.className = 'mood-row';
+    const notice = document.createElement('div');
+    notice.className = 'mood-notice';
+    const emoji = document.createElement('span');
+    emoji.textContent = message.emoji;
+    emoji.setAttribute('aria-hidden', 'true');
+    const text = document.createElement('span');
+    text.textContent = `今天的心情：${message.label}`;
+    notice.append(emoji, text);
+    row.appendChild(notice);
+    return row;
+  }
+
   function makeMessageNode(message, previous, animate) {
     const fragment = document.createDocumentFragment();
     const dayChanged = !previous || startOfDay(previous.at) !== startOfDay(message.at);
@@ -8112,6 +8616,14 @@ button.card-group-heading:hover{background:#FBF7F0}
 
     if (message.type === 'call') {
       fragment.appendChild(makeCallLog(message));
+      return fragment;
+    }
+    if (message.type === 'pat') {
+      fragment.appendChild(makePatNotice(message));
+      return fragment;
+    }
+    if (message.type === 'mood') {
+      fragment.appendChild(makeMoodNotice(message));
       return fragment;
     }
 
@@ -8135,7 +8647,12 @@ button.card-group-heading:hover{background:#FBF7F0}
     body.className = 'msg-body';
     if (message.replyTo) body.appendChild(makeQuoteBlock(message.replyTo));
 
-    if (message.type === 'text') {
+    if (message.type === 'note') {
+      const bubble = document.createElement('div');
+      bubble.className = 'note-bubble';
+      bubble.textContent = message.text;
+      body.appendChild(bubble);
+    } else if (message.type === 'text') {
       const bubble = document.createElement('div');
       bubble.className = 'text-bubble';
       bubble.textContent = message.text;
@@ -8882,6 +9399,8 @@ button.card-group-heading:hover{background:#FBF7F0}
     else if (mode === 'theme') renderChatThemeSheet();
     else if (mode === 'questionAnswer') renderQuestionAnswerSheet();
     else if (mode === 'identity') renderIdentitySheet();
+    else if (mode === 'identityEdit') renderIdentityEditSheet();
+    else if (mode === 'mood') renderMoodSheet();
     else if (mode === 'anniversary') renderAnniversarySheet();
     else if (mode === 'promises') renderPromisesSheet();
     else if (mode === 'dailyLove') renderDailyLoveSheet();
@@ -8903,6 +9422,8 @@ button.card-group-heading:hover{background:#FBF7F0}
     state.sheetMode = null;
     state.cardIntentId = null;
     state.answeringQuestionId = null;
+    state.editingIdentityId = null;
+    state.identityDraft = null;
     state.contactDraft = null;
     state.momentDraft = { text: '', image: null };
     if (lastFocusSheet && document.contains(lastFocusSheet)) {
@@ -9447,6 +9968,8 @@ button.card-group-heading:hover{background:#FBF7F0}
         <li>「…」→「随机身份」会让姓名和头像每 1–24 小时随机换一组；也可以点「换一个」立刻更换。自己设置的资料会作为「我的设置」保留。</li>
         <li>通话中点左上角向下箭头可以缩小成悬浮条；点悬浮条回到通话，右侧红色按钮挂断。</li>
         <li>「…」→「评价」→「评价库」可以添加想让TA评价的字卡；对方会随机挑一张打分和写评价，也可以点「让TA评价」。</li>
+        <li>点聊天顶部的「小手」可以拍一拍TA；对方也会在 1–6 小时内随机拍一拍你。</li>
+        <li>「…」→「今日心情」可以记录今天的心情，心情会显示在聊天顶部；对方会回你一句话。</li>
         <li>点底部的「出题」可以问一道带选项的问题，并设置对方选一个或多个回答。</li>
         <li>对方偶尔会把你发的消息或自己拼的字卡加进「对方加的」分组。</li>
         <li>「…」→「我们的日子」设置纪念日，聊天页会显示在一起第几天。</li>
@@ -9557,6 +10080,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     }
     state.contact = { name, avatar: state.contactDraft.avatar || DEFAULT_AVATAR };
     persistContact();
+    state.identity.customized = true;
     syncIdentityWithContact();
     if (state.identity.enabled) scheduleNextIdentity();
     else state.identity.nextAt = 0;
@@ -9675,11 +10199,16 @@ button.card-group-heading:hover{background:#FBF7F0}
     const cards = pool.map(pair => {
       const active = pair.name === current.name && pair.avatar === current.avatar;
       return `
-        <button class="identity-card${active ? ' active' : ''}${pair.isCustom ? ' custom' : ''}" type="button" data-identity-id="${pair.id}">
-          <img src="${pair.avatar}" alt="${escapeHtml(pair.name)}">
-          <span>${escapeHtml(pair.name)}</span>
-          <small>${pair.isCustom ? '我的设置' : '预设'}</small>
-        </button>
+        <div class="identity-card-wrap">
+          <button class="identity-card${active ? ' active' : ''}${pair.isCustom ? ' custom' : ''}" type="button" data-identity-id="${pair.id}">
+            <img src="${pair.avatar}" alt="${escapeHtml(pair.name)}">
+            <span>${escapeHtml(pair.name)}</span>
+            <small>${pair.isCustom ? '我的设置' : '预设'}</small>
+          </button>
+          <button class="identity-card-edit" type="button" data-edit-identity="${pair.id}" aria-label="编辑${escapeHtml(pair.name)}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4l10.5-10.5a2.1 2.1 0 0 0-3-3L5 17v3Z"/><path d="M13.5 6.5l3 3"/></svg>
+          </button>
+        </div>
       `;
     }).join('');
     els.sheetTitle.textContent = '随机身份';
@@ -9691,7 +10220,10 @@ button.card-group-heading:hover{background:#FBF7F0}
           <strong>${escapeHtml(current.name)}</strong>
           <p id="identityNextHint">${identityNextLabel()}</p>
         </div>
-        <button class="identity-shuffle" id="identityShuffle" type="button">换一个</button>
+        <div class="identity-current-actions">
+          <button class="identity-edit-current" id="identityEditCurrent" type="button">编辑</button>
+          <button class="identity-shuffle" id="identityShuffle" type="button">换一个</button>
+        </div>
       </div>
       <div class="identity-toggle-row">
         <div>
@@ -9700,7 +10232,7 @@ button.card-group-heading:hover{background:#FBF7F0}
         </div>
         <button class="setting-switch${state.identity.enabled ? ' on' : ''}" id="identitySwitch" type="button" role="switch" aria-checked="${state.identity.enabled}" aria-label="自动随机更换身份"><span></span></button>
       </div>
-      <p class="identity-hint">点下面任意一个身份可以立刻换上。想用自己的姓名和头像，先去「编辑联系人」保存，会自动成为「我的设置」。</p>
+      <p class="identity-hint">点卡片可以立刻换上；点右上角铅笔或「编辑」可以修改那组身份的名称和头像。想用自己的姓名和头像，也可以在「编辑联系人」保存，会成为「我的设置」。</p>
       <div class="identity-grid" id="identityGrid">${cards}</div>
     `;
     els.sheetActions.innerHTML = '<button class="btn primary" type="button" data-sheet-action="close">完成</button>';
@@ -9721,13 +10253,158 @@ button.card-group-heading:hover{background:#FBF7F0}
         switchIdentityRandom('manual');
       });
     }
+    const editCurrent = $('#identityEditCurrent');
+    if (editCurrent) {
+      editCurrent.addEventListener('click', () => openIdentityEditor(state.identity.currentId));
+    }
     const grid = $('#identityGrid');
     if (grid) {
       grid.addEventListener('click', event => {
+        const edit = event.target.closest('[data-edit-identity]');
+        if (edit) {
+          openIdentityEditor(edit.dataset.editIdentity);
+          return;
+        }
         const card = event.target.closest('[data-identity-id]');
         if (card) switchIdentityTo(card.dataset.identityId, true);
       });
     }
+  }
+
+  function openIdentityEditor(id) {
+    const pair = identityPool().find(item => item.id === id);
+    if (!pair) return;
+    const original = id === 'custom'
+      ? DEFAULT_AVATAR
+      : (IDENTITY_PRESETS.find(item => item.id === id) || {}).avatar || DEFAULT_AVATAR;
+    state.editingIdentityId = id;
+    state.identityDraft = {
+      id,
+      name: pair.name,
+      avatar: pair.avatar,
+      originalAvatar: original,
+      isCustom: id === 'custom'
+    };
+    openSheet('identityEdit');
+  }
+
+  function renderIdentityEditSheet() {
+    const draft = state.identityDraft;
+    if (!draft) {
+      closeSheet();
+      return;
+    }
+    els.sheetTitle.textContent = '编辑身份';
+    els.sheetBody.innerHTML = `
+      <div class="contact-avatar-row identity-edit-avatar-row">
+        <img class="avatar-preview" id="identityEditAvatar" alt="">
+        <div class="avatar-actions">
+          <button class="small-btn" id="identityEditAvatarBtn" type="button">更换头像</button>
+          <button class="text-link" id="identityEditResetAvatar" type="button">恢复原头像</button>
+        </div>
+      </div>
+      <label class="field-label" for="identityEditName">身份姓名</label>
+      <input class="text-input" id="identityEditName" type="text" maxlength="12" autocomplete="off" placeholder="输入名字">
+      <p class="field-hint">${draft.isCustom ? '会更新「我的设置」这组姓名和头像。' : '会更新这组预设身份；如果正在使用，聊天顶部也会一起更换。'}</p>
+    `;
+    els.sheetActions.innerHTML = `
+      <button class="btn" type="button" data-sheet-action="identity-back">返回</button>
+      <button class="btn primary" id="saveIdentityEditBtn" type="button" data-sheet-action="save-identity">保存</button>
+    `;
+    const nameInput = $('#identityEditName');
+    const preview = $('#identityEditAvatar');
+    const resetAvatar = $('#identityEditResetAvatar');
+    const saveBtn = $('#saveIdentityEditBtn');
+    if (!nameInput || !preview || !saveBtn) return;
+    nameInput.value = draft.name;
+    preview.src = draft.avatar;
+    preview.alt = draft.name;
+    if (resetAvatar) resetAvatar.hidden = draft.avatar === draft.originalAvatar;
+    const syncSave = () => {
+      saveBtn.disabled = !nameInput.value.trim();
+    };
+    nameInput.addEventListener('input', syncSave);
+    nameInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter' && !event.isComposing) {
+        event.preventDefault();
+        saveIdentityEdit();
+      }
+    });
+    const avatarBtn = $('#identityEditAvatarBtn');
+    if (avatarBtn) {
+      avatarBtn.addEventListener('click', () => {
+        els.identityAvatarInput.value = '';
+        els.identityAvatarInput.click();
+      });
+    }
+    if (resetAvatar) {
+      resetAvatar.addEventListener('click', () => {
+        if (!state.identityDraft) return;
+        state.identityDraft.avatar = state.identityDraft.originalAvatar;
+        preview.src = state.identityDraft.avatar;
+        resetAvatar.hidden = true;
+      });
+    }
+    syncSave();
+  }
+
+  function updateIdentityEditPreview() {
+    if (state.sheetMode !== 'identityEdit' || !state.identityDraft) return;
+    const preview = $('#identityEditAvatar');
+    const resetAvatar = $('#identityEditResetAvatar');
+    if (preview) {
+      preview.src = state.identityDraft.avatar;
+      preview.alt = state.identityDraft.name;
+    }
+    if (resetAvatar) resetAvatar.hidden = state.identityDraft.avatar === state.identityDraft.originalAvatar;
+  }
+
+  function cancelIdentityEdit() {
+    state.editingIdentityId = null;
+    state.identityDraft = null;
+    state.sheetMode = 'identity';
+    renderIdentitySheet();
+  }
+
+  function saveIdentityEdit() {
+    const draft = state.identityDraft;
+    const input = $('#identityEditName');
+    if (!draft || !input) return;
+    const name = input.value.trim().slice(0, 12);
+    if (!name) {
+      showToast('身份姓名不能为空');
+      input.focus();
+      return;
+    }
+    const avatar = draft.avatar || draft.originalAvatar || DEFAULT_AVATAR;
+    const id = draft.id;
+    const oldPreset = identityPresets().find(preset => preset.id === id);
+    const customMatchedOld = oldPreset
+      && state.identity.custom.name === oldPreset.name
+      && state.identity.custom.avatar === oldPreset.avatar;
+    if (id === 'custom') {
+      state.identity.custom = { name, avatar };
+      state.identity.customized = true;
+    } else if (IDENTITY_PRESETS.some(preset => preset.id === id)) {
+      state.identity.presetOverrides[id] = { name, avatar };
+      if (customMatchedOld) state.identity.custom = { name, avatar };
+    } else {
+      return;
+    }
+    const active = state.identity.currentId === id;
+    if (active) {
+      state.contact = { name, avatar };
+      persistContact();
+      syncIdentityWithContact();
+      applyContactUI();
+    }
+    persistIdentity();
+    state.editingIdentityId = null;
+    state.identityDraft = null;
+    state.sheetMode = 'identity';
+    renderIdentitySheet();
+    if (active) refreshIdentitySurfaces();
+    showToast('身份已更新');
   }
 
   function renderMomentCompose() {
@@ -10941,6 +11618,33 @@ button.card-group-heading:hover{background:#FBF7F0}
       const file = event.target.files && event.target.files[0];
       handleChatImageFile(file);
     });
+    els.identityAvatarInput.addEventListener('change', async event => {
+      if (state.sheetMode !== 'identityEdit' || !state.identityDraft) return;
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      if (!isImageFile(file)) {
+        showToast('请选择图片文件');
+        els.identityAvatarInput.value = '';
+        return;
+      }
+      if (file.size > MAX_FILE_BYTES) {
+        showToast('图片太大了，请选择 12MB 以内的图片');
+        els.identityAvatarInput.value = '';
+        return;
+      }
+      try {
+        showToast('正在压缩头像…');
+        const dataUrl = await readAsDataURL(file);
+        const image = await loadImage(dataUrl);
+        state.identityDraft.avatar = compressAvatar(image);
+        updateIdentityEditPreview();
+        showToast('头像已更新，记得保存');
+      } catch (_) {
+        showToast('头像读取失败，请换一张试试');
+      } finally {
+        els.identityAvatarInput.value = '';
+      }
+    });
     els.chatBgInput.addEventListener('change', event => {
       const file = event.target.files && event.target.files[0];
       handleChatBackgroundFile(file);
@@ -11068,6 +11772,7 @@ button.card-group-heading:hover{background:#FBF7F0}
 
     els.contactBtn.addEventListener('click', () => openSheet('contact'));
     els.momentsBtn.addEventListener('click', openMoments);
+    els.patBtn.addEventListener('click', patPartner);
     els.callBtn.addEventListener('click', () => openSheet('call'));
     els.callDeclineBtn.addEventListener('click', () => {
       if (activeCall && activeCall.direction === 'incoming' && activeCall.phase === 'ringing') {
@@ -11113,6 +11818,7 @@ button.card-group-heading:hover{background:#FBF7F0}
       const action = button.dataset.menu;
       if (action === 'contact') openSheet('contact');
       else if (action === 'identity') openSheet('identity');
+      else if (action === 'mood') openMoodSheet();
       else if (action === 'anniversary') openSheet('anniversary');
       else if (action === 'promises') openSheet('promises');
       else if (action === 'gifts') openGiftView();
@@ -11359,6 +12065,8 @@ button.card-group-heading:hover{background:#FBF7F0}
       else if (value === 'reset') resetConversation();
       else if (value === 'save-contact') saveContactFromSheet();
       else if (value === 'save-answer') saveQuestionAnswer();
+      else if (value === 'identity-back') cancelIdentityEdit();
+      else if (value === 'save-identity') saveIdentityEdit();
       else if (value === 'publish-moment') publishMomentFromSheet();
       else if (value === 'send-letter') sendLetterFromSheet();
     });
@@ -11413,6 +12121,7 @@ button.card-group-heading:hover{background:#FBF7F0}
         checkGiftSchedule();
         checkQuestionSchedule();
         checkReviewSchedule();
+        checkPatSchedule();
         checkIdentitySchedule();
       }
     });
@@ -11425,6 +12134,7 @@ button.card-group-heading:hover{background:#FBF7F0}
       checkGiftSchedule();
       checkQuestionSchedule();
       checkReviewSchedule();
+      checkPatSchedule();
       checkIdentitySchedule();
     });
 
@@ -11457,6 +12167,8 @@ button.card-group-heading:hover{background:#FBF7F0}
       persistReviewCards();
       persistReviews();
       persistReviewNextAt();
+      persistMood();
+      safeSet(KEYS.patNextAt, String(state.patNextAt || 0));
       persistGiftNextAt();
       persistQuestionNextAt();
       persistMoments();
@@ -11473,6 +12185,7 @@ button.card-group-heading:hover{background:#FBF7F0}
   function init() {
     loadContact();
     loadIdentity();
+    loadMood();
     loadAnniversary();
     loadPromises();
     loadDailyLove();
@@ -11527,6 +12240,7 @@ button.card-group-heading:hover{background:#FBF7F0}
     initGifts();
     initQuestions();
     initReviews();
+    initPats();
     scrollBottom('auto');
     if (cardsDeduped > 0) {
       const removed = cardsDeduped;
